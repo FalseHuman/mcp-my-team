@@ -1,0 +1,39 @@
+{
+  "name": "mcp-my-team",
+  "version": "1.0.0",
+  "description": "MCP-сервер для API HR/таск-платформы «МояКоманда»",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "mcp-my-team": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsx src/index.ts",
+    "list-tools": "npm run build && node scripts/list-tools.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "mcp",
+    "myteam",
+    "моякоманда"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.1",
+    "axios": "^1.9.0",
+    "axios-cookiejar-support": "^5.0.5",
+    "dotenv": "^16.5.0",
+    "form-data": "^4.0.2",
+    "tough-cookie": "^5.1.2",
+    "zod": "^3.24.4"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.21",
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3"
+  }
+}

@@ -1,0 +1,3135 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Раздел Календарь",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/calendars/absences": {
+            "post": {
+                "tags": [
+                    "График отсутствий"
+                ],
+                "summary": "Данные по отсутствиям за заданный период",
+                "description": "Получаем данные по отсутствиям пользователнй за заданный период",
+                "operationId": "calendarAbsencesList",
+                "requestBody": {
+                    "description": "Значения фильтрации",
+                    "required": false,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "date_from": {
+                                        "description": "Начальная дата",
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "01.10.2022"
+                                    },
+                                    "date_to": {
+                                        "description": "Конечная дата",
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "31.10.2022"
+                                    },
+                                    "name": {
+                                        "description": "Поиск по имени",
+                                        "type": "string",
+                                        "example": "Админ"
+                                    },
+                                    "position": {
+                                        "description": "Должность",
+                                        "type": "object",
+                                        "example": [
+                                            1
+                                        ]
+                                    },
+                                    "department": {
+                                        "description": "Отдел",
+                                        "type": "object",
+                                        "example": [
+                                            1
+                                        ]
+                                    },
+                                    "team": {
+                                        "description": "Отдел",
+                                        "type": "object",
+                                        "example": [
+                                            1
+                                        ]
+                                    },
+                                    "division": {
+                                        "description": "Компания",
+                                        "type": "object",
+                                        "example": [
+                                            1
+                                        ]
+                                    },
+                                    "location": {
+                                        "description": "Локация",
+                                        "type": "object",
+                                        "example": [
+                                            1
+                                        ]
+                                    },
+                                    "absence_type": {
+                                        "description": "Тип отсутствия",
+                                        "type": "object",
+                                        "example": [
+                                            1
+                                        ]
+                                    },
+                                    "request_status": {
+                                        "description": "Статус запроса",
+                                        "type": "object",
+                                        "example": [
+                                            1
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Список пользоателей и их отсутствия",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "lang": {
+                                                    "type": "string",
+                                                    "example": "ru"
+                                                },
+                                                "filters": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Должности"
+                                                            },
+                                                            "code": {
+                                                                "type": "string",
+                                                                "example": "position"
+                                                            },
+                                                            "value": {
+                                                                "type": "object",
+                                                                "example": [
+                                                                    "1"
+                                                                ]
+                                                            },
+                                                            "possibleValues": {
+                                                                "type": "array",
+                                                                "items": {
+                                                                    "properties": {
+                                                                        "id": {
+                                                                            "type": "integer",
+                                                                            "example": "1"
+                                                                        },
+                                                                        "name": {
+                                                                            "type": "string",
+                                                                            "example": "Название элемента"
+                                                                        }
+                                                                    },
+                                                                    "type": "object"
+                                                                }
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "items": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "user": {
+                                                                "type": "object",
+                                                                "example": {
+                                                                    "id": "1",
+                                                                    "name": "ФИО",
+                                                                    "avatar": ""
+                                                                }
+                                                            },
+                                                            "absences": {
+                                                                "type": "array",
+                                                                "items": {
+                                                                    "properties": {
+                                                                        "date": {
+                                                                            "type": "string",
+                                                                            "format": "date",
+                                                                            "example": "10.10.2022"
+                                                                        },
+                                                                        "count": {
+                                                                            "type": "integer",
+                                                                            "example": "1"
+                                                                        },
+                                                                        "type": {
+                                                                            "type": "object",
+                                                                            "example": {
+                                                                                "name": "Отпуск",
+                                                                                "icon": "",
+                                                                                "color": "",
+                                                                                "unit": ""
+                                                                            }
+                                                                        },
+                                                                        "status": {
+                                                                            "type": "string",
+                                                                            "example": {
+                                                                                "id": "3",
+                                                                                "code": "approve",
+                                                                                "name": "Согласован"
+                                                                            }
+                                                                        }
+                                                                    },
+                                                                    "type": "object"
+                                                                }
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/calendars/absences/export": {
+            "post": {
+                "tags": [
+                    "График отсутствий"
+                ],
+                "summary": "Экспорт данных по отсутствиям за заданный период",
+                "description": "Получаем данные по отсутствиям пользователнй за заданный период",
+                "operationId": "calendarAbsencesListExport",
+                "requestBody": {
+                    "description": "Формат файла и фильтр (при передаче 'return_path:true' - возвращается путь до файла)",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "formatfile": {
+                                        "type": "string",
+                                        "example": "csv"
+                                    },
+                                    "return_path": {
+                                        "type": "boolean",
+                                        "example": "true"
+                                    },
+                                    "from": {
+                                        "type": "string",
+                                        "example": "30.11.2022"
+                                    },
+                                    "to": {
+                                        "type": "string",
+                                        "example": "01.11.2024"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Download file"
+                    }
+                }
+            }
+        },
+        "/api/calendars/absences/export-form-t-7": {
+            "post": {
+                "tags": [
+                    "График отсутствий"
+                ],
+                "summary": "Экспорт формы Т-7 за заданный период",
+                "description": "Формирует xlsx по шаблону формы Т-7 асинхронно; путь к файлу приходит по WebSocket (export-file). При return_path=true файл собирается синхронно.",
+                "operationId": "calendarAbsencesFormT7Export",
+                "requestBody": {
+                    "description": "Период и фильтры графика отсутствий (при передаче return_path:true возвращается путь до файла)",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "from",
+                                    "to"
+                                ],
+                                "properties": {
+                                    "from": {
+                                        "type": "string",
+                                        "example": "01.01.2026"
+                                    },
+                                    "to": {
+                                        "type": "string",
+                                        "example": "31.12.2026"
+                                    },
+                                    "return_path": {
+                                        "type": "boolean",
+                                        "example": false
+                                    },
+                                    "absence_type": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer"
+                                        },
+                                        "example": [
+                                            1
+                                        ]
+                                    },
+                                    "position": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer"
+                                        },
+                                        "example": [
+                                            1
+                                        ]
+                                    },
+                                    "division": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer"
+                                        },
+                                        "example": [
+                                            1
+                                        ]
+                                    },
+                                    "location": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer"
+                                        },
+                                        "example": [
+                                            1
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ожидание файла по WS или путь при return_path",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "awaitingByWS": {
+                                                    "type": "boolean",
+                                                    "example": true
+                                                },
+                                                "path": {
+                                                    "type": "string",
+                                                    "example": "/storage/downloads/public/exports/absences/form-t-7/form.xlsx"
+                                                },
+                                                "fileName": {
+                                                    "type": "string",
+                                                    "example": "Форма Т-7 03_08_2026_12_00_00.xlsx"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/calendars-external-management/create": {
+            "get": {
+                "tags": [
+                    "Внешние календари"
+                ],
+                "summary": "Поля для формы создания внешнего календаря",
+                "description": "Поля для формы создания внешнего календаря",
+                "operationId": "calendarExternalManagementCreate",
+                "responses": {
+                    "200": {
+                        "description": "Список полей",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/calendars-external-management": {
+            "get": {
+                "tags": [
+                    "Внешние календари"
+                ],
+                "summary": "Список подключений для внешних календарей",
+                "description": "Список подключений для внешних календарей",
+                "operationId": "calendarExternalManagementList",
+                "responses": {
+                    "200": {
+                        "description": "Список полей",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Внешние календари"
+                ],
+                "summary": "Создание внешнего календаря",
+                "description": "Создание внешнего календаря",
+                "operationId": "calendarExternalManagementStore",
+                "requestBody": {
+                    "description": "Значения для внешнего календаря",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Мой календарь"
+                                    },
+                                    "url": {
+                                        "type": "string",
+                                        "example": "Адрес сервера календаря"
+                                    },
+                                    "login": {
+                                        "type": "string",
+                                        "example": "Логин"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "Пароль"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Список полей",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/calendars-external-management/{connection}/edit": {
+            "get": {
+                "tags": [
+                    "Внешние календари"
+                ],
+                "summary": "Редактирование внешнего календаря",
+                "description": "Редактирование внешнего календаря",
+                "operationId": "calendarExternalManagementEdit",
+                "parameters": [
+                    {
+                        "name": "connection",
+                        "in": "path",
+                        "description": "id подключения",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список полей",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/calendars-external-management/{connection}": {
+            "put": {
+                "tags": [
+                    "Внешние календари"
+                ],
+                "summary": "Обновление внешнего календаря",
+                "description": "Обновление внешнего календаря",
+                "operationId": "calendarExternalManagementUpdate",
+                "parameters": [
+                    {
+                        "name": "connection",
+                        "in": "path",
+                        "description": "id внешнего календаря",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Значения для внешнего календаря",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Мой календарь"
+                                    },
+                                    "url": {
+                                        "type": "string",
+                                        "example": "Адрес сервера календаря"
+                                    },
+                                    "login": {
+                                        "type": "string",
+                                        "example": "Логин"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "Пароль"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Список полей",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Внешние календари"
+                ],
+                "summary": "Удаление внешнего календаря",
+                "description": "Удаление внешнего календаря",
+                "operationId": "calendarExternalManagementDestroy",
+                "parameters": [
+                    {
+                        "name": "connection",
+                        "in": "path",
+                        "description": "id внешнего календаря",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список полей",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/calendars-management": {
+            "get": {
+                "tags": [
+                    "Календари"
+                ],
+                "summary": "Список календарей",
+                "description": "Список доступных календарей",
+                "operationId": "calendarManagement",
+                "responses": {
+                    "200": {
+                        "description": "Список доступных календарей",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Календари"
+                ],
+                "summary": "Создание календаря",
+                "description": "Создание календаря",
+                "operationId": "calendarManagementStore",
+                "requestBody": {
+                    "description": "Значения для календаря",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Мой календарь"
+                                    },
+                                    "color": {
+                                        "type": "string",
+                                        "example": "#000000"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Список полей",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/calendars-management/create": {
+            "get": {
+                "tags": [
+                    "Календари"
+                ],
+                "summary": "Поля для формы создания календаря",
+                "description": "Поля для формы создания календаря",
+                "operationId": "calendarManagementCreate",
+                "responses": {
+                    "200": {
+                        "description": "Список полей",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/calendars-management/{calendar}/edit": {
+            "get": {
+                "tags": [
+                    "Календари"
+                ],
+                "summary": "Редактирование календаря",
+                "description": "Редактирование календаря",
+                "operationId": "calendarManagementEdit",
+                "parameters": [
+                    {
+                        "name": "calendar",
+                        "in": "path",
+                        "description": "id календаря",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список полей",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/calendars-management/{calendar}": {
+            "put": {
+                "tags": [
+                    "Календари"
+                ],
+                "summary": "Обновление календаря",
+                "description": "Обновление календаря",
+                "operationId": "calendarManagementUpdate",
+                "parameters": [
+                    {
+                        "name": "calendar",
+                        "in": "path",
+                        "description": "id календаря",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Значения для календаря",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Мой календарь"
+                                    },
+                                    "color": {
+                                        "type": "string",
+                                        "example": "#000000"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Список полей",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Календари"
+                ],
+                "summary": "Удаление календаря",
+                "description": "Удаление календаря",
+                "operationId": "calendarManagementDestroy",
+                "parameters": [
+                    {
+                        "name": "calendar",
+                        "in": "path",
+                        "description": "id календаря",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список полей",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/calendars-management/{calendar}/change-active": {
+            "post": {
+                "tags": [
+                    "Календари"
+                ],
+                "summary": "Изменение активности календаря",
+                "description": "Изменение активности календаря",
+                "operationId": "calendarManagementActive",
+                "parameters": [
+                    {
+                        "name": "calendar",
+                        "in": "path",
+                        "description": "id календаря",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Значения поля",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "active": {
+                                        "description": "Активность",
+                                        "type": "boolean",
+                                        "example": "true"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Список полей",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/calendars-management/{calendar}/set-default": {
+            "get": {
+                "tags": [
+                    "Календари"
+                ],
+                "summary": "Сделать календарь основным",
+                "description": "Сделать календарь основным",
+                "operationId": "calendarManagementDefault",
+                "parameters": [
+                    {
+                        "name": "calendar",
+                        "in": "path",
+                        "description": "id календаря",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список полей",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/calendars-management/export": {
+            "get": {
+                "tags": [
+                    "Календари"
+                ],
+                "summary": "Получить файл календаря для экспорта",
+                "description": "Получить файл календаря для экспорта",
+                "operationId": "calendarManagementExport",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "query",
+                        "description": "Токен",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список полей",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/calendars-management/export-company": {
+            "get": {
+                "tags": [
+                    "Календари"
+                ],
+                "summary": "Получить файл календаря компании для экспорта",
+                "description": "Получить файл календаря компании для экспорта",
+                "operationId": "calendarManagementExportCompany",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "query",
+                        "description": "Токен",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список полей",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/calendars": {
+            "get": {
+                "tags": [
+                    "События"
+                ],
+                "summary": "Получить список событий за заданный период",
+                "description": "Получить список событий за заданный период",
+                "operationId": "calendarEventList",
+                "parameters": [
+                    {
+                        "name": "from",
+                        "in": "query",
+                        "description": "Начальная дата",
+                        "required": true,
+                        "example": "29.06.2022"
+                    },
+                    {
+                        "name": "to",
+                        "in": "query",
+                        "description": "Конечная дата",
+                        "required": true,
+                        "example": "4.08.2022"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список событий",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "События"
+                ],
+                "summary": "Создание нового события",
+                "description": "Создание нового события",
+                "operationId": "calendarEventStore",
+                "requestBody": {
+                    "description": "Значения для сохранения события",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Название события"
+                                    },
+                                    "type": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "location": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "calendar": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "is_busy": {
+                                        "type": "boolean",
+                                        "example": "false"
+                                    },
+                                    "start_date": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "01.07.2022"
+                                    },
+                                    "end_date": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "01.09.2022"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Описание события"
+                                    },
+                                    "notify_email": {
+                                        "type": "boolean",
+                                        "example": "true"
+                                    },
+                                    "for_all": {
+                                        "type": "boolean",
+                                        "example": "false"
+                                    },
+                                    "reminders": {
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "day": {
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "hour": {
+                                                    "type": "integer",
+                                                    "example": "0"
+                                                },
+                                                "minute": {
+                                                    "type": "integer",
+                                                    "example": "0"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "filter": {
+                                        "properties": {
+                                            "operator": {
+                                                "type": "string",
+                                                "example": "and"
+                                            },
+                                            "conditions": {
+                                                "type": "array",
+                                                "items": {
+                                                    "properties": {
+                                                        "code": {
+                                                            "type": "string",
+                                                            "example": "role"
+                                                        },
+                                                        "operator": {
+                                                            "type": "string",
+                                                            "example": "in"
+                                                        },
+                                                        "value": {
+                                                            "type": "object",
+                                                            "example": [
+                                                                "1"
+                                                            ]
+                                                        },
+                                                        "field": {
+                                                            "type": "object",
+                                                            "example": {
+                                                                "id": "1",
+                                                                "code": "email",
+                                                                "type": "string"
+                                                            }
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Список событий",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/users/calendars/{user}": {
+            "get": {
+                "tags": [
+                    "События"
+                ],
+                "summary": "Получить список событий пользователя за заданный период",
+                "description": "Получить список событий пользователя за заданный период",
+                "operationId": "calendarUserEventList",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "description": "id пользователя",
+                        "required": true,
+                        "example": "1"
+                    },
+                    {
+                        "name": "from",
+                        "in": "query",
+                        "description": "Начальная дата",
+                        "required": true,
+                        "example": "29.06.2022"
+                    },
+                    {
+                        "name": "to",
+                        "in": "query",
+                        "description": "Конечная дата",
+                        "required": true,
+                        "example": "4.08.2022"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список событий",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/calendars/list-with-filter": {
+            "post": {
+                "tags": [
+                    "События"
+                ],
+                "summary": "Получить список событий за заданный период с фильтрацией",
+                "description": "Получить список событий за заданный период с фильтрацией",
+                "operationId": "calendarEventListWithFilter",
+                "requestBody": {
+                    "description": "Условия для фильтрации",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "from": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "30.06.2022"
+                                    },
+                                    "to": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "01.09.2022"
+                                    },
+                                    "event": {
+                                        "type": "object",
+                                        "example": [
+                                            "birthdays"
+                                        ]
+                                    },
+                                    "absence": {
+                                        "type": "enum",
+                                        "example": "[1]"
+                                    },
+                                    "position": {
+                                        "type": "enum",
+                                        "example": "[1]"
+                                    },
+                                    "department": {
+                                        "type": "enum",
+                                        "example": "[1]"
+                                    },
+                                    "division": {
+                                        "type": "enum",
+                                        "example": "[1]"
+                                    },
+                                    "location": {
+                                        "type": "enum",
+                                        "example": "[1]"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Список событий",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/calendars/list-filters/{user}": {
+            "get": {
+                "tags": [
+                    "События"
+                ],
+                "summary": "Получить список фильтров для событий календаря",
+                "description": "Получить список фильтров для событий календаря",
+                "operationId": "calendarEventListFilters",
+                "responses": {
+                    "200": {
+                        "description": "Ответ",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "event": {
+                                                    "type": "object",
+                                                    "example": [
+                                                        "birthdays",
+                                                        "events"
+                                                    ]
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/calendars/list-available-events": {
+            "get": {
+                "tags": [
+                    "События"
+                ],
+                "summary": "Список событий доступных для отображения",
+                "description": "Список событий доступных для отображения",
+                "operationId": "listAvailableEvents",
+                "responses": {
+                    "200": {
+                        "description": "Список событий",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/calendars/locations/list": {
+            "post": {
+                "tags": [
+                    "События"
+                ],
+                "summary": "Получить список переговорных",
+                "description": "Получить список переговорных за заданный период с фильтрацией",
+                "operationId": "calendarEventLocationsList",
+                "requestBody": {
+                    "description": "Условия для фильтрации",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "from": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "30.06.2022"
+                                    },
+                                    "to": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "01.09.2022"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Список переговорных",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/calendars/create": {
+            "get": {
+                "tags": [
+                    "События"
+                ],
+                "summary": "Форма для создания нового события",
+                "description": "Форма для создания нового события",
+                "operationId": "calendarEventCreate",
+                "responses": {
+                    "200": {
+                        "description": "Данные для формы создания шаблона оценки",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/calendars/{event}": {
+            "get": {
+                "tags": [
+                    "События"
+                ],
+                "summary": "Детальная информация о событии",
+                "description": "Детальная информация о событии",
+                "operationId": "detailEvent",
+                "parameters": [
+                    {
+                        "name": "event",
+                        "in": "path",
+                        "description": "id события",
+                        "required": true,
+                        "example": "1"
+                    },
+                    {
+                        "name": "date",
+                        "in": "query",
+                        "description": "Дата события",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Информация о событии",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "lang": {
+                                                    "type": "string",
+                                                    "example": "ru"
+                                                },
+                                                "canEdit": {
+                                                    "type": "boolean",
+                                                    "example": "true"
+                                                },
+                                                "name": {
+                                                    "type": "boolean",
+                                                    "example": "true"
+                                                },
+                                                "description": {
+                                                    "type": "boolean",
+                                                    "example": "true"
+                                                },
+                                                "createdBy": {
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "integer",
+                                                            "example": "1"
+                                                        },
+                                                        "name": {
+                                                            "type": "integer",
+                                                            "example": "Имя сотрудника"
+                                                        },
+                                                        "avatar": {
+                                                            "type": "integer",
+                                                            "example": "/path/picture.jpg"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "users": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": "1"
+                                                            },
+                                                            "name": {
+                                                                "type": "integer",
+                                                                "example": "Имя сотрудника"
+                                                            },
+                                                            "avatar": {
+                                                                "type": "integer",
+                                                                "example": "/path/picture.jpg"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "События"
+                ],
+                "summary": "Обновление события",
+                "description": "Обновление события",
+                "operationId": "calendarEventUpdate",
+                "parameters": [
+                    {
+                        "name": "event",
+                        "in": "path",
+                        "description": "id события",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Значения для обновления события",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "action": {
+                                        "type": "string",
+                                        "example": "this"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Название события"
+                                    },
+                                    "type": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "location": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "calendar": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "is_busy": {
+                                        "type": "boolean",
+                                        "example": "false"
+                                    },
+                                    "start_date": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "10.08.2022"
+                                    },
+                                    "end_date": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "15.09.2022"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Описание события"
+                                    },
+                                    "for_all": {
+                                        "type": "boolean",
+                                        "example": "false"
+                                    },
+                                    "reminders": {
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "day": {
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "hour": {
+                                                    "type": "integer",
+                                                    "example": "0"
+                                                },
+                                                "minute": {
+                                                    "type": "integer",
+                                                    "example": "0"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "filter": {
+                                        "properties": {
+                                            "position": {
+                                                "type": "string",
+                                                "example": "and"
+                                            },
+                                            "conditions": {
+                                                "type": "array",
+                                                "items": {
+                                                    "properties": {
+                                                        "code": {
+                                                            "type": "string",
+                                                            "example": "role"
+                                                        },
+                                                        "operator": {
+                                                            "type": "string",
+                                                            "example": "in"
+                                                        },
+                                                        "value": {
+                                                            "type": "object",
+                                                            "example": [
+                                                                "1"
+                                                            ]
+                                                        },
+                                                        "field": {
+                                                            "type": "object",
+                                                            "example": {
+                                                                "id": "1",
+                                                                "code": "email",
+                                                                "type": "string"
+                                                            }
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Список шаблонов оценки",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "События"
+                ],
+                "summary": "Удаление события",
+                "description": "Удаляет события",
+                "operationId": "calendarEventDestroy",
+                "parameters": [
+                    {
+                        "name": "event",
+                        "in": "path",
+                        "description": "Идентификатор события",
+                        "required": true,
+                        "example": "1"
+                    },
+                    {
+                        "name": "action",
+                        "in": "query",
+                        "description": "Тип действия",
+                        "required": false,
+                        "example": "this"
+                    },
+                    {
+                        "name": "date",
+                        "in": "query",
+                        "description": "Дата события",
+                        "required": false,
+                        "example": "15.06.2023"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список событий",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/calendars/{event}/user/{user}": {
+            "get": {
+                "tags": [
+                    "События"
+                ],
+                "summary": "Детальная информация о событии в профиле Сотрудника",
+                "description": "Детальная информация о событии в профиле Сотрудника",
+                "operationId": "detailEventUserProfile",
+                "parameters": [
+                    {
+                        "name": "event",
+                        "in": "path",
+                        "description": "id события",
+                        "required": true,
+                        "example": "1"
+                    },
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "description": "id сотрудника",
+                        "required": true,
+                        "example": "1"
+                    },
+                    {
+                        "name": "date",
+                        "in": "query",
+                        "description": "Дата события",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Информация о событии",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "lang": {
+                                                    "type": "string",
+                                                    "example": "ru"
+                                                },
+                                                "canEdit": {
+                                                    "type": "boolean",
+                                                    "example": "true"
+                                                },
+                                                "name": {
+                                                    "type": "boolean",
+                                                    "example": "true"
+                                                },
+                                                "description": {
+                                                    "type": "boolean",
+                                                    "example": "true"
+                                                },
+                                                "createdBy": {
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "integer",
+                                                            "example": "1"
+                                                        },
+                                                        "name": {
+                                                            "type": "integer",
+                                                            "example": "Имя сотрудника"
+                                                        },
+                                                        "avatar": {
+                                                            "type": "integer",
+                                                            "example": "/path/picture.jpg"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "users": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": "1"
+                                                            },
+                                                            "name": {
+                                                                "type": "integer",
+                                                                "example": "Имя сотрудника"
+                                                            },
+                                                            "avatar": {
+                                                                "type": "integer",
+                                                                "example": "/path/picture.jpg"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/calendars/{event}/edit": {
+            "get": {
+                "tags": [
+                    "События"
+                ],
+                "summary": "Форма редактирования события",
+                "description": "Форма редактирования события",
+                "operationId": "calendarEventEdit",
+                "parameters": [
+                    {
+                        "name": "event",
+                        "in": "path",
+                        "description": "Идентификатор события",
+                        "required": true,
+                        "example": "1"
+                    },
+                    {
+                        "name": "action",
+                        "in": "query",
+                        "description": "Тип действия",
+                        "required": false,
+                        "example": "this"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Данные для формы редактирования события",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/calendars/rrule-to-description": {
+            "post": {
+                "tags": [
+                    "События"
+                ],
+                "summary": "Получения описания по правилу повторяемости",
+                "description": "Получения описания по правилу повторяемости",
+                "operationId": "eventRRuleToDescripiton",
+                "requestBody": {
+                    "description": "Значения для получения текста",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "FREQ": {
+                                        "type": "string",
+                                        "example": "WEEKLY"
+                                    },
+                                    "INTERVAL": {
+                                        "type": "string",
+                                        "example": "2"
+                                    },
+                                    "BYDAY": {
+                                        "type": "object",
+                                        "example": [
+                                            "MO",
+                                            "FR"
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Текст",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/calendars/{event}/decision": {
+            "post": {
+                "tags": [
+                    "События"
+                ],
+                "summary": "Решение иду (не иду) по событию",
+                "description": "Решение по событию",
+                "operationId": "calendarEventDecision",
+                "parameters": [
+                    {
+                        "name": "event",
+                        "in": "path",
+                        "description": "id события",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Значения для обновления события",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "date": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "25.07.2023"
+                                    },
+                                    "decision": {
+                                        "type": "boolean",
+                                        "example": "true"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/calendars/locations/categories/create": {
+            "get": {
+                "tags": [
+                    "Категории переговорных"
+                ],
+                "summary": "Форма создание категории переговорной",
+                "description": "Данные для формы создания категории переговорной",
+                "operationId": "calendarLocationCategoryCreate",
+                "responses": {
+                    "200": {
+                        "description": "Данные для формы создания категории переговорной",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "lang": {
+                                                    "type": "string",
+                                                    "example": "ru"
+                                                },
+                                                "fields": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Название поля"
+                                                            },
+                                                            "code": {
+                                                                "type": "string",
+                                                                "example": "Код поля"
+                                                            },
+                                                            "require": {
+                                                                "type": "boolean",
+                                                                "example": "true"
+                                                            },
+                                                            "type": {
+                                                                "type": "string",
+                                                                "example": "Тип поля"
+                                                            },
+                                                            "value": {
+                                                                "type": "string",
+                                                                "example": "Значение поля"
+                                                            },
+                                                            "possibleValues": {
+                                                                "type": "string",
+                                                                "example": "Список возможных значений"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/calendars/locations/categories": {
+            "post": {
+                "tags": [
+                    "Категории переговорных"
+                ],
+                "summary": "Создание категории переговорной",
+                "description": "Создание категории переговорной",
+                "operationId": "calendarLocationCategoryStore",
+                "requestBody": {
+                    "description": "Данные для создания категории переговорной",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Название категории переговорной"
+                                    },
+                                    "locations": {
+                                        "type": "enum",
+                                        "example": "[]"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Список категорий переговорных",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "lang": {
+                                                    "type": "string",
+                                                    "example": "ru"
+                                                },
+                                                "items": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": "1"
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Название категории"
+                                                            },
+                                                            "show": {
+                                                                "type": "boolean",
+                                                                "example": "true"
+                                                            },
+                                                            "locations": {
+                                                                "type": "array",
+                                                                "items": {
+                                                                    "properties": {
+                                                                        "id": {
+                                                                            "type": "integer",
+                                                                            "example": "1"
+                                                                        },
+                                                                        "name": {
+                                                                            "type": "string",
+                                                                            "example": "Название переговорной"
+                                                                        },
+                                                                        "show": {
+                                                                            "type": "boolean",
+                                                                            "example": "true"
+                                                                        },
+                                                                        "color": {
+                                                                            "type": "string",
+                                                                            "example": "Код цвета"
+                                                                        },
+                                                                        "count": {
+                                                                            "type": "integer",
+                                                                            "example": "1"
+                                                                        }
+                                                                    },
+                                                                    "type": "object"
+                                                                }
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/calendars/locations/categories/{category}/edit": {
+            "get": {
+                "tags": [
+                    "Категории переговорных"
+                ],
+                "summary": "Форма редактирования категории переговорной",
+                "description": "Данные для формы редактирования категории переговорной",
+                "operationId": "calendarLocationCategoryEdit",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "path",
+                        "description": "id категории переговроной",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Данные для формы редактирования категории переговорной",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "lang": {
+                                                    "type": "string",
+                                                    "example": "ru"
+                                                },
+                                                "fields": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Название поля"
+                                                            },
+                                                            "code": {
+                                                                "type": "string",
+                                                                "example": "Код поля"
+                                                            },
+                                                            "require": {
+                                                                "type": "boolean",
+                                                                "example": "true"
+                                                            },
+                                                            "type": {
+                                                                "type": "string",
+                                                                "example": "Тип поля"
+                                                            },
+                                                            "value": {
+                                                                "type": "string",
+                                                                "example": "Значение поля"
+                                                            },
+                                                            "possibleValues": {
+                                                                "type": "string",
+                                                                "example": "Список возможных значений"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/calendars/locations/categories/{category}": {
+            "put": {
+                "tags": [
+                    "Категории переговорных"
+                ],
+                "summary": "Обновление категории переговорной",
+                "description": "Обновление категории переговорной",
+                "operationId": "calendarLocationCategoryUpdate",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "path",
+                        "description": "id категории переговроной",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Данные для обновления категории переговорной",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Название категории переговорной"
+                                    },
+                                    "locations": {
+                                        "type": "enum",
+                                        "example": "[]"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Список категорий переговорных",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "lang": {
+                                                    "type": "string",
+                                                    "example": "ru"
+                                                },
+                                                "items": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": "1"
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Название категории"
+                                                            },
+                                                            "show": {
+                                                                "type": "boolean",
+                                                                "example": "true"
+                                                            },
+                                                            "locations": {
+                                                                "type": "array",
+                                                                "items": {
+                                                                    "properties": {
+                                                                        "id": {
+                                                                            "type": "integer",
+                                                                            "example": "1"
+                                                                        },
+                                                                        "name": {
+                                                                            "type": "string",
+                                                                            "example": "Название переговорной"
+                                                                        },
+                                                                        "show": {
+                                                                            "type": "boolean",
+                                                                            "example": "true"
+                                                                        },
+                                                                        "color": {
+                                                                            "type": "string",
+                                                                            "example": "Код цвета"
+                                                                        },
+                                                                        "count": {
+                                                                            "type": "integer",
+                                                                            "example": "1"
+                                                                        }
+                                                                    },
+                                                                    "type": "object"
+                                                                }
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Категории переговорных"
+                ],
+                "summary": "Удаление категории переговорной",
+                "description": "Удаление категории переговорной",
+                "operationId": "calendarLocationCategoryDestroy",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "path",
+                        "description": "id категории переговроной",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список категорий переговорных",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "lang": {
+                                                    "type": "string",
+                                                    "example": "ru"
+                                                },
+                                                "items": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": "1"
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Название категории"
+                                                            },
+                                                            "show": {
+                                                                "type": "boolean",
+                                                                "example": "true"
+                                                            },
+                                                            "locations": {
+                                                                "type": "array",
+                                                                "items": {
+                                                                    "properties": {
+                                                                        "id": {
+                                                                            "type": "integer",
+                                                                            "example": "1"
+                                                                        },
+                                                                        "name": {
+                                                                            "type": "string",
+                                                                            "example": "Название переговорной"
+                                                                        },
+                                                                        "show": {
+                                                                            "type": "boolean",
+                                                                            "example": "true"
+                                                                        },
+                                                                        "color": {
+                                                                            "type": "string",
+                                                                            "example": "Код цвета"
+                                                                        },
+                                                                        "count": {
+                                                                            "type": "integer",
+                                                                            "example": "1"
+                                                                        }
+                                                                    },
+                                                                    "type": "object"
+                                                                }
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/calendars/locations": {
+            "get": {
+                "tags": [
+                    "Переговорные"
+                ],
+                "summary": "Список переговорных",
+                "description": "Список переговорных",
+                "operationId": "calendarLocationList",
+                "responses": {
+                    "200": {
+                        "description": "Список переговорных",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "lang": {
+                                                    "type": "string",
+                                                    "example": "ru"
+                                                },
+                                                "items": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": "1"
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Название категории"
+                                                            },
+                                                            "locations": {
+                                                                "type": "array",
+                                                                "items": {
+                                                                    "properties": {
+                                                                        "id": {
+                                                                            "type": "integer",
+                                                                            "example": "1"
+                                                                        },
+                                                                        "name": {
+                                                                            "type": "string",
+                                                                            "example": "Название переговорной"
+                                                                        },
+                                                                        "show": {
+                                                                            "type": "boolean",
+                                                                            "example": "true"
+                                                                        },
+                                                                        "color": {
+                                                                            "type": "string",
+                                                                            "example": "Код цвета"
+                                                                        },
+                                                                        "count": {
+                                                                            "type": "integer",
+                                                                            "example": "1"
+                                                                        }
+                                                                    },
+                                                                    "type": "object"
+                                                                }
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Переговорные"
+                ],
+                "summary": "Создание переговорной",
+                "description": "Создание переговорной",
+                "operationId": "calendarLocationStore",
+                "requestBody": {
+                    "description": "Данные для создания переговорной",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Название переговорной"
+                                    },
+                                    "count": {
+                                        "type": "string",
+                                        "example": "Количество участников переговорной"
+                                    },
+                                    "category": {
+                                        "type": "string",
+                                        "example": "Категория переговорной"
+                                    },
+                                    "color": {
+                                        "type": "string",
+                                        "example": "Цвет переговорной"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Список категорий переговорных",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "lang": {
+                                                    "type": "string",
+                                                    "example": "ru"
+                                                },
+                                                "items": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": "1"
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Название категории"
+                                                            },
+                                                            "show": {
+                                                                "type": "boolean",
+                                                                "example": "true"
+                                                            },
+                                                            "locations": {
+                                                                "type": "array",
+                                                                "items": {
+                                                                    "properties": {
+                                                                        "id": {
+                                                                            "type": "integer",
+                                                                            "example": "1"
+                                                                        },
+                                                                        "name": {
+                                                                            "type": "string",
+                                                                            "example": "Название переговорной"
+                                                                        },
+                                                                        "show": {
+                                                                            "type": "boolean",
+                                                                            "example": "true"
+                                                                        },
+                                                                        "color": {
+                                                                            "type": "string",
+                                                                            "example": "Код цвета"
+                                                                        },
+                                                                        "count": {
+                                                                            "type": "integer",
+                                                                            "example": "1"
+                                                                        }
+                                                                    },
+                                                                    "type": "object"
+                                                                }
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/calendars/locations/create": {
+            "get": {
+                "tags": [
+                    "Переговорные"
+                ],
+                "summary": "Форма создание переговорной",
+                "description": "Данные для формы создания переговорной",
+                "operationId": "calendarLocationCreate",
+                "responses": {
+                    "200": {
+                        "description": "Данные для формы создания переговорной",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "lang": {
+                                                    "type": "string",
+                                                    "example": "ru"
+                                                },
+                                                "fields": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Название поля"
+                                                            },
+                                                            "code": {
+                                                                "type": "string",
+                                                                "example": "Код поля"
+                                                            },
+                                                            "require": {
+                                                                "type": "boolean",
+                                                                "example": "true"
+                                                            },
+                                                            "type": {
+                                                                "type": "string",
+                                                                "example": "Тип поля"
+                                                            },
+                                                            "value": {
+                                                                "type": "string",
+                                                                "example": "Значение поля"
+                                                            },
+                                                            "possibleValues": {
+                                                                "type": "string",
+                                                                "example": "Список возможных значений"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/calendars/locations/{location}/edit": {
+            "get": {
+                "tags": [
+                    "Переговорные"
+                ],
+                "summary": "Форма для редактировния переговорной",
+                "description": "Данные для формы редактирования переговорной",
+                "operationId": "calendarLocationEdit",
+                "parameters": [
+                    {
+                        "name": "location",
+                        "in": "path",
+                        "description": "id переговроной",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Данные для формы редактирования переговорной",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "lang": {
+                                                    "type": "string",
+                                                    "example": "ru"
+                                                },
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "fields": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Название поля"
+                                                            },
+                                                            "code": {
+                                                                "type": "string",
+                                                                "example": "Код поля"
+                                                            },
+                                                            "require": {
+                                                                "type": "boolean",
+                                                                "example": "true"
+                                                            },
+                                                            "type": {
+                                                                "type": "string",
+                                                                "example": "Тип поля"
+                                                            },
+                                                            "value": {
+                                                                "type": "string",
+                                                                "example": "Значение поля"
+                                                            },
+                                                            "possibleValues": {
+                                                                "type": "string",
+                                                                "example": "Список возможных значений"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/calendars/locations/{location}": {
+            "put": {
+                "tags": [
+                    "Переговорные"
+                ],
+                "summary": "Изменение переговорной",
+                "description": "Изменение переговорной",
+                "operationId": "calendarLocationUpdate",
+                "parameters": [
+                    {
+                        "name": "location",
+                        "in": "path",
+                        "description": "id переговроной",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Данные для изменения переговорной",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Название переговорной"
+                                    },
+                                    "count": {
+                                        "type": "string",
+                                        "example": "Количество участников переговорной"
+                                    },
+                                    "category": {
+                                        "type": "string",
+                                        "example": "Категория переговорной"
+                                    },
+                                    "color": {
+                                        "type": "string",
+                                        "example": "Цвет переговорной"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Список категорий переговорных",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "lang": {
+                                                    "type": "string",
+                                                    "example": "ru"
+                                                },
+                                                "items": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": "1"
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Название категории"
+                                                            },
+                                                            "show": {
+                                                                "type": "boolean",
+                                                                "example": "true"
+                                                            },
+                                                            "locations": {
+                                                                "type": "array",
+                                                                "items": {
+                                                                    "properties": {
+                                                                        "id": {
+                                                                            "type": "integer",
+                                                                            "example": "1"
+                                                                        },
+                                                                        "name": {
+                                                                            "type": "string",
+                                                                            "example": "Название переговорной"
+                                                                        },
+                                                                        "show": {
+                                                                            "type": "boolean",
+                                                                            "example": "true"
+                                                                        },
+                                                                        "color": {
+                                                                            "type": "string",
+                                                                            "example": "Код цвета"
+                                                                        },
+                                                                        "count": {
+                                                                            "type": "integer",
+                                                                            "example": "1"
+                                                                        }
+                                                                    },
+                                                                    "type": "object"
+                                                                }
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Переговорные"
+                ],
+                "summary": "Удаление переговорной",
+                "description": "Удаление переговорной",
+                "operationId": "calendarLocationDestroy",
+                "parameters": [
+                    {
+                        "name": "location",
+                        "in": "path",
+                        "description": "id переговроной",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список категорий переговорных",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "lang": {
+                                                    "type": "string",
+                                                    "example": "ru"
+                                                },
+                                                "items": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": "1"
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Название категории"
+                                                            },
+                                                            "show": {
+                                                                "type": "boolean",
+                                                                "example": "true"
+                                                            },
+                                                            "locations": {
+                                                                "type": "array",
+                                                                "items": {
+                                                                    "properties": {
+                                                                        "id": {
+                                                                            "type": "integer",
+                                                                            "example": "1"
+                                                                        },
+                                                                        "name": {
+                                                                            "type": "string",
+                                                                            "example": "Название переговорной"
+                                                                        },
+                                                                        "show": {
+                                                                            "type": "boolean",
+                                                                            "example": "true"
+                                                                        },
+                                                                        "color": {
+                                                                            "type": "string",
+                                                                            "example": "Код цвета"
+                                                                        },
+                                                                        "count": {
+                                                                            "type": "integer",
+                                                                            "example": "1"
+                                                                        }
+                                                                    },
+                                                                    "type": "object"
+                                                                }
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/calendars/locations/show": {
+            "post": {
+                "tags": [
+                    "Переговорные"
+                ],
+                "summary": "Установка признака Показывать для пользователя",
+                "description": "Признак Показывать для пользователя",
+                "operationId": "calendarLocationUserShow",
+                "requestBody": {
+                    "description": "Переговроные, которые нужно показывать пользователю",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "locations": {
+                                        "type": "enum",
+                                        "example": "[]"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Список категорий переговорных",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "lang": {
+                                                    "type": "string",
+                                                    "example": "ru"
+                                                },
+                                                "items": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": "1"
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Название категории"
+                                                            },
+                                                            "show": {
+                                                                "type": "boolean",
+                                                                "example": "true"
+                                                            },
+                                                            "locations": {
+                                                                "type": "array",
+                                                                "items": {
+                                                                    "properties": {
+                                                                        "id": {
+                                                                            "type": "integer",
+                                                                            "example": "1"
+                                                                        },
+                                                                        "name": {
+                                                                            "type": "string",
+                                                                            "example": "Название переговорной"
+                                                                        },
+                                                                        "show": {
+                                                                            "type": "boolean",
+                                                                            "example": "true"
+                                                                        },
+                                                                        "color": {
+                                                                            "type": "string",
+                                                                            "example": "Код цвета"
+                                                                        },
+                                                                        "count": {
+                                                                            "type": "integer",
+                                                                            "example": "1"
+                                                                        }
+                                                                    },
+                                                                    "type": "object"
+                                                                }
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "График отсутствий",
+            "description": "График отсутствий"
+        },
+        {
+            "name": "Внешние календари",
+            "description": "Внешние календари"
+        },
+        {
+            "name": "Календари",
+            "description": "Календари"
+        },
+        {
+            "name": "События",
+            "description": "События"
+        },
+        {
+            "name": "Категории переговорных",
+            "description": "Категории переговорных"
+        },
+        {
+            "name": "Переговорные",
+            "description": "Переговорные"
+        }
+    ],
+    "components": {
+        "securitySchemes": {
+            "sanctum": {
+                "type": "apiKey",
+                "description": "Введите token в следующем формате: Bearer Ваш Api Token",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    }
+}

@@ -1,0 +1,2772 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Общие методы",
+        "version": "1.0"
+    },
+    "paths": {
+        "/api/wiki/pages": {
+            "get": {
+                "tags": [
+                    "WIKI"
+                ],
+                "summary": "Список страниц документации",
+                "description": "Возвращает список страниц документации",
+                "operationId": "wikiPageList",
+                "responses": {
+                    "200": {
+                        "description": "Список страниц документации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "pages": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": "1"
+                                                            },
+                                                            "title": {
+                                                                "type": "string",
+                                                                "example": "Главная страница"
+                                                            },
+                                                            "tags": {
+                                                                "type": "enum",
+                                                                "example": "[]"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "paths": {
+                                                    "type": "enum",
+                                                    "example": "[]"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/wiki/pages/{page}/content": {
+            "get": {
+                "tags": [
+                    "WIKI"
+                ],
+                "summary": "Контент страницы документации по id",
+                "description": "Возвращает контент страницы документации",
+                "operationId": "wikiPageIdContent",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "path",
+                        "description": "Page id",
+                        "required": true,
+                        "example": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Контент страницы документации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "title": {
+                                                    "type": "string",
+                                                    "example": "Главная страница"
+                                                },
+                                                "content": {
+                                                    "type": "string",
+                                                    "example": "Контент страницы"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/wiki/pages/{path}/content": {
+            "get": {
+                "tags": [
+                    "WIKI"
+                ],
+                "summary": "Контент страницы документации по Path",
+                "description": "Возвращает контент страницы документации",
+                "operationId": "wikiPagePathContent",
+                "parameters": [
+                    {
+                        "name": "path",
+                        "in": "path",
+                        "description": "Path page",
+                        "required": true,
+                        "example": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Контент страницы документации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "title": {
+                                                    "type": "string",
+                                                    "example": "Главная страница"
+                                                },
+                                                "content": {
+                                                    "type": "string",
+                                                    "example": "Контент страницы"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/wiki/search": {
+            "post": {
+                "tags": [
+                    "WIKI"
+                ],
+                "summary": "Поиск по страницам документации",
+                "description": "Возвращает результат поиска",
+                "operationId": "wikiSearch",
+                "requestBody": {
+                    "description": "Данные для поиска",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "query": {
+                                        "description": "Request query",
+                                        "type": "string",
+                                        "example": "query"
+                                    },
+                                    "paths": {
+                                        "description": "Paths pages for search",
+                                        "type": "enum",
+                                        "example": "[]"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Результат поиска",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "results": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "title": {
+                                                                "type": "string",
+                                                                "example": "Title page"
+                                                            },
+                                                            "description": {
+                                                                "type": "string",
+                                                                "example": "description page"
+                                                            },
+                                                            "path": {
+                                                                "type": "string",
+                                                                "example": "page path"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "suggestions": {
+                                                    "type": "enum",
+                                                    "example": "[сотрудникам, сотрудников]"
+                                                },
+                                                "totalHits": {
+                                                    "type": "integer",
+                                                    "example": "5"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/file/download": {
+            "get": {
+                "tags": [
+                    "Операции с файлами"
+                ],
+                "summary": "Скачивание файла",
+                "description": "Возвращает файл",
+                "operationId": "downloadFile",
+                "parameters": [
+                    {
+                        "name": "path",
+                        "in": "query",
+                        "description": "Путь к файлу",
+                        "required": true,
+                        "example": "public/images/avatar/avatar_10_08.jpg"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Файл"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/file/download-path": {
+            "get": {
+                "tags": [
+                    "Операции с файлами"
+                ],
+                "summary": "Получение ссылки на скачивание файла",
+                "description": "Возвращает ссылку на скачивание файла",
+                "operationId": "downloadPathFile",
+                "parameters": [
+                    {
+                        "name": "path",
+                        "in": "query",
+                        "description": "Путь к файлу",
+                        "required": true,
+                        "example": "public/images/avatar/avatar_10_08.jpg"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Путь к файлу"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/file/upload": {
+            "post": {
+                "tags": [
+                    "Операции с файлами"
+                ],
+                "summary": "Загрузка файла",
+                "description": "Загружает файл",
+                "operationId": "uploadFile",
+                "requestBody": {
+                    "description": "Загружаемый файл",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "file": {
+                                        "description": "Файл",
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "format": "binary"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Файл"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/image/upload": {
+            "post": {
+                "tags": [
+                    "Операции с файлами"
+                ],
+                "summary": "Загрузка изображения",
+                "description": "Загружает изображение",
+                "operationId": "uploadImage",
+                "requestBody": {
+                    "description": "Загружаемое изображение",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "file": {
+                                        "description": "Файл",
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "format": "binary"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Файл"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/file/chunks/upload": {
+            "post": {
+                "tags": [
+                    "Операции с файлами"
+                ],
+                "summary": "Загрузка файла по частям",
+                "description": "Загружает файл",
+                "operationId": "uploadFileChunks",
+                "requestBody": {
+                    "description": "Загружаемый файл",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "type": {
+                                        "description": "К чему относится файл",
+                                        "type": "string",
+                                        "example": "knowlagebase"
+                                    },
+                                    "file": {
+                                        "description": "Файл",
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "format": "binary"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Файл"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/notifications": {
+            "get": {
+                "tags": [
+                    "Уведомления"
+                ],
+                "summary": "Информация по уведомлениям",
+                "description": "Возвращает информацию по уведомлениям пользователя",
+                "operationId": "notificationList",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Номер страницы пагинации",
+                        "required": false,
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список уведомлений",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "lang": {
+                                                        "type": "string",
+                                                        "example": "ru"
+                                                    },
+                                                    "items": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "properties": {
+                                                                "notifyId": {
+                                                                    "type": "integer",
+                                                                    "example": "1"
+                                                                },
+                                                                "isViewed": {
+                                                                    "type": "boolean",
+                                                                    "example": "false"
+                                                                },
+                                                                "notifyType": {
+                                                                    "type": "string",
+                                                                    "example": "request-for-approve"
+                                                                },
+                                                                "entityId": {
+                                                                    "type": "integer",
+                                                                    "example": "1"
+                                                                },
+                                                                "createdAt": {
+                                                                    "type": "string",
+                                                                    "format": "date",
+                                                                    "example": "28.06.2022"
+                                                                },
+                                                                "user": {
+                                                                    "properties": {
+                                                                        "id": {
+                                                                            "type": "integer",
+                                                                            "example": "1"
+                                                                        },
+                                                                        "name": {
+                                                                            "type": "string",
+                                                                            "example": "Админов Админ"
+                                                                        }
+                                                                    },
+                                                                    "type": "object"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        }
+                                                    },
+                                                    "pagination": {
+                                                        "type": "object",
+                                                        "example": {
+                                                            "total": 25,
+                                                            "count": 15,
+                                                            "perPage": 15,
+                                                            "currentPage": 1,
+                                                            "totalPages": 2,
+                                                            "from": 1,
+                                                            "to": 15
+                                                        }
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/notifications/viewed-all": {
+            "get": {
+                "tags": [
+                    "Уведомления"
+                ],
+                "summary": "Отметить Все как прочитанное",
+                "description": "Отмечает все уведомления пользователя как прочитанными",
+                "operationId": "notificationViewedAll",
+                "responses": {
+                    "200": {
+                        "description": "Список уведомлений",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "lang": {
+                                                        "type": "string",
+                                                        "example": "ru"
+                                                    },
+                                                    "items": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "properties": {
+                                                                "notifyId": {
+                                                                    "type": "integer",
+                                                                    "example": "1"
+                                                                },
+                                                                "isViewed": {
+                                                                    "type": "boolean",
+                                                                    "example": "false"
+                                                                },
+                                                                "notifyType": {
+                                                                    "type": "string",
+                                                                    "example": "request-for-approve"
+                                                                },
+                                                                "entityId": {
+                                                                    "type": "integer",
+                                                                    "example": "1"
+                                                                },
+                                                                "createdAt": {
+                                                                    "type": "string",
+                                                                    "format": "date",
+                                                                    "example": "28.06.2022"
+                                                                },
+                                                                "user": {
+                                                                    "properties": {
+                                                                        "id": {
+                                                                            "type": "integer",
+                                                                            "example": "1"
+                                                                        },
+                                                                        "name": {
+                                                                            "type": "string",
+                                                                            "example": "Админов Админ"
+                                                                        }
+                                                                    },
+                                                                    "type": "object"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        }
+                                                    },
+                                                    "pagination": {
+                                                        "type": "object",
+                                                        "example": {
+                                                            "total": 25,
+                                                            "count": 15,
+                                                            "perPage": 15,
+                                                            "currentPage": 1,
+                                                            "totalPages": 2,
+                                                            "from": 1,
+                                                            "to": 15
+                                                        }
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/notifications/viewed": {
+            "post": {
+                "tags": [
+                    "Уведомления"
+                ],
+                "summary": "Отметить прочитанными выбранные уведомления",
+                "description": "Отмечает выбранные уведомления пользователя как прочитанными",
+                "operationId": "notificationViewed",
+                "requestBody": {
+                    "description": "Выбранные уведомления",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "notifications": {
+                                        "type": "object",
+                                        "example": [
+                                            1,
+                                            2
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Список уведомлений",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "lang": {
+                                                        "type": "string",
+                                                        "example": "ru"
+                                                    },
+                                                    "items": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "properties": {
+                                                                "notifyId": {
+                                                                    "type": "integer",
+                                                                    "example": "1"
+                                                                },
+                                                                "isViewed": {
+                                                                    "type": "boolean",
+                                                                    "example": "false"
+                                                                },
+                                                                "notifyType": {
+                                                                    "type": "string",
+                                                                    "example": "request-for-approve"
+                                                                },
+                                                                "entityId": {
+                                                                    "type": "integer",
+                                                                    "example": "1"
+                                                                },
+                                                                "createdAt": {
+                                                                    "type": "string",
+                                                                    "format": "date",
+                                                                    "example": "28.06.2022"
+                                                                },
+                                                                "user": {
+                                                                    "properties": {
+                                                                        "id": {
+                                                                            "type": "integer",
+                                                                            "example": "1"
+                                                                        },
+                                                                        "name": {
+                                                                            "type": "string",
+                                                                            "example": "Админов Админ"
+                                                                        }
+                                                                    },
+                                                                    "type": "object"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        }
+                                                    },
+                                                    "pagination": {
+                                                        "type": "object",
+                                                        "example": {
+                                                            "total": 25,
+                                                            "count": 15,
+                                                            "perPage": 15,
+                                                            "currentPage": 1,
+                                                            "totalPages": 2,
+                                                            "from": 1,
+                                                            "to": 15
+                                                        }
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/notifications/destroy": {
+            "post": {
+                "tags": [
+                    "Уведомления"
+                ],
+                "summary": "Удалить выбранные уведомления",
+                "description": "Удаляет выбранные уведомления пользователя",
+                "operationId": "notificationDestroy",
+                "requestBody": {
+                    "description": "Выбранные уведомления",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "notifications": {
+                                        "type": "object",
+                                        "example": [
+                                            1,
+                                            2
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Список уведомлений",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "lang": {
+                                                        "type": "string",
+                                                        "example": "ru"
+                                                    },
+                                                    "items": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "properties": {
+                                                                "notifyId": {
+                                                                    "type": "integer",
+                                                                    "example": "1"
+                                                                },
+                                                                "isViewed": {
+                                                                    "type": "boolean",
+                                                                    "example": "false"
+                                                                },
+                                                                "notifyType": {
+                                                                    "type": "string",
+                                                                    "example": "request-for-approve"
+                                                                },
+                                                                "entityId": {
+                                                                    "type": "integer",
+                                                                    "example": "1"
+                                                                },
+                                                                "createdAt": {
+                                                                    "type": "string",
+                                                                    "format": "date",
+                                                                    "example": "28.06.2022"
+                                                                },
+                                                                "user": {
+                                                                    "properties": {
+                                                                        "id": {
+                                                                            "type": "integer",
+                                                                            "example": "1"
+                                                                        },
+                                                                        "name": {
+                                                                            "type": "string",
+                                                                            "example": "Админов Админ"
+                                                                        }
+                                                                    },
+                                                                    "type": "object"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        }
+                                                    },
+                                                    "pagination": {
+                                                        "type": "object",
+                                                        "example": {
+                                                            "total": 25,
+                                                            "count": 15,
+                                                            "perPage": 15,
+                                                            "currentPage": 1,
+                                                            "totalPages": 2,
+                                                            "from": 1,
+                                                            "to": 15
+                                                        }
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/notifications/pusher-info": {
+            "get": {
+                "tags": [
+                    "Уведомления"
+                ],
+                "summary": "Получить данные конфигурации",
+                "description": "Получить данные конфигурации",
+                "operationId": "notificationConfig",
+                "responses": {
+                    "200": {
+                        "description": "Данные конфигурации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "user": {
+                                            "properties": {
+                                                "pusherKey": {
+                                                    "type": "string",
+                                                    "example": "ХХХХХ"
+                                                },
+                                                "pusherCluster": {
+                                                    "type": "string",
+                                                    "example": "ХХХХХ"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/notifications/settings": {
+            "get": {
+                "tags": [
+                    "Уведомления"
+                ],
+                "summary": "Получить настройки уведомлений",
+                "description": "Получить настройки уведомлений",
+                "operationId": "notificationSettings",
+                "responses": {
+                    "200": {
+                        "description": "Данные конфигурации"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Уведомления"
+                ],
+                "summary": "Сохранение настроек уведомлений",
+                "description": "Сохранение настроек уведомлений пользователя",
+                "operationId": "notificationSettingsStore",
+                "requestBody": {
+                    "description": "Настройки",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "general": {
+                                        "type": "object",
+                                        "example": [
+                                            1,
+                                            2
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Данные конфигурации"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/notifications/messenger-disconnect": {
+            "post": {
+                "tags": [
+                    "Уведомления"
+                ],
+                "summary": "Отключение мессенджеров через сервис бота",
+                "description": "Вызов URL отключения мессенджеров (см. {@see User::getMessengersDisconnectLinkAttribute}).",
+                "operationId": "notificationsMessengerDisconnect",
+                "responses": {
+                    "200": {
+                        "description": "Запрос к сервису отключения выполнен",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string",
+                                                    "example": "Мессенджеры отключены."
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "ошибки error_code / error_msg"
+                    },
+                    "502": {
+                        "description": "Сервис мессенджеров не ответил ожидаемо (error)"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/search": {
+            "get": {
+                "tags": [
+                    "Поиск"
+                ],
+                "summary": "Поиск по сайту",
+                "description": "Поиск по сайту",
+                "operationId": "search",
+                "parameters": [
+                    {
+                        "name": "q",
+                        "in": "query",
+                        "description": "Поисковый запрос",
+                        "required": false,
+                        "example": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Результаты поиска",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "lang": {
+                                            "type": "string",
+                                            "example": "ru"
+                                        },
+                                        "users": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "Иван Иванов"
+                                                    },
+                                                    "type": {
+                                                        "type": "string",
+                                                        "example": "users"
+                                                    },
+                                                    "score": {
+                                                        "type": "integer",
+                                                        "example": 100
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/settings/competency-materials/search-article": {
+            "get": {
+                "tags": [
+                    "Поиск: Списки"
+                ],
+                "summary": "Поиск по статьям",
+                "description": "Поиск по статьям",
+                "operationId": "searchArticle",
+                "parameters": [
+                    {
+                        "name": "q",
+                        "in": "query",
+                        "description": "Название статьи",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "items": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": "1"
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Название"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "pagination": {
+                                                    "type": "object",
+                                                    "example": {
+                                                        "total": 25,
+                                                        "count": 15,
+                                                        "perPage": 15,
+                                                        "currentPage": 1,
+                                                        "totalPages": 2,
+                                                        "from": 1,
+                                                        "to": 15
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/settings/competency-materials/search-course": {
+            "get": {
+                "tags": [
+                    "Поиск: Списки"
+                ],
+                "summary": "Поиск по курсам",
+                "description": "Поиск по курсам",
+                "operationId": "searchCourse",
+                "parameters": [
+                    {
+                        "name": "q",
+                        "in": "query",
+                        "description": "Название курса",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "items": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": "1"
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Название"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "pagination": {
+                                                    "type": "object",
+                                                    "example": {
+                                                        "total": 25,
+                                                        "count": 15,
+                                                        "perPage": 15,
+                                                        "currentPage": 1,
+                                                        "totalPages": 2,
+                                                        "from": 1,
+                                                        "to": 15
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/users/get-user-tasks": {
+            "get": {
+                "tags": [
+                    "Поиск: Списки"
+                ],
+                "summary": "Список задач c фильтрацией",
+                "description": "Список задач c фильтрацией",
+                "operationId": "getUserTasks",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "query",
+                        "description": "id сотрудника",
+                        "required": true,
+                        "example": "1"
+                    },
+                    {
+                        "name": "q",
+                        "in": "query",
+                        "description": "Поиск",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "items": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": "1"
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Название"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "pagination": {
+                                                    "type": "object",
+                                                    "example": {
+                                                        "total": 25,
+                                                        "count": 15,
+                                                        "perPage": 15,
+                                                        "currentPage": 1,
+                                                        "totalPages": 2,
+                                                        "from": 1,
+                                                        "to": 15
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/settings/positions/get-ranks": {
+            "get": {
+                "tags": [
+                    "Поиск: Связанные списки"
+                ],
+                "summary": "Получение разрядов должности",
+                "description": "Получение разрядов должности",
+                "operationId": "rankByPosition",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "id должности",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Данные",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/settings/competencies/get-competencies": {
+            "get": {
+                "tags": [
+                    "Поиск: Связанные списки"
+                ],
+                "summary": "Получить компетенции",
+                "description": "Получить компетенции",
+                "operationId": "getCompetencies",
+                "parameters": [
+                    {
+                        "name": "q",
+                        "in": "query",
+                        "description": "Поиск",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "items": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": "1"
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Название"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "pagination": {
+                                                    "type": "object",
+                                                    "example": {
+                                                        "total": 25,
+                                                        "count": 15,
+                                                        "perPage": 15,
+                                                        "currentPage": 1,
+                                                        "totalPages": 2,
+                                                        "from": 1,
+                                                        "to": 15
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/settings/competencies/get-indicators": {
+            "get": {
+                "tags": [
+                    "Поиск: Связанные списки"
+                ],
+                "summary": "Получить индикаторы компетенции",
+                "description": "Получить индикаторы компетенции",
+                "operationId": "getIndicators",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "id компетенции",
+                        "required": true,
+                        "example": "1"
+                    },
+                    {
+                        "name": "q",
+                        "in": "query",
+                        "description": "Поиск",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "items": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": "1"
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Название"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "pagination": {
+                                                    "type": "object",
+                                                    "example": {
+                                                        "total": 25,
+                                                        "count": 15,
+                                                        "perPage": 15,
+                                                        "currentPage": 1,
+                                                        "totalPages": 2,
+                                                        "from": 1,
+                                                        "to": 15
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/settings/evaluation-template-type/search-position": {
+            "get": {
+                "tags": [
+                    "Поиск: Списки"
+                ],
+                "summary": "Список должностей",
+                "description": "Список должностей",
+                "operationId": "searchPosition",
+                "parameters": [
+                    {
+                        "name": "q",
+                        "in": "query",
+                        "description": "Поиск",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "items": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": "1"
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Название"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "pagination": {
+                                                    "type": "object",
+                                                    "example": {
+                                                        "total": 25,
+                                                        "count": 15,
+                                                        "perPage": 15,
+                                                        "currentPage": 1,
+                                                        "totalPages": 2,
+                                                        "from": 1,
+                                                        "to": 15
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/efficiency/get-templates": {
+            "get": {
+                "tags": [
+                    "Поиск: Списки"
+                ],
+                "summary": "Получить список шаблонов",
+                "description": "Доступные типы шаблонов: должностной (position), эффективности (efficiency) и дополнительные вопросы (additional)",
+                "operationId": "getEfficiencyTemplates",
+                "parameters": [
+                    {
+                        "name": "q",
+                        "in": "query",
+                        "description": "Поиск",
+                        "required": false
+                    },
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "description": "Тип",
+                        "required": true,
+                        "example": "efficiency"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "items": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": "1"
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Название"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "pagination": {
+                                                    "type": "object",
+                                                    "example": {
+                                                        "total": 25,
+                                                        "count": 15,
+                                                        "perPage": 15,
+                                                        "currentPage": 1,
+                                                        "totalPages": 2,
+                                                        "from": 1,
+                                                        "to": 15
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/recruitment/get-areas": {
+            "get": {
+                "tags": [
+                    "Поиск: Списки"
+                ],
+                "summary": "Получить список городов для интеграции",
+                "description": "Получить список городов для интеграции",
+                "operationId": "getIntergartionAreas",
+                "parameters": [
+                    {
+                        "name": "q",
+                        "in": "query",
+                        "description": "Поиск",
+                        "required": false
+                    },
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "id интеграции",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "items": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": "1"
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Название"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "pagination": {
+                                                    "type": "object",
+                                                    "example": {
+                                                        "total": 25,
+                                                        "count": 15,
+                                                        "perPage": 15,
+                                                        "currentPage": 1,
+                                                        "totalPages": 2,
+                                                        "from": 1,
+                                                        "to": 15
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/recruitment/get-professions": {
+            "get": {
+                "tags": [
+                    "Поиск: Списки"
+                ],
+                "summary": "Получить список профессий Авито для интеграции",
+                "description": "Получить список профессий Авито для интеграции",
+                "operationId": "getIntergartionAvitoProfessions",
+                "parameters": [
+                    {
+                        "name": "q",
+                        "in": "query",
+                        "description": "Поиск",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "items": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": "1"
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Название"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "pagination": {
+                                                    "type": "object",
+                                                    "example": {
+                                                        "total": 25,
+                                                        "count": 15,
+                                                        "perPage": 15,
+                                                        "currentPage": 1,
+                                                        "totalPages": 2,
+                                                        "from": 1,
+                                                        "to": 15
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/settings/search-country": {
+            "get": {
+                "tags": [
+                    "Поиск: Списки"
+                ],
+                "summary": "Список стран",
+                "description": "Список стран",
+                "operationId": "searchCountry",
+                "parameters": [
+                    {
+                        "name": "q",
+                        "in": "query",
+                        "description": "Поиск",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "items": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": "1"
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Название"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "pagination": {
+                                                    "type": "object",
+                                                    "example": {
+                                                        "total": 25,
+                                                        "count": 15,
+                                                        "perPage": 15,
+                                                        "currentPage": 1,
+                                                        "totalPages": 2,
+                                                        "from": 1,
+                                                        "to": 15
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/settings/search-time-zone": {
+            "get": {
+                "tags": [
+                    "Поиск: Списки"
+                ],
+                "summary": "Список часовых поясов",
+                "description": "Список часовых поясов",
+                "operationId": "searchTimeZone",
+                "parameters": [
+                    {
+                        "name": "q",
+                        "in": "query",
+                        "description": "Поиск",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "items": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": "1"
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "EUROPE/MOSCOW(GMT+3)"
+                                                            },
+                                                            "code": {
+                                                                "type": "string",
+                                                                "example": "gmt3"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "pagination": {
+                                                    "type": "object",
+                                                    "example": {
+                                                        "total": 25,
+                                                        "count": 15,
+                                                        "perPage": 15,
+                                                        "currentPage": 1,
+                                                        "totalPages": 2,
+                                                        "from": 1,
+                                                        "to": 15
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/calendars/search-location": {
+            "get": {
+                "tags": [
+                    "Поиск: Списки"
+                ],
+                "summary": "Список мест проведения",
+                "description": "Список стран",
+                "operationId": "searchLocation",
+                "parameters": [
+                    {
+                        "name": "q",
+                        "in": "query",
+                        "description": "Поиск",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "items": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": "1"
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Название"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "pagination": {
+                                                    "type": "object",
+                                                    "example": {
+                                                        "total": 25,
+                                                        "count": 15,
+                                                        "perPage": 15,
+                                                        "currentPage": 1,
+                                                        "totalPages": 2,
+                                                        "from": 1,
+                                                        "to": 15
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "api/education/search-speaker": {
+            "get": {
+                "tags": [
+                    "Поиск: Чек-листы по вакансии"
+                ],
+                "summary": "Список докладчиков Тренинга",
+                "description": "Список докладчиков Тренинга",
+                "operationId": "searchSpeakerTrainig",
+                "parameters": [
+                    {
+                        "name": "q",
+                        "in": "query",
+                        "description": "Поиск",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "items": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": "1"
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Название"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "pagination": {
+                                                    "type": "object",
+                                                    "example": {
+                                                        "total": 25,
+                                                        "count": 15,
+                                                        "perPage": 15,
+                                                        "currentPage": 1,
+                                                        "totalPages": 2,
+                                                        "from": 1,
+                                                        "to": 15
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/settings/search-candidate": {
+            "get": {
+                "tags": [
+                    "Поиск: Списки"
+                ],
+                "summary": "Список кандидатов",
+                "description": "Список кандидатов",
+                "operationId": "searchCandidate",
+                "parameters": [
+                    {
+                        "name": "q",
+                        "in": "query",
+                        "description": "Поиск",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "items": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": "1"
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Название"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "pagination": {
+                                                    "type": "object",
+                                                    "example": {
+                                                        "total": 25,
+                                                        "count": 15,
+                                                        "perPage": 15,
+                                                        "currentPage": 1,
+                                                        "totalPages": 2,
+                                                        "from": 1,
+                                                        "to": 15
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "api/recruitment/vacancies/{vacancy}/search-check-list": {
+            "get": {
+                "tags": [
+                    "Поиск: Чек-листы по вакансии"
+                ],
+                "summary": "Список чек-листов по вакансии",
+                "description": "Список чек-листов по вакансии",
+                "operationId": "searchVacancyCheckLists",
+                "parameters": [
+                    {
+                        "name": "q",
+                        "in": "query",
+                        "description": "Поиск",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "items": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": "1"
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Название"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "pagination": {
+                                                    "type": "object",
+                                                    "example": {
+                                                        "total": 25,
+                                                        "count": 15,
+                                                        "perPage": 15,
+                                                        "currentPage": 1,
+                                                        "totalPages": 2,
+                                                        "from": 1,
+                                                        "to": 15
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/settings/edms/search-classifier-code": {
+            "get": {
+                "tags": [
+                    "Поиск: Списки"
+                ],
+                "summary": "Список кодов классификатора Минтруда",
+                "description": "Список кодов классификатора Минтруда",
+                "operationId": "searchClassifierCode",
+                "parameters": [
+                    {
+                        "name": "q",
+                        "in": "query",
+                        "description": "Поиск",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "items": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": "1"
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Название"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "pagination": {
+                                                    "type": "object",
+                                                    "example": {
+                                                        "total": 25,
+                                                        "count": 15,
+                                                        "perPage": 15,
+                                                        "currentPage": 1,
+                                                        "totalPages": 2,
+                                                        "from": 1,
+                                                        "to": 15
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/edms/search-document-type": {
+            "get": {
+                "tags": [
+                    "Поиск: Списки"
+                ],
+                "summary": "Список типов документов",
+                "description": "Список типов документов",
+                "operationId": "searchDocumentType",
+                "parameters": [
+                    {
+                        "name": "q",
+                        "in": "query",
+                        "description": "Поиск",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "items": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": "1"
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Название"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "pagination": {
+                                                    "type": "object",
+                                                    "example": {
+                                                        "total": 25,
+                                                        "count": 15,
+                                                        "perPage": 15,
+                                                        "currentPage": 1,
+                                                        "totalPages": 2,
+                                                        "from": 1,
+                                                        "to": 15
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/users/search-user": {
+            "get": {
+                "tags": [
+                    "Поиск: Списки"
+                ],
+                "summary": "Список пользователей",
+                "description": "Список пользователей",
+                "operationId": "searchUser",
+                "parameters": [
+                    {
+                        "name": "q",
+                        "in": "query",
+                        "description": "Поиск",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "items": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": "1"
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Название"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "pagination": {
+                                                    "type": "object",
+                                                    "example": {
+                                                        "total": 25,
+                                                        "count": 15,
+                                                        "perPage": 15,
+                                                        "currentPage": 1,
+                                                        "totalPages": 2,
+                                                        "from": 1,
+                                                        "to": 15
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/users/get-users-ids-by-filter": {
+            "post": {
+                "tags": [
+                    "Поиск: Списки"
+                ],
+                "summary": "Список идентификаторов пользователей по фильтру",
+                "description": "Список идентификаторов пользователей по фильтру",
+                "operationId": "searchUserUdsByFilter",
+                "parameters": [
+                    {
+                        "name": "q",
+                        "in": "query",
+                        "description": "Поиск",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "items": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": "1"
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Название"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "pagination": {
+                                                    "type": "object",
+                                                    "example": {
+                                                        "total": 25,
+                                                        "count": 15,
+                                                        "perPage": 15,
+                                                        "currentPage": 1,
+                                                        "totalPages": 2,
+                                                        "from": 1,
+                                                        "to": 15
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/settings/departments/get-departments": {
+            "get": {
+                "tags": [
+                    "Поиск: Списки"
+                ],
+                "summary": "Список подразделений",
+                "description": "Список подразделений",
+                "operationId": "searchDepartment",
+                "parameters": [
+                    {
+                        "name": "q",
+                        "in": "query",
+                        "description": "Поиск",
+                        "required": false
+                    },
+                    {
+                        "name": "manager",
+                        "in": "query",
+                        "description": "Получить данные руководителя подразделения",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "items": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": "1"
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Название"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "pagination": {
+                                                    "type": "object",
+                                                    "example": {
+                                                        "total": 25,
+                                                        "count": 15,
+                                                        "perPage": 15,
+                                                        "currentPage": 1,
+                                                        "totalPages": 2,
+                                                        "from": 1,
+                                                        "to": 15
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/recruitment/app/search-vacancy": {
+            "get": {
+                "tags": [
+                    "Поиск: Списки"
+                ],
+                "summary": "Список вакансий",
+                "description": "Список вакансий",
+                "operationId": "searchVacancy",
+                "parameters": [
+                    {
+                        "name": "q",
+                        "in": "query",
+                        "description": "Поиск",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "items": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": "1"
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Название"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "pagination": {
+                                                    "type": "object",
+                                                    "example": {
+                                                        "total": 25,
+                                                        "count": 15,
+                                                        "perPage": 15,
+                                                        "currentPage": 1,
+                                                        "totalPages": 2,
+                                                        "from": 1,
+                                                        "to": 15
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/settings/search-role": {
+            "get": {
+                "tags": [
+                    "Поиск: Списки"
+                ],
+                "summary": "Список ролей",
+                "description": "Список ролей",
+                "operationId": "searchRole",
+                "parameters": [
+                    {
+                        "name": "q",
+                        "in": "query",
+                        "description": "Поиск",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "items": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": "1"
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Название"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "pagination": {
+                                                    "type": "object",
+                                                    "example": {
+                                                        "total": 25,
+                                                        "count": 15,
+                                                        "perPage": 15,
+                                                        "currentPage": 1,
+                                                        "totalPages": 2,
+                                                        "from": 1,
+                                                        "to": 15
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/update-information/{update_information}": {
+            "get": {
+                "tags": [
+                    "Информация об обновлении"
+                ],
+                "summary": "Возвращает инфу для модального окна с обновлениями",
+                "description": "Возвращает инфу для модального окна с обновлениями",
+                "operationId": "updateInformation",
+                "parameters": [
+                    {
+                        "name": "update_information",
+                        "in": "path",
+                        "description": "id обновления",
+                        "required": true,
+                        "example": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Файл"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "WIKI",
+            "description": "WIKI"
+        },
+        {
+            "name": "Операции с файлами",
+            "description": "Операции с файлами"
+        },
+        {
+            "name": "Уведомления",
+            "description": "Уведомления"
+        },
+        {
+            "name": "Поиск",
+            "description": "Поиск"
+        },
+        {
+            "name": "Поиск: Списки",
+            "description": "Поиск: Списки"
+        },
+        {
+            "name": "Поиск: Связанные списки",
+            "description": "Поиск: Связанные списки"
+        },
+        {
+            "name": "Поиск: Чек-листы по вакансии",
+            "description": "Поиск: Чек-листы по вакансии"
+        },
+        {
+            "name": "Информация об обновлении",
+            "description": "Информация об обновлении"
+        }
+    ],
+    "components": {
+        "securitySchemes": {
+            "sanctum": {
+                "type": "apiKey",
+                "description": "Введите token в следующем формате: Bearer Ваш Api Token",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    }
+}

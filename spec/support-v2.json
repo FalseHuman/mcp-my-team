@@ -1,0 +1,158 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Общие методы",
+        "version": "2.0"
+    },
+    "paths": {
+        "/api/v2/file/chunks/upload": {
+            "post": {
+                "tags": [
+                    "Операции с файлами"
+                ],
+                "summary": "Загрузка файла по частям",
+                "description": "Загружает файл",
+                "operationId": "uploadFileChunksV2",
+                "requestBody": {
+                    "description": "Данные загружаемого файла",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/FileUploadRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Информация о статусе загрузки",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/FileUploadedInfo"
+                                }
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Ответ об окончании загрузки и запуске создания файла из загруженных частей",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/FileUploadedDone"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "FileUploadRequest": {
+                "required": [
+                    "type",
+                    "module",
+                    "resumableIdentifier",
+                    "resumableChunkNumber",
+                    "resumableTotalChunks",
+                    "resumableTotalSize",
+                    "file"
+                ],
+                "properties": {
+                    "type": {
+                        "description": "К какому виджету относится файл. Значение берется из ответа формы создания или редактирования сущности, для которой загружается файл",
+                        "type": "string",
+                        "example": "post-content"
+                    },
+                    "module": {
+                        "description": "К какому модулю относится файл. Значение берется из ответа формы создания или редактирования сущности, для которой загружается файл",
+                        "type": "string",
+                        "example": "knowledge-base"
+                    },
+                    "resumableIdentifier": {
+                        "description": "Уникальный идентификатор загружаемого файла. По нему определяются все части загружаемого файла",
+                        "type": "string",
+                        "example": "12314545645641"
+                    },
+                    "resumableChunkNumber": {
+                        "description": "Номер загружаемой части",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "resumableTotalChunks": {
+                        "description": "Количество частей, на который разбит файл",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "resumableTotalSize": {
+                        "description": "Общий размер файл в байтах",
+                        "type": "integer",
+                        "example": "2323"
+                    },
+                    "file": {
+                        "description": "Файл для загрузки",
+                        "type": "string",
+                        "format": "binary"
+                    }
+                },
+                "type": "object"
+            },
+            "FileUploadedInfo": {
+                "required": [
+                    "done",
+                    "status"
+                ],
+                "properties": {
+                    "done": {
+                        "type": "integer",
+                        "example": "10"
+                    },
+                    "status": {
+                        "type": "boolean",
+                        "example": "true"
+                    }
+                },
+                "type": "object"
+            },
+            "FileUploadedDone": {
+                "required": [
+                    "done",
+                    "status"
+                ],
+                "properties": {
+                    "done": {
+                        "type": "integer",
+                        "example": "100"
+                    },
+                    "status": {
+                        "type": "string",
+                        "example": "PENDING"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "sanctum": {
+                "type": "apiKey",
+                "description": "Введите token в следующем формате: Bearer Ваш Api Token",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Операции с файлами",
+            "description": "Операции с файлами"
+        }
+    ]
+}

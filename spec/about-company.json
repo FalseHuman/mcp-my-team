@@ -1,0 +1,934 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Раздел О компании",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/about-company/pages/all": {
+            "get": {
+                "tags": [
+                    "О компании"
+                ],
+                "summary": "Список страниц для админки",
+                "description": "Возвращает страницы раздела с глобальными настройками и пагинацией. Требуется manage_about_company_edit.",
+                "operationId": "aboutCompanyPagesAll",
+                "responses": {
+                    "200": {
+                        "description": "Список страниц",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/AboutCompanyAdminListResponse"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/about-company/landing": {
+            "get": {
+                "tags": [
+                    "О компании"
+                ],
+                "summary": "Лендинг раздела",
+                "description": "Карточки страниц для пользователя с учётом языка и фильтра доступа. Требуется manage_about_company_show или manage_about_company_edit.",
+                "operationId": "aboutCompanyLanding",
+                "responses": {
+                    "200": {
+                        "description": "Данные лендинга",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/AboutCompanyLandingPayload"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/about-company/pages": {
+            "get": {
+                "tags": [
+                    "О компании"
+                ],
+                "summary": "Список страниц для меню",
+                "description": "Возвращает id, title и lang доступных страниц. Требуется manage_about_company_show или manage_about_company_edit.",
+                "operationId": "aboutCompanyPagesIndex",
+                "responses": {
+                    "200": {
+                        "description": "Список страниц",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "canEdit": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "sectionTitle": {
+                                            "type": "string",
+                                            "example": "О компании"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/AboutCompanyPageListItem"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "О компании"
+                ],
+                "summary": "Создание страницы",
+                "description": "Создаёт страницу раздела. Требуется manage_about_company_edit.",
+                "operationId": "aboutCompanyPageStore",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AboutCompanyPageSaveRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Созданная страница",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/AboutCompanyPageDetailResponse"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/about-company/pages/{page}": {
+            "get": {
+                "tags": [
+                    "О компании"
+                ],
+                "summary": "Просмотр страницы",
+                "description": "Детальная страница с содержимым. Требуется manage_about_company_show или manage_about_company_edit и доступ по языку/фильтру.",
+                "operationId": "aboutCompanyPageShow",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "path",
+                        "description": "ID страницы",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Страница",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/AboutCompanyPageDetailResponse"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Доступ запрещён",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AboutCompanyAccessDenied"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "О компании"
+                ],
+                "summary": "Обновление страницы",
+                "description": "Обновляет страницу раздела. Требуется manage_about_company_edit.",
+                "operationId": "aboutCompanyPageUpdate",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "path",
+                        "description": "ID страницы",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AboutCompanyPageSaveRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Обновлённая страница",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/AboutCompanyPageDetailResponse"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "О компании"
+                ],
+                "summary": "Удаление страницы",
+                "description": "Удаляет страницу и возвращает обновлённый список для меню. Требуется manage_about_company_edit.",
+                "operationId": "aboutCompanyPageDestroy",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "path",
+                        "description": "ID страницы",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список страниц после удаления",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "canEdit": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "sectionTitle": {
+                                            "type": "string",
+                                            "example": "О компании"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/AboutCompanyPageListItem"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/about-company/pages/get-form-fields": {
+            "get": {
+                "tags": [
+                    "О компании"
+                ],
+                "summary": "Поля формы создания",
+                "description": "Возвращает поля для создания страницы. Требуется manage_about_company_edit.",
+                "operationId": "aboutCompanyPageCreateForm",
+                "responses": {
+                    "200": {
+                        "description": "Поля формы",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/AboutCompanyPageFormResponse"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/about-company/pages/{page}/edit": {
+            "get": {
+                "tags": [
+                    "О компании"
+                ],
+                "summary": "Поля формы редактирования",
+                "description": "Возвращает поля для редактирования страницы. Требуется manage_about_company_edit.",
+                "operationId": "aboutCompanyPageEditForm",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "path",
+                        "description": "ID страницы",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Поля формы",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/AboutCompanyPageFormResponse"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/about-company/settings": {
+            "put": {
+                "tags": [
+                    "О компании"
+                ],
+                "summary": "Обновление настроек раздела",
+                "description": "Обновляет заголовок раздела и флаги скрытия автора, превью и даты на всех страницах. Требуется manage_about_company_edit.",
+                "operationId": "aboutCompanyUpdateSettings",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AboutCompanySectionSettingsRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Обновлённые настройки",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "settings": {
+                                                    "$ref": "#/components/schemas/AboutCompanySectionSettingsResponse"
+                                                },
+                                                "sectionTitle": {
+                                                    "type": "string",
+                                                    "example": "О компании"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/about-company/pages/sort": {
+            "put": {
+                "tags": [
+                    "О компании"
+                ],
+                "summary": "Сортировка страниц",
+                "description": "Обновляет порядок страниц по массиву id. Требуется manage_about_company_edit.",
+                "operationId": "aboutCompanyPagesSort",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AboutCompanySortRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Обновлённый список страниц",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/AboutCompanyAdminListResponse"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "AboutCompanyAccessDenied": {
+                "properties": {
+                    "error": {
+                        "properties": {
+                            "error_code": {
+                                "type": "integer",
+                                "example": 4
+                            },
+                            "error_msg": {
+                                "type": "string",
+                                "example": "Доступ запрещен"
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "AboutCompanyUserShort": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Иванов Иван"
+                    },
+                    "avatar": {
+                        "type": "string",
+                        "example": "/storage/images/users/demo/averchenko.jpg"
+                    }
+                },
+                "type": "object"
+            },
+            "AboutCompanyFilter": {
+                "properties": {
+                    "operator": {
+                        "type": "string",
+                        "example": "or"
+                    },
+                    "conditions": {
+                        "type": "array",
+                        "items": {
+                            "properties": {
+                                "code": {
+                                    "type": "string",
+                                    "example": "user"
+                                },
+                                "operator": {
+                                    "type": "string",
+                                    "example": "in"
+                                },
+                                "value": {
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "AboutCompanyPageSaveRequest": {
+                "required": [
+                    "title",
+                    "content",
+                    "lang",
+                    "is_hidden"
+                ],
+                "properties": {
+                    "title": {
+                        "type": "string",
+                        "example": "О компании"
+                    },
+                    "content": {
+                        "type": "string",
+                        "example": "<p>HTML-содержимое страницы</p>"
+                    },
+                    "preview": {
+                        "description": "Путь загруженного файла или сохранённый /storage/...",
+                        "type": "string",
+                        "example": "upload/about-company-preview/frame.png",
+                        "nullable": true
+                    },
+                    "lang": {
+                        "type": "string",
+                        "enum": [
+                            "ru",
+                            "en",
+                            "kk"
+                        ],
+                        "example": "ru"
+                    },
+                    "is_hidden": {
+                        "type": "boolean",
+                        "example": false
+                    },
+                    "has_contents": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "filter": {
+                        "$ref": "#/components/schemas/AboutCompanyFilter"
+                    },
+                    "content_files": {
+                        "type": "array",
+                        "items": {
+                            "properties": {
+                                "id": {
+                                    "type": "integer",
+                                    "example": 10
+                                },
+                                "path": {
+                                    "type": "string",
+                                    "example": "upload/about-company-content/file.pdf"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "AboutCompanyFormField": {
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "Заголовок"
+                    },
+                    "code": {
+                        "type": "string",
+                        "example": "title"
+                    },
+                    "type": {
+                        "type": "string",
+                        "example": "text"
+                    },
+                    "require": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "value": {
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "AboutCompanyPageFormResponse": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "fields": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/AboutCompanyFormField"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "AboutCompanyPageFooter": {
+                "properties": {
+                    "user": {
+                        "$ref": "#/components/schemas/AboutCompanyUserShort"
+                    },
+                    "createdDate": {
+                        "type": "string",
+                        "example": "01.01.2026 00:00"
+                    }
+                },
+                "type": "object",
+                "nullable": true
+            },
+            "AboutCompanyPageDetailResponse": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "canEdit": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "sectionTitle": {
+                        "type": "string",
+                        "example": "О компании"
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "О компании"
+                    },
+                    "content": {
+                        "type": "string",
+                        "example": "<p>HTML-содержимое</p>"
+                    },
+                    "hasContents": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "showAuthor": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "showDate": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "preview": {
+                        "type": "string",
+                        "example": "/storage/about-company/files/1/preview.png",
+                        "nullable": true
+                    },
+                    "footer": {
+                        "$ref": "#/components/schemas/AboutCompanyPageFooter"
+                    }
+                },
+                "type": "object"
+            },
+            "AboutCompanyLandingCard": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "О компании"
+                    },
+                    "excerpt": {
+                        "type": "string",
+                        "example": "Краткий текст превью…"
+                    },
+                    "lang": {
+                        "type": "string",
+                        "example": "ru"
+                    },
+                    "preview": {
+                        "type": "string",
+                        "example": "/storage/about-company/files/1/preview.png",
+                        "nullable": true
+                    },
+                    "user": {
+                        "$ref": "#/components/schemas/AboutCompanyUserShort"
+                    },
+                    "createdDate": {
+                        "type": "string",
+                        "example": "01.01.2026 00:00"
+                    }
+                },
+                "type": "object"
+            },
+            "AboutCompanyLandingPayload": {
+                "properties": {
+                    "canEdit": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "sectionTitle": {
+                        "type": "string",
+                        "example": "О компании"
+                    },
+                    "hideAuthor": {
+                        "type": "boolean",
+                        "example": false
+                    },
+                    "hidePreview": {
+                        "type": "boolean",
+                        "example": false
+                    },
+                    "hideDate": {
+                        "type": "boolean",
+                        "example": false
+                    },
+                    "cards": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/AboutCompanyLandingCard"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "AboutCompanyPageListItem": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "О компании"
+                    },
+                    "lang": {
+                        "type": "string",
+                        "example": "ru"
+                    }
+                },
+                "type": "object"
+            },
+            "AboutCompanyAdminPageItem": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "О компании"
+                    },
+                    "user": {
+                        "$ref": "#/components/schemas/AboutCompanyUserShort"
+                    },
+                    "lang": {
+                        "type": "string",
+                        "example": "ru"
+                    },
+                    "createdDate": {
+                        "type": "string",
+                        "example": "01.01.2026 00:00"
+                    },
+                    "content": {
+                        "type": "string",
+                        "example": "<p>HTML</p>"
+                    },
+                    "isHidden": {
+                        "type": "boolean",
+                        "example": false
+                    }
+                },
+                "type": "object"
+            },
+            "AboutCompanySectionSettingsRequest": {
+                "properties": {
+                    "section_title": {
+                        "type": "string",
+                        "example": "О компании"
+                    },
+                    "hide_author": {
+                        "type": "boolean",
+                        "example": false
+                    },
+                    "hide_preview": {
+                        "type": "boolean",
+                        "example": false
+                    },
+                    "hide_date": {
+                        "type": "boolean",
+                        "example": false
+                    }
+                },
+                "type": "object"
+            },
+            "AboutCompanySectionSettingsResponse": {
+                "properties": {
+                    "fields": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/AboutCompanyFormField"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "AboutCompanySortRequest": {
+                "required": [
+                    "page_ids"
+                ],
+                "properties": {
+                    "page_ids": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "AboutCompanyAdminListResponse": {
+                "properties": {
+                    "canEdit": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "settings": {
+                        "$ref": "#/components/schemas/AboutCompanySectionSettingsResponse"
+                    },
+                    "pages": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/AboutCompanyAdminPageItem"
+                        }
+                    },
+                    "pagination": {
+                        "properties": {
+                            "total": {
+                                "type": "integer",
+                                "example": 20
+                            },
+                            "count": {
+                                "type": "integer",
+                                "example": 20
+                            },
+                            "perPage": {
+                                "type": "integer",
+                                "example": 20
+                            },
+                            "currentPage": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "totalPages": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "from": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "to": {
+                                "type": "integer",
+                                "example": 20
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "sanctum": {
+                "type": "apiKey",
+                "description": "Введите token в следующем формате: Bearer Ваш Api Token",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "О компании",
+            "description": "О компании"
+        }
+    ]
+}

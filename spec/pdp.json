@@ -1,0 +1,1587 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "ИПР (Индивидуальный план развития)",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/personal-development-plans/checking/list": {
+            "get": {
+                "tags": [
+                    "Проверка ИПР"
+                ],
+                "summary": "Список ИПР для проверки",
+                "description": "Список ИПР для проверки",
+                "operationId": "indexPDPChecking",
+                "parameters": [
+                    {
+                        "name": "user[]",
+                        "in": "query",
+                        "description": "id сотрудника",
+                        "required": false
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "Статус",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Данные",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/personal-development-plans/users/{user}": {
+            "get": {
+                "tags": [
+                    "Мои ИПР"
+                ],
+                "summary": "Список ИПР пользователя",
+                "description": "Список ИПР пользователя",
+                "operationId": "listByUser",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "description": "id сотрудника",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Данные",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/personal-development-plans": {
+            "get": {
+                "tags": [
+                    "ИПР"
+                ],
+                "summary": "Список ИПР",
+                "description": "Список ИПР",
+                "operationId": "indexPDP",
+                "parameters": [
+                    {
+                        "name": "user[]",
+                        "in": "query",
+                        "description": "id сотрудника",
+                        "required": false
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "Статус",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Данные",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "ИПР"
+                ],
+                "summary": "Создание ИПР",
+                "description": "Создание ИПР",
+                "operationId": "storePDP",
+                "requestBody": {
+                    "description": "Значения для авторизации",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "user": {
+                                        "description": "Пользователь",
+                                        "type": "integer",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Данные",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/personal-development-plans/create": {
+            "get": {
+                "tags": [
+                    "ИПР"
+                ],
+                "summary": "Поля для формы создания ИПР",
+                "description": "Поля для формы создания ИПР",
+                "operationId": "createPDP",
+                "responses": {
+                    "200": {
+                        "description": "Данные",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/personal-development-plans/{plan}/edit": {
+            "get": {
+                "tags": [
+                    "ИПР"
+                ],
+                "summary": "Форма для редактирования ИПР",
+                "description": "Форма для редактирования ИПР",
+                "operationId": "editPDP",
+                "parameters": [
+                    {
+                        "name": "plan",
+                        "in": "path",
+                        "description": "id ИПР",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Данные",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/personal-development-plans/{plan}": {
+            "get": {
+                "tags": [
+                    "Мои ИПР"
+                ],
+                "summary": "Детальная прохождения ИПР",
+                "description": "Детальная прохождения ИПР",
+                "operationId": "detailPDP",
+                "parameters": [
+                    {
+                        "name": "plan",
+                        "in": "path",
+                        "description": "id ИПР",
+                        "required": true,
+                        "example": "1"
+                    },
+                    {
+                        "name": "tab",
+                        "in": "query",
+                        "description": "Таб материала",
+                        "required": false
+                    },
+                    {
+                        "name": "q",
+                        "in": "query",
+                        "description": "Поиск",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Данные",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "ИПР"
+                ],
+                "summary": "Обновление ИПР",
+                "description": "Обновление ИПР",
+                "operationId": "updatePDP",
+                "parameters": [
+                    {
+                        "name": "plan",
+                        "in": "path",
+                        "description": "id ИПР",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Значения",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "user": {
+                                        "description": "Пользователь",
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "target": {
+                                        "description": "Цель проведения ИПР",
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "position": {
+                                        "description": "Должность",
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "rank": {
+                                        "description": "Разряд",
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "start_date": {
+                                        "description": "Дата начала",
+                                        "type": "integer",
+                                        "example": "30.10.2023"
+                                    },
+                                    "end_date": {
+                                        "description": "Дата окончания",
+                                        "type": "integer",
+                                        "example": "30.10.2023"
+                                    },
+                                    "notify_overdue": {
+                                        "description": "Уведомить о просрочке даты окончания ИПР",
+                                        "type": "boolean",
+                                        "example": "false"
+                                    },
+                                    "notify_overdue_to_all": {
+                                        "description": "Отправить всем",
+                                        "type": "boolean",
+                                        "example": "false"
+                                    },
+                                    "overdue_reminders": {
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "day": {
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "isRecurrence": {
+                                                    "type": "boolean",
+                                                    "example": "true"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "overdue_material_reminders": {
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "day": {
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "isRecurrence": {
+                                                    "type": "boolean",
+                                                    "example": "true"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "notify_comment": {
+                                        "description": "Уведомить о новом комментарии",
+                                        "type": "boolean",
+                                        "example": "false"
+                                    },
+                                    "notify_comment_to_all": {
+                                        "description": "Отправить всем",
+                                        "type": "boolean",
+                                        "example": "false"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Данные",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "ИПР"
+                ],
+                "summary": "Удаление ИПР",
+                "description": "Удаление ИПР",
+                "operationId": "deletePDP",
+                "parameters": [
+                    {
+                        "name": "plan",
+                        "in": "path",
+                        "description": "id ИПР",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Данные",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/personal-development-plans/{plan}/copy": {
+            "post": {
+                "tags": [
+                    "ИПР"
+                ],
+                "summary": "Копирование ИПР",
+                "description": "Копирование ИПР",
+                "operationId": "copyPDP",
+                "parameters": [
+                    {
+                        "name": "plan",
+                        "in": "path",
+                        "description": "id ИПР",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Данные",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/personal-development-plans/count-drafts-by-user/{user}": {
+            "get": {
+                "tags": [
+                    "ИПР"
+                ],
+                "summary": "Получения количество черновиков ИПР для пользователя",
+                "description": "Получения количество черновиков ИПР для пользователя",
+                "operationId": "countDraftsByUser",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "description": "id пользователя",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Данные",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/personal-development-plans/{plan}/positions/{position}": {
+            "get": {
+                "tags": [
+                    "ИПР"
+                ],
+                "summary": "Получение компетенций/индикаторов должности вместе с материалам",
+                "description": "Получение компетенций/индикаторов должности вместе с материалам",
+                "operationId": "competenciesWithMaterials",
+                "parameters": [
+                    {
+                        "name": "plan",
+                        "in": "path",
+                        "description": "id ИПР",
+                        "required": true,
+                        "example": "1"
+                    },
+                    {
+                        "name": "position",
+                        "in": "path",
+                        "description": "id должности",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Данные",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/personal-development-plans/{plan}/add-materials-by-competencies": {
+            "post": {
+                "tags": [
+                    "ИПР"
+                ],
+                "summary": "Прикрепление материалов по выбранным компетенциям/индикаторам",
+                "description": "Прикрепление материалов по выбранным компетенциям/индикаторам",
+                "operationId": "addMaterialByCompetency",
+                "parameters": [
+                    {
+                        "name": "plan",
+                        "in": "path",
+                        "description": "id ИПР",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Значения материала",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "competencies": {
+                                        "description": "Компетенции",
+                                        "type": "enum",
+                                        "example": "[1]"
+                                    },
+                                    "indicators": {
+                                        "description": "Индикаторы",
+                                        "type": "enum",
+                                        "example": "[1]"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Данные",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/personal-development-plans/{plan}/run": {
+            "post": {
+                "tags": [
+                    "ИПР"
+                ],
+                "summary": "Запустить ИПР",
+                "description": "Запустить ИПР",
+                "operationId": "runPDP",
+                "parameters": [
+                    {
+                        "name": "plan",
+                        "in": "path",
+                        "description": "id ИПР",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Данные",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/growth/get-tabs": {
+            "get": {
+                "tags": [
+                    "Вкладки"
+                ],
+                "summary": "Получение доступных вкладок раздела Развитие",
+                "description": "Получение доступных вкладок раздела Развитие",
+                "operationId": "growthGetTabs",
+                "responses": {
+                    "200": {
+                        "description": "Список доступных табов",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "tabs": {
+                                                    "type": "object",
+                                                    "example": [
+                                                        "pdp",
+                                                        "check_pdp"
+                                                    ]
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/personal-development-plans/{plan}/comments": {
+            "post": {
+                "tags": [
+                    "ИПР: Комментарии"
+                ],
+                "summary": "Добавление нового комментария",
+                "description": "Сохраняет новый комментарий",
+                "operationId": "planCommentStore",
+                "parameters": [
+                    {
+                        "name": "plan",
+                        "in": "path",
+                        "description": "id ИПР",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Значения для сохранения нового комментария",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "text": {
+                                        "description": "Текст комментария",
+                                        "type": "string",
+                                        "example": "Текст комментария"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Комментарии",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": "1"
+                                                    },
+                                                    "canEdit": {
+                                                        "type": "boolean",
+                                                        "example": "true"
+                                                    },
+                                                    "canDelete": {
+                                                        "type": "boolean",
+                                                        "example": "true"
+                                                    },
+                                                    "createdBy": {
+                                                        "type": "object",
+                                                        "example": {
+                                                            "id": 1,
+                                                            "name": "ФИО",
+                                                            "avatar": "",
+                                                            "position": "Должность"
+                                                        }
+                                                    },
+                                                    "text": {
+                                                        "type": "string",
+                                                        "example": "Текст комментария"
+                                                    },
+                                                    "createdAt": {
+                                                        "type": "string",
+                                                        "format": "date",
+                                                        "example": "09:15 23.10.2023"
+                                                    },
+                                                    "createdAtDiff": {
+                                                        "type": "string",
+                                                        "format": "date",
+                                                        "example": "5 минут назад"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/personal-development-plans/comments/{comment}": {
+            "put": {
+                "tags": [
+                    "ИПР: Комментарии"
+                ],
+                "summary": "Изменение комментария",
+                "description": "Изменяет комментарий",
+                "operationId": "planCommentUpdate",
+                "parameters": [
+                    {
+                        "name": "comment",
+                        "in": "path",
+                        "description": "id комментария",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Значения для сохранения комментария",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "text": {
+                                        "description": "Текст комментария",
+                                        "type": "string",
+                                        "example": "Новый комментарий"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Комментарии",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": "1"
+                                                    },
+                                                    "canEdit": {
+                                                        "type": "boolean",
+                                                        "example": "true"
+                                                    },
+                                                    "canDelete": {
+                                                        "type": "boolean",
+                                                        "example": "true"
+                                                    },
+                                                    "createdBy": {
+                                                        "type": "object",
+                                                        "example": {
+                                                            "id": 1,
+                                                            "name": "ФИО",
+                                                            "avatar": "",
+                                                            "position": "Должность"
+                                                        }
+                                                    },
+                                                    "text": {
+                                                        "type": "string",
+                                                        "example": "Текст комментария"
+                                                    },
+                                                    "createdAt": {
+                                                        "type": "string",
+                                                        "format": "date",
+                                                        "example": "09:15 23.10.2023"
+                                                    },
+                                                    "createdAtDiff": {
+                                                        "type": "string",
+                                                        "format": "date",
+                                                        "example": "5 минут назад"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "ИПР: Комментарии"
+                ],
+                "summary": "Удаление комментария",
+                "description": "Удаляет комментарий",
+                "operationId": "planCommentDestroy",
+                "parameters": [
+                    {
+                        "name": "comment",
+                        "in": "path",
+                        "description": "Идентификатор комментария",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Комментарии",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": "1"
+                                                    },
+                                                    "canEdit": {
+                                                        "type": "boolean",
+                                                        "example": "true"
+                                                    },
+                                                    "canDelete": {
+                                                        "type": "boolean",
+                                                        "example": "true"
+                                                    },
+                                                    "createdBy": {
+                                                        "type": "object",
+                                                        "example": {
+                                                            "id": 1,
+                                                            "name": "ФИО",
+                                                            "avatar": "",
+                                                            "position": "Должность"
+                                                        }
+                                                    },
+                                                    "text": {
+                                                        "type": "string",
+                                                        "example": "Текст комментария"
+                                                    },
+                                                    "createdAt": {
+                                                        "type": "string",
+                                                        "format": "date",
+                                                        "example": "09:15 23.10.2023"
+                                                    },
+                                                    "createdAtDiff": {
+                                                        "type": "string",
+                                                        "format": "date",
+                                                        "example": "5 минут назад"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/personal-development-plans/comments/{comment}/edit": {
+            "get": {
+                "tags": [
+                    "ИПР: Комментарии"
+                ],
+                "summary": "Форма редактирования комментария",
+                "description": "Форма редактирования комментарий",
+                "operationId": "planCommentEdit",
+                "parameters": [
+                    {
+                        "name": "comment",
+                        "in": "path",
+                        "description": "id комментария",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Поля",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/personal-development-plans/material-types/{type}/materials/create": {
+            "get": {
+                "tags": [
+                    "ИПР: Материалы"
+                ],
+                "summary": "Поля для формы добавления материала ИПР",
+                "description": "Поля для формы добавления материала ИПР",
+                "operationId": "createMaterialPDP",
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "path",
+                        "description": "Символьный код типа",
+                        "required": true,
+                        "example": "link"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Данные",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/personal-development-plans/{plan}/materials": {
+            "post": {
+                "tags": [
+                    "ИПР: Материалы"
+                ],
+                "summary": "Создание нового материала ИПР",
+                "description": "Создание нового материала ИПР",
+                "operationId": "storeMaterialPDP",
+                "parameters": [
+                    {
+                        "name": "plan",
+                        "in": "path",
+                        "description": "id ИПР",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Значения материала",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "description": "Название",
+                                        "type": "string",
+                                        "example": "Название пункта"
+                                    },
+                                    "type": {
+                                        "description": "Тип материала",
+                                        "type": "string",
+                                        "example": "link"
+                                    },
+                                    "value": {
+                                        "description": "Значение",
+                                        "type": "string",
+                                        "example": "Значение"
+                                    },
+                                    "duration": {
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "day": {
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "hour": {
+                                                    "type": "integer",
+                                                    "example": "2"
+                                                },
+                                                "minute": {
+                                                    "type": "integer",
+                                                    "example": "20"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "time": {
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "day": {
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Данные",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/personal-development-plans/materials/{material}/edit": {
+            "get": {
+                "tags": [
+                    "ИПР: Материалы"
+                ],
+                "summary": "Поля для формы редактирования материала ИПР",
+                "description": "Поля для формы редактирования материала ИПР",
+                "operationId": "editMaterialPDP",
+                "parameters": [
+                    {
+                        "name": "material",
+                        "in": "path",
+                        "description": "id материала",
+                        "required": true,
+                        "example": "1"
+                    },
+                    {
+                        "name": "material_type",
+                        "in": "query",
+                        "description": "Код типа материала: поля value как при создании с этим типом (смена заглушки/типа в форме)",
+                        "required": false,
+                        "example": "article"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Данные",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/personal-development-plans/materials/{material}": {
+            "put": {
+                "tags": [
+                    "ИПР: Материалы"
+                ],
+                "summary": "Поля для формы редактирования материала ИПР",
+                "description": "Поля для формы редактирования материала ИПР",
+                "operationId": "updateMaterialPDP",
+                "parameters": [
+                    {
+                        "name": "material",
+                        "in": "path",
+                        "description": "id ИПР",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Значения материала",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "description": "Название",
+                                        "type": "string",
+                                        "example": "Название пункта"
+                                    },
+                                    "type": {
+                                        "description": "Тип материала",
+                                        "type": "string",
+                                        "example": "link"
+                                    },
+                                    "value": {
+                                        "description": "Значение",
+                                        "type": "string",
+                                        "example": "Значение"
+                                    },
+                                    "duration": {
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "day": {
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "hour": {
+                                                    "type": "integer",
+                                                    "example": "2"
+                                                },
+                                                "minute": {
+                                                    "type": "integer",
+                                                    "example": "20"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "time": {
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "day": {
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Данные",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "ИПР: Материалы"
+                ],
+                "summary": "Поля для формы редактирования материала ИПР",
+                "description": "Поля для формы редактирования материала ИПР",
+                "operationId": "deleteMaterialPDP",
+                "parameters": [
+                    {
+                        "name": "material",
+                        "in": "path",
+                        "description": "id ИПР",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Данные",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/personal-development-plans/{plan}/sort-materials": {
+            "post": {
+                "tags": [
+                    "ИПР: Материалы"
+                ],
+                "summary": "Сортировка материалов ИПР",
+                "description": "Сортировка материалов ИПР",
+                "operationId": "sortMaterialPDP",
+                "parameters": [
+                    {
+                        "name": "plan",
+                        "in": "path",
+                        "description": "id ИПР",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "requestBody": {
+                    "description": "id материалов",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "materials_ids": {
+                                        "type": "object",
+                                        "example": [
+                                            2,
+                                            1
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Данные",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/personal-development-plans/materials/{material}/set-passage-status": {
+            "post": {
+                "tags": [
+                    "ИПР: Прохождение"
+                ],
+                "summary": "Смена статуса прохождения у материала ИПР",
+                "description": "Смена статуса прохождения у материала ИПР",
+                "operationId": "setPassedMaterial",
+                "parameters": [
+                    {
+                        "name": "material",
+                        "in": "path",
+                        "description": "id материала",
+                        "required": true,
+                        "example": "1"
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "статус",
+                        "required": true,
+                        "example": "review"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Данные",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/personal-development-plans/{plan}/set-completed": {
+            "post": {
+                "tags": [
+                    "ИПР: Прохождение"
+                ],
+                "summary": "Принятие ИПР проверяющим",
+                "description": "Принятие ИПР проверяющим",
+                "operationId": "setCompletedPlan",
+                "parameters": [
+                    {
+                        "name": "plan",
+                        "in": "path",
+                        "description": "id ИПР",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Значения",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "action": {
+                                        "description": "Страница, где происходит завершение ИПР",
+                                        "type": "string",
+                                        "example": "detail"
+                                    },
+                                    "tab": {
+                                        "description": "Таб",
+                                        "type": "string",
+                                        "example": "all"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Данные",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/personal-development-plans/materials/{material}/attach-file": {
+            "post": {
+                "tags": [
+                    "ИПР: Прохождение"
+                ],
+                "summary": "Прикрепить файл к материалу",
+                "description": "Прикрепить файл к материалу",
+                "operationId": "attachFileToMaterial",
+                "parameters": [
+                    {
+                        "name": "material",
+                        "in": "path",
+                        "description": "id материала",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Файл",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "file": {
+                                        "description": "Файл",
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "format": "binary"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Данные",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/personal-development-plans/attached-files/{file}": {
+            "delete": {
+                "tags": [
+                    "ИПР: Прохождение"
+                ],
+                "summary": "Удалить прикрепленный к материалу файл",
+                "description": "Удалить прикрепленный к материалу файл",
+                "operationId": "deleteAttachFile",
+                "parameters": [
+                    {
+                        "name": "file",
+                        "in": "path",
+                        "description": "id файла",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Данные",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/personal-development-plans/my/list": {
+            "get": {
+                "tags": [
+                    "Мои ИПР"
+                ],
+                "summary": "Список ИПР авторизованного юзера",
+                "description": "Список ИПР авторизованного юзера",
+                "operationId": "indexUserPDP",
+                "parameters": [
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "Статус",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Данные",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Проверка ИПР",
+            "description": "Проверка ИПР"
+        },
+        {
+            "name": "Мои ИПР",
+            "description": "Мои ИПР"
+        },
+        {
+            "name": "ИПР",
+            "description": "ИПР"
+        },
+        {
+            "name": "Вкладки",
+            "description": "Вкладки"
+        },
+        {
+            "name": "ИПР: Комментарии",
+            "description": "ИПР: Комментарии"
+        },
+        {
+            "name": "ИПР: Материалы",
+            "description": "ИПР: Материалы"
+        },
+        {
+            "name": "ИПР: Прохождение",
+            "description": "ИПР: Прохождение"
+        }
+    ],
+    "components": {
+        "securitySchemes": {
+            "sanctum": {
+                "type": "apiKey",
+                "description": "Введите token в следующем формате: Bearer Ваш Api Token",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    }
+}

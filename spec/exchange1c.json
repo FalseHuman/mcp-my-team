@@ -1,0 +1,2625 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Раздел Обмен с 1С",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/1c-exchange/types-accruals": {
+            "post": {
+                "tags": [
+                    "Начисления"
+                ],
+                "summary": "Сохранение типов начислений",
+                "description": "Сохранение типов начислений и удержаний из 1С",
+                "operationId": "storeAccrualTypes",
+                "requestBody": {
+                    "description": "Типы начислений",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "payroll": {
+                                        "description": "Начисления",
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "example": "a5cd458c-a928-11e9-80ce-d43d7e4c0a31"
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Разовое начисление"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "deduction": {
+                                        "description": "Удержания",
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "example": "0ab19db3-04c0-11f0-b08b-386077fdff4e"
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "НДФЛ"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "status": {
+                                                    "type": "string",
+                                                    "example": "success"
+                                                },
+                                                "error": {
+                                                    "type": "enum",
+                                                    "example": "[]"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/1c-exchange/user-accruals": {
+            "post": {
+                "tags": [
+                    "Начисления"
+                ],
+                "summary": "Сохранение начислений сотрудников",
+                "description": "Сохранение начислений и удержаний сотрудников из 1С",
+                "operationId": "userAccruals",
+                "requestBody": {
+                    "description": "Начисления сотрудников",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "properties": {
+                                        "xml_id": {
+                                            "type": "string",
+                                            "example": "0"
+                                        },
+                                        "user_id": {
+                                            "type": "string",
+                                            "example": "1afe95c2-78a5-11ee-818e-d43d7e4c0a31"
+                                        },
+                                        "user_fio": {
+                                            "type": "string",
+                                            "example": "Буйновская Анастасия Серверовна"
+                                        },
+                                        "month": {
+                                            "type": "integer",
+                                            "example": 12
+                                        },
+                                        "year": {
+                                            "type": "string",
+                                            "example": "2024"
+                                        },
+                                        "payroll_total": {
+                                            "type": "number",
+                                            "example": 100326.41
+                                        },
+                                        "deduction_total": {
+                                            "type": "number",
+                                            "example": 12860
+                                        },
+                                        "insurance_contributions": {
+                                            "type": "number",
+                                            "example": 7810.65
+                                        },
+                                        "n_u": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "summa": {
+                                                        "type": "number",
+                                                        "example": 54857.14
+                                                    },
+                                                    "year": {
+                                                        "type": "integer",
+                                                        "example": 2024
+                                                    },
+                                                    "month": {
+                                                        "type": "integer",
+                                                        "example": 12
+                                                    },
+                                                    "vid": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "time": {
+                                                        "type": "string",
+                                                        "example": "144,00 чс."
+                                                    },
+                                                    "tip": {
+                                                        "type": "string",
+                                                        "example": "8937b49e-ddea-11ea-8129-d43d7e4c0a31"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "status": {
+                                                    "type": "string",
+                                                    "example": "success"
+                                                },
+                                                "error": {
+                                                    "type": "enum",
+                                                    "example": "[]"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/1c-exchange/check": {
+            "get": {
+                "tags": [
+                    "Загрузка из 1С"
+                ],
+                "summary": "Проверка доступности обмена со стороны МК",
+                "description": "Проверяется включен ли обмен с 1С в МК",
+                "operationId": "checkExchange1С",
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "status": {
+                                                    "type": "string",
+                                                    "example": "success"
+                                                },
+                                                "error": {
+                                                    "type": "enum",
+                                                    "example": "[]"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/1c-exchange/user-properties": {
+            "post": {
+                "tags": [
+                    "Загрузка из 1С"
+                ],
+                "summary": "Загрузка справочников для сотрудников",
+                "description": "Загружаются данные справочников для сотрудников",
+                "operationId": "1cExchangeUsersProperties",
+                "requestBody": {
+                    "description": "Данные справочников",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "Properties": {
+                                        "description": "Справочники",
+                                        "properties": {
+                                            "type_of_employment": {
+                                                "description": "Тип найма",
+                                                "properties": {
+                                                    "Идентификатор типа": {
+                                                        "type": "string",
+                                                        "example": "Название типа"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "company": {
+                                                "description": "Компании",
+                                                "properties": {
+                                                    "Идентификатор компании": {
+                                                        "type": "string",
+                                                        "example": "Название компании"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "positions": {
+                                                "description": "Должности",
+                                                "properties": {
+                                                    "Идентификатор должности": {
+                                                        "type": "string",
+                                                        "example": "Название должности"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "status": {
+                                                    "type": "string",
+                                                    "example": "success"
+                                                },
+                                                "error": {
+                                                    "type": "enum",
+                                                    "example": "[]"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/1c-exchange/department-list": {
+            "post": {
+                "tags": [
+                    "Загрузка из 1С"
+                ],
+                "summary": "Загрузка структуры отделов",
+                "description": "Загружаются данные структуры отделов",
+                "operationId": "1cExchangeDepartmentList",
+                "requestBody": {
+                    "description": "Структура отделов",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "Departments": {
+                                        "description": "Структура отделов",
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "example": "Идентификатор отдела"
+                                                },
+                                                "company": {
+                                                    "type": "string",
+                                                    "example": "Идентификатор компании"
+                                                },
+                                                "parent": {
+                                                    "type": "string",
+                                                    "example": "Идентификатор родителя"
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Название отдела"
+                                                },
+                                                "head": {
+                                                    "type": "string",
+                                                    "example": "Руководитель отдела"
+                                                },
+                                                "head_individual": {
+                                                    "type": "string",
+                                                    "example": "Руководитель отдела"
+                                                },
+                                                "status": {
+                                                    "description": "Статус подразделения: active — создать/обновить и показать; hide — скрыть с дочерними; delete — удалить (дети к главному и скрыты). Если передан — имеет приоритет над is_removed",
+                                                    "type": "string",
+                                                    "enum": [
+                                                        "active",
+                                                        "hide",
+                                                        "delete"
+                                                    ],
+                                                    "example": "active"
+                                                },
+                                                "is_removed": {
+                                                    "description": "Обратная совместимость (если status не передан): false → active, true → delete",
+                                                    "type": "boolean",
+                                                    "example": false
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "status": {
+                                                    "type": "string",
+                                                    "example": "success"
+                                                },
+                                                "error": {
+                                                    "type": "enum",
+                                                    "example": "[]"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/1c-exchange/user-list": {
+            "post": {
+                "tags": [
+                    "Загрузка из 1С"
+                ],
+                "summary": "Загрузка сотрудников",
+                "description": "Загружаются данные сотрудников",
+                "operationId": "1cExchangeUserList",
+                "requestBody": {
+                    "description": "Структура отделов",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "mode": {
+                                        "type": "string",
+                                        "example": "full"
+                                    },
+                                    "Users": {
+                                        "description": "Данные сотрудников",
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "example": "Идентификатор сотрудника"
+                                                },
+                                                "company": {
+                                                    "type": "string",
+                                                    "example": "Идентификатор компании"
+                                                },
+                                                "department": {
+                                                    "type": "string",
+                                                    "example": "Идентификатор отдела"
+                                                },
+                                                "position": {
+                                                    "type": "string",
+                                                    "example": "Идентификатор должности"
+                                                },
+                                                "employment_date": {
+                                                    "type": "string",
+                                                    "example": "Дата найма"
+                                                },
+                                                "date_of_dismissal": {
+                                                    "type": "string",
+                                                    "example": "Дата увольнения"
+                                                },
+                                                "first_name": {
+                                                    "type": "string",
+                                                    "example": "Имя"
+                                                },
+                                                "last_name": {
+                                                    "type": "string",
+                                                    "example": "Фамилия"
+                                                },
+                                                "middle_name": {
+                                                    "type": "string",
+                                                    "example": "Отчество"
+                                                },
+                                                "date_of_birth": {
+                                                    "type": "string",
+                                                    "example": "Дата рождения"
+                                                },
+                                                "sex": {
+                                                    "type": "string",
+                                                    "example": "Пол(M/W)"
+                                                },
+                                                "snils": {
+                                                    "type": "string",
+                                                    "example": "СНИЛС"
+                                                },
+                                                "type_of_employment": {
+                                                    "type": "string",
+                                                    "example": "Идентификатор типа найма"
+                                                },
+                                                "main_email": {
+                                                    "type": "string",
+                                                    "example": "Email"
+                                                },
+                                                "address": {
+                                                    "type": "string",
+                                                    "example": "Адрес проживания"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "status": {
+                                                    "type": "string",
+                                                    "example": "success"
+                                                },
+                                                "error": {
+                                                    "type": "enum",
+                                                    "example": "[]"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/1c-exchange/user-list/result/{result}": {
+            "get": {
+                "tags": [
+                    "Загрузка из 1С"
+                ],
+                "summary": "Результат загрузки сотрудников",
+                "description": "Результат загрузки сотрудников",
+                "operationId": "1cExchangeUserListResult",
+                "parameters": [
+                    {
+                        "name": "result_id",
+                        "in": "query",
+                        "description": "Идентификатор результата",
+                        "required": false,
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "status": {
+                                                    "type": "string",
+                                                    "example": "success"
+                                                },
+                                                "percent": {
+                                                    "type": "integer",
+                                                    "example": "20"
+                                                },
+                                                "error": {
+                                                    "type": "enum",
+                                                    "example": "[]"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/1c-exchange/pay-list/upload": {
+            "post": {
+                "tags": [
+                    "Загрузка из 1С"
+                ],
+                "summary": "Загрузка расчетных листов сотрудников",
+                "description": "Загружаются файлы расчетных листов сотрудников",
+                "operationId": "1cExchangeUserPayInfoUpload",
+                "requestBody": {
+                    "description": "Загрузка архива файлов расчетных листов сотрудников",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "file": {
+                                        "description": "Архив фалов расчетных листов",
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "format": "binary"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "status": {
+                                                    "type": "string",
+                                                    "example": "success"
+                                                },
+                                                "error": {
+                                                    "type": "enum",
+                                                    "example": "[]"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/1c-exchange/pay-list": {
+            "post": {
+                "tags": [
+                    "Загрузка из 1С"
+                ],
+                "summary": "Загрузка информации о расчетных листках сотрудников",
+                "description": "Загружаются данные о расчетных листках сотрудников",
+                "operationId": "1cExchangeUserPayInfo",
+                "requestBody": {
+                    "description": "Данные по расчетным листам сотрудников",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "pay_sheets": {
+                                        "description": "Данные по расчетным листам сотрудников",
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "user_id": {
+                                                    "type": "string",
+                                                    "example": "Идентификатор сотрудника"
+                                                },
+                                                "file_name": {
+                                                    "type": "string",
+                                                    "example": "Название файла"
+                                                },
+                                                "month": {
+                                                    "type": "string",
+                                                    "example": "Месяц"
+                                                },
+                                                "year": {
+                                                    "type": "string",
+                                                    "example": "Год"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "status": {
+                                                    "type": "string",
+                                                    "example": "success"
+                                                },
+                                                "error": {
+                                                    "type": "enum",
+                                                    "example": "[]"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/1c-exchange/balance": {
+            "post": {
+                "tags": [
+                    "Загрузка из 1С"
+                ],
+                "summary": "Загрузка информации об остатках отпуска сотрудников",
+                "description": "Загружаются данные об остатках отпуска сотрудников",
+                "operationId": "1cExchangeUserVacationBalance",
+                "requestBody": {
+                    "description": "Данные по остаткам отпуска сотрудников",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "vacation_balances": {
+                                        "description": "Данные по остаткам отпуска сотрудников",
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "user_id": {
+                                                    "type": "string",
+                                                    "example": "Идентификатор сотрудника"
+                                                },
+                                                "calc_date": {
+                                                    "type": "string",
+                                                    "example": "Дата остатков"
+                                                },
+                                                "balance": {
+                                                    "type": "numeric",
+                                                    "example": "Остаток дней"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "status": {
+                                                    "type": "string",
+                                                    "example": "success"
+                                                },
+                                                "error": {
+                                                    "type": "enum",
+                                                    "example": "[]"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/1c-exchange/absence-list": {
+            "post": {
+                "tags": [
+                    "Загрузка из 1С"
+                ],
+                "summary": "Загрузка информации об отсутствиях сотрудников",
+                "description": "Загрузка информации об отсутствиях сотрудников",
+                "operationId": "1cExchangeAbsenceList",
+                "requestBody": {
+                    "description": "Данные по отсутствиям сотрудников",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "Absences": {
+                                        "description": "Данные по отсутствиям сотрудников",
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "individual_id": {
+                                                    "type": "string",
+                                                    "example": "Идентификатор сотрудника"
+                                                },
+                                                "absence_type_id": {
+                                                    "type": "string",
+                                                    "example": "Идентификатор типа отсутствия"
+                                                },
+                                                "date_from": {
+                                                    "type": "string",
+                                                    "example": "01.10.2025"
+                                                },
+                                                "date_to": {
+                                                    "type": "string",
+                                                    "example": "14.10.2025"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "status": {
+                                                    "type": "string",
+                                                    "example": "success"
+                                                },
+                                                "error": {
+                                                    "type": "enum",
+                                                    "example": "[]"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/1c-exchange/edms/applications": {
+            "post": {
+                "tags": [
+                    "КЭДО — Заявления"
+                ],
+                "summary": "Список заявок для обмена с 1С",
+                "description": "Возвращает список заявок с внешним идентификатором пользователя и статусом отличным от черновика",
+                "operationId": "exchange1CApplicationsIndex",
+                "responses": {
+                    "200": {
+                        "description": "Список заявок",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "Applications": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": "1"
+                                                            },
+                                                            "type_id": {
+                                                                "type": "integer",
+                                                                "example": "1"
+                                                            },
+                                                            "status": {
+                                                                "type": "string",
+                                                                "example": "approved"
+                                                            },
+                                                            "date_created": {
+                                                                "type": "string",
+                                                                "example": "2024-01-15 10:30:00"
+                                                            },
+                                                            "file_path": {
+                                                                "type": "string",
+                                                                "example": "https://example.com/storage/edms/applications/file.pdf"
+                                                            },
+                                                            "division_id": {
+                                                                "type": "string",
+                                                                "example": "12345"
+                                                            },
+                                                            "user_id": {
+                                                                "type": "string",
+                                                                "example": "67890"
+                                                            },
+                                                            "absence_ext_id": {
+                                                                "type": "string",
+                                                                "example": "11111"
+                                                            },
+                                                            "approvals": {
+                                                                "type": "array",
+                                                                "items": {
+                                                                    "properties": {
+                                                                        "id": {
+                                                                            "type": "integer",
+                                                                            "example": "1"
+                                                                        },
+                                                                        "name": {
+                                                                            "type": "string",
+                                                                            "example": "Иванов Иван Иванович"
+                                                                        },
+                                                                        "type": {
+                                                                            "type": "string",
+                                                                            "example": "user"
+                                                                        },
+                                                                        "type_signature": {
+                                                                            "type": "string",
+                                                                            "example": "electronic"
+                                                                        },
+                                                                        "user_ids": {
+                                                                            "type": "array",
+                                                                            "items": {
+                                                                                "type": "integer",
+                                                                                "example": "1"
+                                                                            }
+                                                                        },
+                                                                        "status": {
+                                                                            "type": "string",
+                                                                            "example": "approved"
+                                                                        },
+                                                                        "pointer": {
+                                                                            "type": "integer",
+                                                                            "example": "1"
+                                                                        }
+                                                                    },
+                                                                    "type": "object"
+                                                                }
+                                                            },
+                                                            "custom_fields": {
+                                                                "type": "array",
+                                                                "items": {
+                                                                    "properties": {
+                                                                        "code": {
+                                                                            "type": "string",
+                                                                            "example": "date_start"
+                                                                        },
+                                                                        "value": {
+                                                                            "type": "string",
+                                                                            "example": "01.01.2026"
+                                                                        }
+                                                                    },
+                                                                    "type": "object"
+                                                                }
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Ошибка валидации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "properties": {
+                                                "error_code": {
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "error_msg": {
+                                                    "type": "string",
+                                                    "example": "Ошибка валидации"
+                                                },
+                                                "fields": {
+                                                    "properties": {
+                                                        "field_name": {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "example": "Поле field_name обязательно для заполнения."
+                                                            }
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/1c-exchange/edms/applications/update-status": {
+            "post": {
+                "tags": [
+                    "КЭДО — Заявления"
+                ],
+                "summary": "Обновить статус подписания заявления из 1С",
+                "description": "Обновляет статус заявки и информацию о подписании из системы 1С",
+                "operationId": "exchange1CApplicationsUpdateStatus",
+                "requestBody": {
+                    "description": "Данные заявки для обновления статуса",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "Application": {
+                                        "required": [
+                                            "id"
+                                        ],
+                                        "properties": {
+                                            "id": {
+                                                "description": "Идентификатор заявки",
+                                                "type": "integer",
+                                                "example": "1"
+                                            },
+                                            "status_1c": {
+                                                "description": "Статус заявки в 1С",
+                                                "type": "string",
+                                                "enum": [
+                                                    "not_sent",
+                                                    "sent",
+                                                    "created_document",
+                                                    "completed_document"
+                                                ],
+                                                "example": "sent"
+                                            },
+                                            "approvals": {
+                                                "type": "array",
+                                                "items": {
+                                                    "properties": {
+                                                        "id": {
+                                                            "description": "Идентификатор участника маршрута подписания",
+                                                            "type": "integer",
+                                                            "example": "1"
+                                                        },
+                                                        "user_id": {
+                                                            "description": "ID физического лица сотрудника",
+                                                            "type": "string",
+                                                            "example": "12345"
+                                                        },
+                                                        "date": {
+                                                            "description": "Дата подписания заявления",
+                                                            "type": "string",
+                                                            "example": "2026-01-26 10:30:00"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Результат обновления статуса заявки",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "status": {
+                                                    "description": "Статус операции: success или failed",
+                                                    "type": "string",
+                                                    "example": "success"
+                                                },
+                                                "message": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "Отсутствует параметр Application"
+                                                    }
+                                                },
+                                                "application": {
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "integer",
+                                                            "example": "1"
+                                                        },
+                                                        "status": {
+                                                            "type": "string",
+                                                            "example": "approved"
+                                                        },
+                                                        "absence_id": {
+                                                            "type": "string",
+                                                            "example": "12345",
+                                                            "nullable": true
+                                                        },
+                                                        "approvals": {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "properties": {
+                                                                    "id": {
+                                                                        "type": "integer",
+                                                                        "example": "1"
+                                                                    },
+                                                                    "name": {
+                                                                        "type": "string",
+                                                                        "example": "Иванов Иван Иванович"
+                                                                    },
+                                                                    "type": {
+                                                                        "type": "string",
+                                                                        "example": "user"
+                                                                    },
+                                                                    "type_signature": {
+                                                                        "type": "string",
+                                                                        "example": "none"
+                                                                    },
+                                                                    "user_ids": {
+                                                                        "type": "array",
+                                                                        "items": {
+                                                                            "type": "string",
+                                                                            "example": "12345"
+                                                                        }
+                                                                    },
+                                                                    "user_names": {
+                                                                        "type": "array",
+                                                                        "items": {
+                                                                            "type": "string",
+                                                                            "example": "Иванов Иван"
+                                                                        }
+                                                                    },
+                                                                    "status": {
+                                                                        "type": "string",
+                                                                        "example": "completed"
+                                                                    },
+                                                                    "pointer": {
+                                                                        "type": "integer",
+                                                                        "example": "1"
+                                                                    }
+                                                                },
+                                                                "type": "object"
+                                                            }
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Ошибка валидации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "properties": {
+                                                "error_code": {
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "error_msg": {
+                                                    "type": "string",
+                                                    "example": "Ошибка валидации"
+                                                },
+                                                "fields": {
+                                                    "properties": {
+                                                        "field_name": {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "example": "Поле field_name обязательно для заполнения."
+                                                            }
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/1c-exchange/edms/applications/mark-exported": {
+            "post": {
+                "tags": [
+                    "КЭДО — Заявления"
+                ],
+                "summary": "Отметить заявки как экспортированные в 1С",
+                "description": "Отмечает заявки как экспортированные в 1С по списку идентификаторов",
+                "operationId": "exchange1CApplicationsMarkExported",
+                "requestBody": {
+                    "description": "Идентификаторы заявок",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "Application_Ids": {
+                                        "description": "Массив идентификаторов заявок",
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer",
+                                            "example": "1"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Результат отметки заявок",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "status": {
+                                                    "type": "string",
+                                                    "example": "success"
+                                                },
+                                                "message": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "Отсутствует параметр Application_Ids"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/1c-exchange/edms/templates-list": {
+            "get": {
+                "tags": [
+                    "КЭДО — Заявления"
+                ],
+                "summary": "Список шаблонов заявок",
+                "description": "Возвращает список шаблонов заявок с идентификатором, названием и статусом активности",
+                "operationId": "exchange1CTemplatesList",
+                "responses": {
+                    "200": {
+                        "description": "Список шаблонов",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "Templates": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": "1"
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Заявление на отпуск"
+                                                            },
+                                                            "is_active": {
+                                                                "type": "boolean",
+                                                                "example": "true"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Ошибка валидации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "properties": {
+                                                "error_code": {
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "error_msg": {
+                                                    "type": "string",
+                                                    "example": "Ошибка валидации"
+                                                },
+                                                "fields": {
+                                                    "properties": {
+                                                        "field_name": {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "example": "Поле field_name обязательно для заполнения."
+                                                            }
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/1c-exchange/edms/documents-list": {
+            "post": {
+                "tags": [
+                    "КЭДО — Экспорт документов"
+                ],
+                "summary": "Список документов для обмена с 1С",
+                "description": "Возвращает список документов КЭДО с status_1c null или NOT_SENT, без черновиков",
+                "operationId": "exchange1CDocumentsList",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "Ids": {
+                                        "description": "Идентификаторы документов",
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "page": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "perPage": {
+                                        "type": "integer",
+                                        "example": 50
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Список документов",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "items": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "document_id": {
+                                                                "type": "integer"
+                                                            },
+                                                            "ext_id": {
+                                                                "type": "string"
+                                                            },
+                                                            "name": {
+                                                                "type": "string"
+                                                            },
+                                                            "number": {
+                                                                "type": "string"
+                                                            },
+                                                            "type_id": {
+                                                                "type": "string"
+                                                            },
+                                                            "status": {
+                                                                "type": "string"
+                                                            },
+                                                            "division_id": {
+                                                                "type": "string"
+                                                            },
+                                                            "date_created": {
+                                                                "type": "string"
+                                                            },
+                                                            "date_deadline": {
+                                                                "type": "string"
+                                                            },
+                                                            "initiator": {
+                                                                "type": "object"
+                                                            },
+                                                            "file_path": {
+                                                                "type": "string"
+                                                            },
+                                                            "approvals": {
+                                                                "type": "array",
+                                                                "items": {
+                                                                    "type": "object"
+                                                                }
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/1c-exchange/edms/documents/{document}/detail": {
+            "get": {
+                "tags": [
+                    "КЭДО — Экспорт документов"
+                ],
+                "summary": "Детальная документа",
+                "description": "Показывает информацию для детальной документа",
+                "operationId": "exchange1CDocumentDetail",
+                "parameters": [
+                    {
+                        "name": "document",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Результат удаления",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "status": {
+                                                    "type": "string",
+                                                    "enum": [
+                                                        "success",
+                                                        "failed"
+                                                    ]
+                                                },
+                                                "message": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "document": {
+                                                    "type": "object",
+                                                    "nullable": true
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Документ не найден"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/1c-exchange/edms/documents/{document}": {
+            "delete": {
+                "tags": [
+                    "КЭДО — Экспорт документов"
+                ],
+                "summary": "Удаление документа",
+                "description": "Переводит документ в статус invalid",
+                "operationId": "exchange1CDocumentsDestroy",
+                "parameters": [
+                    {
+                        "name": "document",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Результат удаления",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "status": {
+                                                    "type": "string",
+                                                    "enum": [
+                                                        "success",
+                                                        "failed"
+                                                    ]
+                                                },
+                                                "message": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "document": {
+                                                    "type": "object",
+                                                    "nullable": true
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Документ не найден"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/1c-exchange/edms/documents/delegate/users-list": {
+            "get": {
+                "tags": [
+                    "КЭДО — Экспорт документов"
+                ],
+                "summary": "Список пользователей для делегирования",
+                "description": "Возвращает руководителя и доверенных по подразделению",
+                "operationId": "exchange1CDocumentsDelegateUsersList",
+                "parameters": [
+                    {
+                        "name": "approval_id",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список пользователей",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "users": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "user_id": {
+                                                                "type": "string"
+                                                            },
+                                                            "name": {
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/1c-exchange/edms/documents/delegate": {
+            "post": {
+                "tags": [
+                    "КЭДО — Экспорт документов"
+                ],
+                "summary": "Делегирование документа",
+                "description": "Делегирует подписание на указанного сотрудника",
+                "operationId": "exchange1CDocumentsDelegate",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "approval_id": {
+                                        "type": "integer"
+                                    },
+                                    "user_id": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Результат делегирования",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "status": {
+                                                    "type": "string",
+                                                    "enum": [
+                                                        "success",
+                                                        "failed"
+                                                    ]
+                                                },
+                                                "message": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "document": {
+                                                    "type": "object",
+                                                    "nullable": true
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/1c-exchange/edms/documents/sign": {
+            "post": {
+                "tags": [
+                    "КЭДО — Экспорт документов"
+                ],
+                "summary": "Подписание документа УКЭП",
+                "operationId": "exchange1CDocumentsSign",
+                "parameters": [
+                    {
+                        "name": "document",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "approval_id": {
+                                        "type": "integer"
+                                    },
+                                    "date_sign": {
+                                        "type": "string",
+                                        "format": "date-time"
+                                    },
+                                    "file_sign": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Результат подписания",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "status": {
+                                                    "type": "string",
+                                                    "enum": [
+                                                        "success",
+                                                        "failed"
+                                                    ]
+                                                },
+                                                "message": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "document": {
+                                                    "type": "object",
+                                                    "nullable": true
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Документ не найден"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/1c-exchange/edms/documents/reject": {
+            "post": {
+                "tags": [
+                    "КЭДО — Экспорт документов"
+                ],
+                "summary": "Отклонение подписания документа",
+                "operationId": "exchange1CDocumentsReject",
+                "parameters": [
+                    {
+                        "name": "document",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "approval_id": {
+                                        "type": "integer"
+                                    },
+                                    "reason": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Результат отклонения",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "status": {
+                                                    "type": "string",
+                                                    "enum": [
+                                                        "success",
+                                                        "failed"
+                                                    ]
+                                                },
+                                                "message": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "document": {
+                                                    "type": "object",
+                                                    "nullable": true
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Документ не найден"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/1c-exchange/edms/documents/remind": {
+            "post": {
+                "tags": [
+                    "КЭДО — Экспорт документов"
+                ],
+                "summary": "Напоминание о подписании",
+                "operationId": "exchange1CDocumentsRemind",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "approval_id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Результат отправки напоминания",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "status": {
+                                                    "type": "string",
+                                                    "enum": [
+                                                        "success",
+                                                        "failed"
+                                                    ]
+                                                },
+                                                "message": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "document": {
+                                                    "type": "object",
+                                                    "nullable": true
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/1c-exchange/edms/documents/mark-exported": {
+            "post": {
+                "tags": [
+                    "КЭДО — Экспорт документов"
+                ],
+                "summary": "Отметить документы как экспортированные в 1С",
+                "description": "Отмечает документы как экспортированные в 1С по списку идентификаторов",
+                "operationId": "exchange1CDocumentsMarkExported",
+                "requestBody": {
+                    "description": "Идентификаторы заявок",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "Document_Ids": {
+                                        "description": "Массив идентификаторов заявок",
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer",
+                                            "example": "1"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Результат отметки заявок",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "status": {
+                                                    "type": "string",
+                                                    "example": "success"
+                                                },
+                                                "message": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "Отсутствует параметр Application_Ids"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/1c-exchange/edms/check": {
+            "get": {
+                "tags": [
+                    "КЭДО — Документы"
+                ],
+                "summary": "Проверка доступности КЭДО на стороне МК",
+                "description": "Проверяется включен ли модуль КЭДО в МК",
+                "operationId": "checkExchangeEDMS1С",
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "status": {
+                                                    "type": "string",
+                                                    "example": "success"
+                                                },
+                                                "error": {
+                                                    "type": "enum",
+                                                    "example": "[]"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/1c-exchange/edms/documents/upload": {
+            "post": {
+                "tags": [
+                    "КЭДО — Документы"
+                ],
+                "summary": "Загрузка документов сотрудников",
+                "description": "Загружаются файлы документов сотрудников",
+                "operationId": "1cExchangeDocumentsUpload",
+                "requestBody": {
+                    "description": "Загрузка архива файлов документов сотрудников",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "file": {
+                                        "description": "Архив файлов документов",
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "format": "binary"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "status": {
+                                                    "type": "string",
+                                                    "example": "success"
+                                                },
+                                                "error": {
+                                                    "type": "enum",
+                                                    "example": "[]"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/1c-exchange/edms/documents": {
+            "post": {
+                "tags": [
+                    "КЭДО — Документы"
+                ],
+                "summary": "Загрузка информации о документах сотрудников",
+                "description": "Загружается информация о документах сотрудников",
+                "operationId": "1cExchangeDocumentList",
+                "requestBody": {
+                    "description": "Значения для документа",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "Documents": {
+                                        "description": "Документы",
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "doc_id": {
+                                                    "type": "string",
+                                                    "example": "fd15a107-912f-11ef-b07f-386077fdff4e"
+                                                },
+                                                "doctype_id": {
+                                                    "type": "string",
+                                                    "example": "1"
+                                                },
+                                                "company": {
+                                                    "type": "string",
+                                                    "example": "9a4e6111-3970-11e8-806a-d43d7e4c0a31"
+                                                },
+                                                "doc_number": {
+                                                    "type": "string",
+                                                    "example": "ЛОЗП-00000"
+                                                },
+                                                "doc_date": {
+                                                    "type": "string",
+                                                    "example": "01.09.2020"
+                                                },
+                                                "head": {
+                                                    "type": "string",
+                                                    "example": "ad25a1a7-912f-11ef-b07f-386077fdff4e"
+                                                },
+                                                "route": {
+                                                    "type": "string",
+                                                    "example": "director_first"
+                                                },
+                                                "deadline": {
+                                                    "type": "string",
+                                                    "example": "04.09.2020"
+                                                },
+                                                "draft": {
+                                                    "type": "boolean",
+                                                    "example": "1"
+                                                },
+                                                "employees": {
+                                                    "type": "enum",
+                                                    "example": "[]"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "status": {
+                                                    "type": "string",
+                                                    "example": "success"
+                                                },
+                                                "error": {
+                                                    "type": "enum",
+                                                    "example": "[]"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/1c-exchange/edms/document-types-list": {
+            "get": {
+                "tags": [
+                    "КЭДО — Документы"
+                ],
+                "summary": "Список типов документов из МояКоманда",
+                "description": "Список типов документов из МояКоманда",
+                "operationId": "1cExchangeDocumentTypesList",
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "status": {
+                                                    "type": "string",
+                                                    "example": "success"
+                                                },
+                                                "error": {
+                                                    "type": "enum",
+                                                    "example": "[]"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/1c-exchange/edms/document-types-1c-list": {
+            "get": {
+                "tags": [
+                    "КЭДО — Документы"
+                ],
+                "summary": "Справочник Виды документов 1С",
+                "description": "Справочник Виды документов 1С",
+                "operationId": "1cExchangeDocumentType1CsList",
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "status": {
+                                                    "type": "string",
+                                                    "example": "success"
+                                                },
+                                                "error": {
+                                                    "type": "enum",
+                                                    "example": "[]"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/1c-exchange/edms/delete-documents": {
+            "post": {
+                "tags": [
+                    "КЭДО — Документы"
+                ],
+                "summary": "Перевод документов в статус Недействителен",
+                "description": "Перевод документов в статус Недействителен",
+                "operationId": "1cExchangeDeleteDocuments",
+                "requestBody": {
+                    "description": "Идентификаторы документов",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "Documents": {
+                                        "type": "enum",
+                                        "example": "[]"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "status": {
+                                                    "type": "string",
+                                                    "example": "success"
+                                                },
+                                                "error": {
+                                                    "type": "enum",
+                                                    "example": "[]"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/1c-exchange/edms/users-consents": {
+            "post": {
+                "tags": [
+                    "КЭДО — Документы"
+                ],
+                "summary": "Согласие пользователей о работе с КЭДО",
+                "description": "Возвращает список пользователей со статусом согласия на работу с КЭДО",
+                "operationId": "1cExchangeUsersConsents",
+                "requestBody": {
+                    "description": "Идентификатор физического лица",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "Ids": {
+                                        "type": "enum",
+                                        "example": "[]"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "status": {
+                                                    "type": "string",
+                                                    "example": "success"
+                                                },
+                                                "error": {
+                                                    "type": "enum",
+                                                    "example": "[]"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/1c-exchange/edms/documents-statuses": {
+            "post": {
+                "tags": [
+                    "КЭДО — Документы"
+                ],
+                "summary": "Получение статусов документов",
+                "description": "Получение статусов документов",
+                "operationId": "1cExchangeDocumentsStatuses",
+                "requestBody": {
+                    "description": "Идентификаторы документов",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "Ids": {
+                                        "type": "enum",
+                                        "example": "[]"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "status": {
+                                                    "type": "string",
+                                                    "example": "success"
+                                                },
+                                                "error": {
+                                                    "type": "enum",
+                                                    "example": "[]"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Начисления",
+            "description": "Начисления"
+        },
+        {
+            "name": "Загрузка из 1С",
+            "description": "Загрузка из 1С"
+        },
+        {
+            "name": "КЭДО — Заявления",
+            "description": "КЭДО — Заявления"
+        },
+        {
+            "name": "КЭДО — Экспорт документов",
+            "description": "КЭДО — Экспорт документов"
+        },
+        {
+            "name": "КЭДО — Документы",
+            "description": "КЭДО — Документы"
+        }
+    ],
+    "components": {
+        "securitySchemes": {
+            "sanctum": {
+                "type": "apiKey",
+                "description": "Введите token в следующем формате: Bearer Ваш Api Token",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    }
+}

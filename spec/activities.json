@@ -1,0 +1,703 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Раздел Мои активности",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/activities": {
+            "get": {
+                "tags": [
+                    "Вкладка Обзор"
+                ],
+                "summary": "Список активностей",
+                "description": "Возвращает список активностей",
+                "operationId": "activitiesList",
+                "responses": {
+                    "200": {
+                        "description": "Список активностей",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "lang": {
+                                                    "type": "string",
+                                                    "example": "ru"
+                                                },
+                                                "requests": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": "1"
+                                                            },
+                                                            "user": {
+                                                                "type": "object",
+                                                                "example": {
+                                                                    "id": 1,
+                                                                    "name": "ФИО",
+                                                                    "avatar": "path to image"
+                                                                }
+                                                            },
+                                                            "type": {
+                                                                "type": "object",
+                                                                "example": {
+                                                                    "name": "Отпуск",
+                                                                    "unit": "days"
+                                                                }
+                                                            },
+                                                            "dateFrom": {
+                                                                "type": "string",
+                                                                "format": "date",
+                                                                "example": "18 авг 2022"
+                                                            },
+                                                            "dateTo": {
+                                                                "type": "string",
+                                                                "format": "date",
+                                                                "example": "25 авг 2022"
+                                                            },
+                                                            "count": {
+                                                                "type": "string",
+                                                                "example": "8"
+                                                            },
+                                                            "comment": {
+                                                                "type": "string",
+                                                                "example": "Комментарий к запросу"
+                                                            },
+                                                            "attachment": {
+                                                                "type": "string",
+                                                                "example": "путь к вложению"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "absences": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": "1"
+                                                            },
+                                                            "type": {
+                                                                "type": "object",
+                                                                "example": {
+                                                                    "name": "Отпуск",
+                                                                    "icon": "fa fa-home",
+                                                                    "color": "#123654",
+                                                                    "unit": "days"
+                                                                }
+                                                            },
+                                                            "dateFrom": {
+                                                                "type": "string",
+                                                                "format": "date",
+                                                                "example": "18 авг 2022"
+                                                            },
+                                                            "dateTo": {
+                                                                "type": "string",
+                                                                "format": "date",
+                                                                "example": "25 авг 2022"
+                                                            },
+                                                            "count": {
+                                                                "type": "string",
+                                                                "example": "8"
+                                                            },
+                                                            "comment": {
+                                                                "type": "string",
+                                                                "example": "Комментарий к запросу"
+                                                            },
+                                                            "attachment": {
+                                                                "type": "string",
+                                                                "example": "путь к вложению"
+                                                            },
+                                                            "status": {
+                                                                "type": "object",
+                                                                "example": {
+                                                                    "name": "Открыт",
+                                                                    "code": "open"
+                                                                }
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "objectives": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": "1"
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Название цели"
+                                                            },
+                                                            "status": {
+                                                                "type": "string",
+                                                                "example": "open"
+                                                            },
+                                                            "finish": {
+                                                                "type": "string",
+                                                                "format": "date",
+                                                                "example": "авг 31, 2022"
+                                                            },
+                                                            "isOverdue": {
+                                                                "type": "boolean",
+                                                                "example": "false"
+                                                            },
+                                                            "resultTotalPercent": {
+                                                                "type": "integer",
+                                                                "example": "0"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "kpi": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": "1"
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Название KPI"
+                                                            },
+                                                            "value": {
+                                                                "type": "string",
+                                                                "example": "10"
+                                                            },
+                                                            "currentTarget": {
+                                                                "type": "integer",
+                                                                "example": "20"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/activities/absences": {
+            "get": {
+                "tags": [
+                    "Вкладка Обзор"
+                ],
+                "summary": "Список мои запросы на отсутствия",
+                "description": "Возвращает мои запросы на отсутствия",
+                "operationId": "activitiesAbsenceList",
+                "responses": {
+                    "200": {
+                        "description": "Список мои запросы на отсутствия",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "lang": {
+                                                    "type": "string",
+                                                    "example": "ru"
+                                                },
+                                                "data": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": "1"
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Название KPI"
+                                                            },
+                                                            "value": {
+                                                                "type": "string",
+                                                                "example": "10"
+                                                            },
+                                                            "currentTarget": {
+                                                                "type": "integer",
+                                                                "example": "20"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/activities/requests": {
+            "get": {
+                "tags": [
+                    "Вкладка Обзор"
+                ],
+                "summary": "Список запросов на отсутствия/вакансию",
+                "description": "Возвращает список запросов на отсутствия/вакансию",
+                "operationId": "activitiesAbsenceVacancyRequestList",
+                "responses": {
+                    "200": {
+                        "description": "Список запросов на отсутствия/вакансию",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "lang": {
+                                                    "type": "string",
+                                                    "example": "ru"
+                                                },
+                                                "data": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": "1"
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Название KPI"
+                                                            },
+                                                            "value": {
+                                                                "type": "string",
+                                                                "example": "10"
+                                                            },
+                                                            "currentTarget": {
+                                                                "type": "integer",
+                                                                "example": "20"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/activities/offers": {
+            "get": {
+                "tags": [
+                    "Вкладка Обзор"
+                ],
+                "summary": "Список согласования офферов",
+                "description": "Возвращает список согласования офферов",
+                "operationId": "activitiesOffersList",
+                "responses": {
+                    "200": {
+                        "description": "Список согласования офферов",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "lang": {
+                                                    "type": "string",
+                                                    "example": "ru"
+                                                },
+                                                "data": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": "1"
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Название KPI"
+                                                            },
+                                                            "value": {
+                                                                "type": "string",
+                                                                "example": "10"
+                                                            },
+                                                            "currentTarget": {
+                                                                "type": "integer",
+                                                                "example": "20"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/activities/surveys": {
+            "get": {
+                "tags": [
+                    "Вкладка Обзор"
+                ],
+                "summary": "Список активных опросов",
+                "description": "Возвращает список активных опросов",
+                "operationId": "activitiesSurveysList",
+                "responses": {
+                    "200": {
+                        "description": "Список активных опросов",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "lang": {
+                                                    "type": "string",
+                                                    "example": "ru"
+                                                },
+                                                "data": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": "1"
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Название KPI"
+                                                            },
+                                                            "value": {
+                                                                "type": "string",
+                                                                "example": "10"
+                                                            },
+                                                            "currentTarget": {
+                                                                "type": "integer",
+                                                                "example": "20"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/activities/kpi": {
+            "get": {
+                "tags": [
+                    "Вкладка KPI"
+                ],
+                "summary": "Список KPI",
+                "description": "Возвращает список KPI",
+                "operationId": "activitiesKpi",
+                "responses": {
+                    "200": {
+                        "description": "Список активностей",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "lang": {
+                                                    "type": "string",
+                                                    "example": "ru"
+                                                },
+                                                "kpi": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": "1"
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Название KPI"
+                                                            },
+                                                            "value": {
+                                                                "type": "string",
+                                                                "example": "10"
+                                                            },
+                                                            "currentTarget": {
+                                                                "type": "integer",
+                                                                "example": "20"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/activities/objectives": {
+            "get": {
+                "tags": [
+                    "Вкладка Цели"
+                ],
+                "summary": "Список Цели",
+                "description": "Возвращает список Целей",
+                "operationId": "activitiesObjectives",
+                "responses": {
+                    "200": {
+                        "description": "Список целей",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "lang": {
+                                                    "type": "string",
+                                                    "example": "ru"
+                                                },
+                                                "objectives": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Активные"
+                                                            },
+                                                            "code": {
+                                                                "type": "string",
+                                                                "example": "open"
+                                                            },
+                                                            "totalPercent": {
+                                                                "type": "integer",
+                                                                "example": "20"
+                                                            },
+                                                            "items": {
+                                                                "type": "array",
+                                                                "items": {
+                                                                    "properties": {
+                                                                        "id": {
+                                                                            "type": "integer",
+                                                                            "example": "1"
+                                                                        },
+                                                                        "name": {
+                                                                            "type": "name",
+                                                                            "example": "Название цели"
+                                                                        },
+                                                                        "status": {
+                                                                            "type": "object",
+                                                                            "example": {
+                                                                                "code": "open",
+                                                                                "name": "Открыто"
+                                                                            }
+                                                                        },
+                                                                        "start": {
+                                                                            "type": "string",
+                                                                            "example": "1 янв 2023"
+                                                                        },
+                                                                        "finish": {
+                                                                            "type": "string",
+                                                                            "example": "28 фев 2023"
+                                                                        },
+                                                                        "isOverdue": {
+                                                                            "type": "boolean",
+                                                                            "example": "false"
+                                                                        },
+                                                                        "owner": {
+                                                                            "type": "object",
+                                                                            "example": {
+                                                                                "id": 1,
+                                                                                "name": "ФИО",
+                                                                                "avatar": "путь к изображению"
+                                                                            }
+                                                                        },
+                                                                        "type": {
+                                                                            "type": "string",
+                                                                            "example": "Название типа"
+                                                                        },
+                                                                        "typeValue": {
+                                                                            "type": "string",
+                                                                            "example": "Значение типа"
+                                                                        },
+                                                                        "resultTotalStatus": {
+                                                                            "type": "object",
+                                                                            "example": {
+                                                                                "code": "no-status",
+                                                                                "name": "Нет статуса"
+                                                                            }
+                                                                        },
+                                                                        "resultTotalPercent": {
+                                                                            "type": "integer",
+                                                                            "example": "50"
+                                                                        },
+                                                                        "results": {
+                                                                            "type": "array",
+                                                                            "items": {
+                                                                                "properties": {
+                                                                                    "id": {
+                                                                                        "type": "integer",
+                                                                                        "example": "1"
+                                                                                    },
+                                                                                    "name": {
+                                                                                        "type": "string",
+                                                                                        "example": "Название показателя цели"
+                                                                                    },
+                                                                                    "type": {
+                                                                                        "type": "object",
+                                                                                        "example": {
+                                                                                            "code": "number",
+                                                                                            "name": "Число"
+                                                                                        }
+                                                                                    },
+                                                                                    "status": {
+                                                                                        "type": "object",
+                                                                                        "example": {
+                                                                                            "code": "no-status",
+                                                                                            "name": "Нет статуса"
+                                                                                        }
+                                                                                    },
+                                                                                    "startValue": {
+                                                                                        "type": "integer",
+                                                                                        "example": "0"
+                                                                                    },
+                                                                                    "targetValue": {
+                                                                                        "type": "integer",
+                                                                                        "example": "100"
+                                                                                    },
+                                                                                    "value": {
+                                                                                        "type": "integer",
+                                                                                        "example": "10"
+                                                                                    },
+                                                                                    "percent": {
+                                                                                        "type": "integer",
+                                                                                        "example": "10"
+                                                                                    }
+                                                                                },
+                                                                                "type": "object"
+                                                                            }
+                                                                        }
+                                                                    },
+                                                                    "type": "object"
+                                                                }
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Вкладка Обзор",
+            "description": "Вкладка Обзор"
+        },
+        {
+            "name": "Вкладка KPI",
+            "description": "Вкладка KPI"
+        },
+        {
+            "name": "Вкладка Цели",
+            "description": "Вкладка Цели"
+        }
+    ],
+    "components": {
+        "securitySchemes": {
+            "sanctum": {
+                "type": "apiKey",
+                "description": "Введите token в следующем формате: Bearer Ваш Api Token",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    }
+}

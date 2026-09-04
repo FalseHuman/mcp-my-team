@@ -1,0 +1,2369 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Раздел Мои идеи",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/idea/{idea}/comments": {
+            "post": {
+                "tags": [
+                    "Идея - Комментарии"
+                ],
+                "summary": "Оставить комментарий",
+                "description": "Оставить комментарий",
+                "operationId": "ideaCommentStore",
+                "parameters": [
+                    {
+                        "name": "idea",
+                        "in": "path",
+                        "description": "id идеи",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Данные комментария",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "comment": {
+                                        "description": "Комментарий",
+                                        "type": "string",
+                                        "example": "Комментарий пользователя"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Комментарии",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "lang": {
+                                            "type": "string",
+                                            "example": "ru"
+                                        },
+                                        "comments": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": "1"
+                                                    },
+                                                    "createdBy": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": "1"
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Имя пользователя"
+                                                            },
+                                                            "avatar": {
+                                                                "type": "string",
+                                                                "example": "/path/image.jpg"
+                                                            },
+                                                            "position": {
+                                                                "type": "string",
+                                                                "example": "Сотрудник"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "comment": {
+                                                        "type": "string",
+                                                        "example": "Комментарий пользователя"
+                                                    },
+                                                    "date": {
+                                                        "type": "string",
+                                                        "example": "21 сен 2022, 10:46"
+                                                    },
+                                                    "dateDiff": {
+                                                        "type": "string",
+                                                        "example": "9 минут назад"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/idea-comments/{comment}/edit": {
+            "get": {
+                "tags": [
+                    "Идея - Комментарии"
+                ],
+                "summary": "Поля для редактирования комментария",
+                "description": "Поля для редактирования комментария",
+                "operationId": "ideaCommentEdit",
+                "parameters": [
+                    {
+                        "name": "comment",
+                        "in": "path",
+                        "description": "id комментария",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Поля для редактирования комментария",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "lang": {
+                                            "type": "string",
+                                            "example": "ru"
+                                        },
+                                        "id": {
+                                            "type": "integer",
+                                            "example": "1"
+                                        },
+                                        "fields": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": ""
+                                                    },
+                                                    "code": {
+                                                        "type": "string",
+                                                        "example": "comment"
+                                                    },
+                                                    "require": {
+                                                        "type": "boolean",
+                                                        "example": "true"
+                                                    },
+                                                    "value": {
+                                                        "type": "string",
+                                                        "example": "Комментарий"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/idea-comments/{comment}": {
+            "put": {
+                "tags": [
+                    "Идея - Комментарии"
+                ],
+                "summary": "Обновить комментарий",
+                "description": "Обновить комментарий",
+                "operationId": "ideaCommentUpdate",
+                "parameters": [
+                    {
+                        "name": "comment",
+                        "in": "path",
+                        "description": "id комментария",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Данные комментария",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "comment": {
+                                        "description": "Комментарий",
+                                        "type": "string",
+                                        "example": "Измененный комментарий"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Комментарии",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "lang": {
+                                            "type": "string",
+                                            "example": "ru"
+                                        },
+                                        "comments": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": "1"
+                                                    },
+                                                    "createdBy": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": "1"
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Имя пользователя"
+                                                            },
+                                                            "avatar": {
+                                                                "type": "string",
+                                                                "example": "/path/image.jpg"
+                                                            },
+                                                            "position": {
+                                                                "type": "string",
+                                                                "example": "Сотрудник"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "comment": {
+                                                        "type": "string",
+                                                        "example": "Комментарий пользователя"
+                                                    },
+                                                    "date": {
+                                                        "type": "string",
+                                                        "example": "21 сен 2022, 10:46"
+                                                    },
+                                                    "dateDiff": {
+                                                        "type": "string",
+                                                        "example": "9 минут назад"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Идея - Комментарии"
+                ],
+                "summary": "Удалить комментарий",
+                "description": "Удалить комментарий",
+                "operationId": "ideaCommentDestroy",
+                "parameters": [
+                    {
+                        "name": "comment",
+                        "in": "path",
+                        "description": "id комментария",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Комментарии",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "lang": {
+                                            "type": "string",
+                                            "example": "ru"
+                                        },
+                                        "comments": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": "1"
+                                                    },
+                                                    "createdBy": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": "1"
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Имя пользователя"
+                                                            },
+                                                            "avatar": {
+                                                                "type": "string",
+                                                                "example": "/path/image.jpg"
+                                                            },
+                                                            "position": {
+                                                                "type": "string",
+                                                                "example": "Сотрудник"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "comment": {
+                                                        "type": "string",
+                                                        "example": "Комментарий пользователя"
+                                                    },
+                                                    "date": {
+                                                        "type": "string",
+                                                        "example": "21 сен 2022, 10:46"
+                                                    },
+                                                    "dateDiff": {
+                                                        "type": "string",
+                                                        "example": "9 минут назад"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/idea-comments/{comment}/send-reaction": {
+            "post": {
+                "tags": [
+                    "Идея - Комментарии v2"
+                ],
+                "summary": "Добавление реакции на комментарий",
+                "operationId": "1e4458d2c14d1e9cdd5fa5635ed1c589",
+                "parameters": [
+                    {
+                        "name": "comment",
+                        "in": "path",
+                        "description": "ID комментария",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Реакция успешно добавлена",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "lang": {
+                                            "type": "string",
+                                            "example": "ru"
+                                        },
+                                        "reactions": {
+                                            "properties": {
+                                                "liked": {
+                                                    "type": "boolean",
+                                                    "example": true
+                                                },
+                                                "countReactions": {
+                                                    "type": "integer",
+                                                    "example": 5
+                                                },
+                                                "users": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": 1
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Иван Иванов"
+                                                            },
+                                                            "avatar": {
+                                                                "type": "string",
+                                                                "example": "/storage/images/users/ivan.jpg"
+                                                            },
+                                                            "position": {
+                                                                "type": "string",
+                                                                "example": "Менеджер"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибка запроса",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Ошибка в параметрах запроса"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Комментарий не найден",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Комментарий не найден"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/idea-comments/{comment}/count-reactions": {
+            "get": {
+                "tags": [
+                    "Идея - Комментарии v2"
+                ],
+                "summary": "Получение количества реакций на комментарий",
+                "operationId": "01b0fffd113e33e7ed130f2725062766",
+                "parameters": [
+                    {
+                        "name": "comment",
+                        "in": "path",
+                        "description": "ID комментария",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Количество реакций успешно получено",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "lang": {
+                                            "type": "string",
+                                            "example": "ru"
+                                        },
+                                        "reactions": {
+                                            "properties": {
+                                                "liked": {
+                                                    "type": "boolean",
+                                                    "example": true
+                                                },
+                                                "countReactions": {
+                                                    "type": "integer",
+                                                    "example": 10
+                                                },
+                                                "users": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": 1
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Иван Иванов"
+                                                            },
+                                                            "avatar": {
+                                                                "type": "string",
+                                                                "example": "/storage/images/users/ivan.jpg"
+                                                            },
+                                                            "position": {
+                                                                "type": "string",
+                                                                "example": "Менеджер"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Комментарий не найден",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Комментарий не найден"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v2/idea/{idea}/comments": {
+            "get": {
+                "tags": [
+                    "Идея - Комментарии v2"
+                ],
+                "summary": "Получение списка комментариев к идее",
+                "operationId": "a14fc174f06363bbed86ed56548e01dc",
+                "parameters": [
+                    {
+                        "name": "idea",
+                        "in": "path",
+                        "description": "ID идеи",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Сортировка комментариев",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "desc",
+                                "asc"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "description": "Смещение результатов",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Количество комментариев на странице",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список комментариев получен успешно",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "lang": {
+                                                    "type": "string",
+                                                    "example": "ru"
+                                                },
+                                                "items": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": 1
+                                                            },
+                                                            "comment": {
+                                                                "type": "string",
+                                                                "example": "<p>Пример комментария</p>"
+                                                            },
+                                                            "createdBy": {
+                                                                "properties": {
+                                                                    "id": {
+                                                                        "type": "integer",
+                                                                        "example": 1
+                                                                    },
+                                                                    "name": {
+                                                                        "type": "string",
+                                                                        "example": "Первый Администратор"
+                                                                    },
+                                                                    "avatar": {
+                                                                        "type": "string",
+                                                                        "example": "/storage/images/users/demo/averchenko.jpg"
+                                                                    },
+                                                                    "position": {
+                                                                        "type": "string",
+                                                                        "example": "Директор"
+                                                                    }
+                                                                },
+                                                                "type": "object"
+                                                            },
+                                                            "createdAt": {
+                                                                "type": "string",
+                                                                "example": "10 фев 2025, 08:32"
+                                                            },
+                                                            "reactions": {
+                                                                "properties": {
+                                                                    "liked": {
+                                                                        "type": "boolean",
+                                                                        "example": false
+                                                                    },
+                                                                    "countReactions": {
+                                                                        "type": "integer",
+                                                                        "example": 0
+                                                                    }
+                                                                },
+                                                                "type": "object"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "count": {
+                                                    "type": "integer",
+                                                    "example": 4
+                                                },
+                                                "allCount": {
+                                                    "type": "integer",
+                                                    "example": 4
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибка запроса",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Ошибка параметров запроса"
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Идея - Комментарии v2"
+                ],
+                "summary": "Добавление комментария к идее",
+                "operationId": "b5a7bb70de5d3edde2e851a6c9569a65",
+                "parameters": [
+                    {
+                        "name": "idea",
+                        "in": "path",
+                        "description": "ID идеи",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Сортировка комментариев",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "desc",
+                                "asc"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "description": "Смещение результатов",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Количество комментариев на странице",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "comment"
+                                ],
+                                "properties": {
+                                    "comment": {
+                                        "description": "Текст комментария",
+                                        "type": "string"
+                                    },
+                                    "created_by": {
+                                        "description": "ID создателя комментария (опционально)",
+                                        "type": "integer"
+                                    },
+                                    "taggedUsersList": {
+                                        "description": "Список ID отмеченных пользователей",
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "parent_id": {
+                                        "description": "ID родительского комментария",
+                                        "type": "integer",
+                                        "nullable": true
+                                    },
+                                    "to_user_id": {
+                                        "description": "ID пользователя, которому адресован комментарий",
+                                        "type": "integer",
+                                        "nullable": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Комментарий успешно добавлен",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "lang": {
+                                                    "type": "string",
+                                                    "example": "ru"
+                                                },
+                                                "items": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": 1
+                                                            },
+                                                            "comment": {
+                                                                "type": "string",
+                                                                "example": "<p>3333</p>"
+                                                            },
+                                                            "items": {
+                                                                "type": "array",
+                                                                "items": {}
+                                                            },
+                                                            "items_count": {
+                                                                "type": "integer",
+                                                                "example": 0
+                                                            },
+                                                            "createdBy": {
+                                                                "properties": {
+                                                                    "id": {
+                                                                        "type": "integer",
+                                                                        "example": 1
+                                                                    },
+                                                                    "name": {
+                                                                        "type": "string",
+                                                                        "example": "Первый Администратор"
+                                                                    },
+                                                                    "avatar": {
+                                                                        "type": "string",
+                                                                        "example": "/storage/images/users/demo/averchenko.jpg"
+                                                                    },
+                                                                    "position": {
+                                                                        "type": "string",
+                                                                        "example": "Директор"
+                                                                    }
+                                                                },
+                                                                "type": "object"
+                                                            },
+                                                            "canEdit": {
+                                                                "type": "boolean",
+                                                                "example": true
+                                                            },
+                                                            "canDelete": {
+                                                                "type": "boolean",
+                                                                "example": true
+                                                            },
+                                                            "createdAt": {
+                                                                "type": "string",
+                                                                "example": "10 фев 2025, 08:32"
+                                                            },
+                                                            "createdAtDiff": {
+                                                                "type": "string",
+                                                                "nullable": true
+                                                            },
+                                                            "updatedAt": {
+                                                                "type": "string",
+                                                                "nullable": true
+                                                            },
+                                                            "updatedAtDiff": {
+                                                                "type": "string",
+                                                                "nullable": true
+                                                            },
+                                                            "reactions": {
+                                                                "properties": {
+                                                                    "liked": {
+                                                                        "type": "boolean",
+                                                                        "example": false
+                                                                    },
+                                                                    "countReactions": {
+                                                                        "type": "integer",
+                                                                        "example": 0
+                                                                    },
+                                                                    "users": {
+                                                                        "type": "array",
+                                                                        "items": {}
+                                                                    }
+                                                                },
+                                                                "type": "object"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "count": {
+                                                    "type": "integer",
+                                                    "example": 4
+                                                },
+                                                "allCount": {
+                                                    "type": "integer",
+                                                    "example": 4
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибка валидации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Ошибка валидации данных"
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v2/idea-comments/{comment}/edit": {
+            "get": {
+                "tags": [
+                    "Идея - Комментарии v2"
+                ],
+                "summary": "Получение данных для редактирования комментария",
+                "operationId": "32c8cf2adac2dda8cfa6fcaf3555b6c0",
+                "parameters": [
+                    {
+                        "name": "comment",
+                        "in": "path",
+                        "description": "ID комментария",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Данные для редактирования комментария получены успешно",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "lang": {
+                                            "type": "string",
+                                            "example": "ru"
+                                        },
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "fields": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": ""
+                                                    },
+                                                    "code": {
+                                                        "type": "string",
+                                                        "example": "comment"
+                                                    },
+                                                    "require": {
+                                                        "type": "boolean",
+                                                        "example": true
+                                                    },
+                                                    "value": {
+                                                        "type": "string",
+                                                        "example": "Текст комментария"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Пользователь не имеет прав на редактирование",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Нет прав на редактирование комментария"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Комментарий не найден",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Комментарий не найден"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v2/idea-comments/{comment}": {
+            "put": {
+                "tags": [
+                    "Идея - Комментарии v2"
+                ],
+                "summary": "Обновление комментария и получение обновленного списка",
+                "operationId": "ff59cb6f523bbc755d66be15a391bb37",
+                "parameters": [
+                    {
+                        "name": "idea",
+                        "in": "path",
+                        "description": "ID идеи",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "comment",
+                        "in": "path",
+                        "description": "ID комментария",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Сортировка комментариев",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "desc",
+                                "asc"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "description": "Смещение результатов",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Количество комментариев на странице",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "comment"
+                                ],
+                                "properties": {
+                                    "comment": {
+                                        "description": "Обновленный текст комментария",
+                                        "type": "string"
+                                    },
+                                    "edited_by": {
+                                        "description": "ID пользователя, обновившего комментарий",
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Комментарий успешно обновлен и список обновлен",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "lang": {
+                                                    "type": "string",
+                                                    "example": "ru"
+                                                },
+                                                "items": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": 1
+                                                            },
+                                                            "comment": {
+                                                                "type": "string",
+                                                                "example": "<p>Обновленный текст комментария</p>"
+                                                            },
+                                                            "updatedAt": {
+                                                                "type": "string",
+                                                                "example": "12 фев 2025, 14:45"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "count": {
+                                                    "type": "integer",
+                                                    "example": 3
+                                                },
+                                                "allCount": {
+                                                    "type": "integer",
+                                                    "example": 3
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибка валидации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Ошибка валидации данных"
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Комментарий не найден",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Комментарий не найден"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Идея - Комментарии v2"
+                ],
+                "summary": "Удаление комментария и получение обновленного списка",
+                "operationId": "ca63dbe357319be7d2faad8cec933009",
+                "parameters": [
+                    {
+                        "name": "idea",
+                        "in": "path",
+                        "description": "ID идеи",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "comment",
+                        "in": "path",
+                        "description": "ID комментария",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Сортировка комментариев",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "desc",
+                                "asc"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "description": "Смещение результатов",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Количество комментариев на странице",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "nullable": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Комментарий успешно удален и список обновлен",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "lang": {
+                                                    "type": "string",
+                                                    "example": "ru"
+                                                },
+                                                "items": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": 1
+                                                            },
+                                                            "comment": {
+                                                                "type": "string",
+                                                                "example": "<p>Пример комментария</p>"
+                                                            },
+                                                            "createdBy": {
+                                                                "properties": {
+                                                                    "id": {
+                                                                        "type": "integer",
+                                                                        "example": 1
+                                                                    },
+                                                                    "name": {
+                                                                        "type": "string",
+                                                                        "example": "Первый Администратор"
+                                                                    },
+                                                                    "avatar": {
+                                                                        "type": "string",
+                                                                        "example": "/storage/images/users/demo/averchenko.jpg"
+                                                                    },
+                                                                    "position": {
+                                                                        "type": "string",
+                                                                        "example": "Директор"
+                                                                    }
+                                                                },
+                                                                "type": "object"
+                                                            },
+                                                            "createdAt": {
+                                                                "type": "string",
+                                                                "example": "10 фев 2025, 08:32"
+                                                            },
+                                                            "reactions": {
+                                                                "properties": {
+                                                                    "liked": {
+                                                                        "type": "boolean",
+                                                                        "example": false
+                                                                    },
+                                                                    "countReactions": {
+                                                                        "type": "integer",
+                                                                        "example": 0
+                                                                    }
+                                                                },
+                                                                "type": "object"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "count": {
+                                                    "type": "integer",
+                                                    "example": 3
+                                                },
+                                                "allCount": {
+                                                    "type": "integer",
+                                                    "example": 3
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибка запроса",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Ошибка удаления комментария"
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Комментарий не найден",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Комментарий не найден"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/idea/create": {
+            "get": {
+                "tags": [
+                    "Мои идеи"
+                ],
+                "summary": "Форма создания новой идеи",
+                "description": "Данные для создания новой идеи",
+                "operationId": "ideaCreate",
+                "responses": {
+                    "200": {
+                        "description": "Данные для создания новой идеи",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "lang": {
+                                                    "type": "string",
+                                                    "example": "ru"
+                                                },
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": "null"
+                                                },
+                                                "fields": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Сотрудник"
+                                                            },
+                                                            "code": {
+                                                                "type": "string",
+                                                                "example": "user"
+                                                            },
+                                                            "require": {
+                                                                "type": "boolean",
+                                                                "example": "true"
+                                                            },
+                                                            "description": {
+                                                                "type": "string",
+                                                                "example": "Выберите кого-либо..."
+                                                            },
+                                                            "value": {
+                                                                "type": "string",
+                                                                "example": "null"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/idea/{idea}/edit": {
+            "get": {
+                "tags": [
+                    "Мои идеи"
+                ],
+                "summary": "Форма редактирования идеи",
+                "description": "Данные для редактирования идеи",
+                "operationId": "ideaEdit",
+                "parameters": [
+                    {
+                        "name": "idea",
+                        "in": "path",
+                        "description": "id идеи",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Данные для редактирования идеи",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "lang": {
+                                                    "type": "string",
+                                                    "example": "ru"
+                                                },
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": "null"
+                                                },
+                                                "fields": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Сотрудник"
+                                                            },
+                                                            "code": {
+                                                                "type": "string",
+                                                                "example": "user"
+                                                            },
+                                                            "require": {
+                                                                "type": "boolean",
+                                                                "example": "true"
+                                                            },
+                                                            "description": {
+                                                                "type": "string",
+                                                                "example": "Выберите кого-либо..."
+                                                            },
+                                                            "value": {
+                                                                "type": "string",
+                                                                "example": "null"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/idea": {
+            "post": {
+                "tags": [
+                    "Мои идеи"
+                ],
+                "summary": "Сохранение новой идеи",
+                "description": "Сохранение новой идеи",
+                "operationId": "ideaStore",
+                "requestBody": {
+                    "description": "Значения типа идеи",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "category": {
+                                        "description": "Сотрудник",
+                                        "type": "integer",
+                                        "example": "2"
+                                    },
+                                    "name": {
+                                        "description": "Сотрудник",
+                                        "type": "string",
+                                        "example": "Турник"
+                                    },
+                                    "description": {
+                                        "description": "Сотрудник",
+                                        "type": "string",
+                                        "example": "Для здоровой спины"
+                                    },
+                                    "budget": {
+                                        "description": "Сотрудник",
+                                        "type": "string",
+                                        "example": "10000"
+                                    },
+                                    "anonymous": {
+                                        "description": "Сотрудник",
+                                        "type": "boolean",
+                                        "example": "false"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Сохранение новой идеи",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "lang": {
+                                                    "type": "string",
+                                                    "example": "ru"
+                                                },
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": ""
+                                                },
+                                                "fields": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Название поля"
+                                                            },
+                                                            "code": {
+                                                                "type": "integer",
+                                                                "example": "Код поля"
+                                                            },
+                                                            "require": {
+                                                                "type": "boolean",
+                                                                "example": "true"
+                                                            },
+                                                            "value": {
+                                                                "type": "string",
+                                                                "example": ""
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/idea/{idea}": {
+            "get": {
+                "tags": [
+                    "Мои идеи"
+                ],
+                "summary": "Показ детальной страницы идеи",
+                "description": "Показ детальной страницы идеи",
+                "operationId": "oneOnOneShow",
+                "parameters": [
+                    {
+                        "name": "idea",
+                        "in": "path",
+                        "description": "id идеи",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Данные для создания новой идеи",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "lang": {
+                                                    "type": "string",
+                                                    "example": "ru"
+                                                },
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": ""
+                                                },
+                                                "fields": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Название поля"
+                                                            },
+                                                            "code": {
+                                                                "type": "integer",
+                                                                "example": "Код поля"
+                                                            },
+                                                            "require": {
+                                                                "type": "boolean",
+                                                                "example": "true"
+                                                            },
+                                                            "value": {
+                                                                "type": "string",
+                                                                "example": ""
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Мои идеи"
+                ],
+                "summary": "Обновление идеи",
+                "description": "Обновление идеи",
+                "operationId": "ideaUpdate",
+                "parameters": [
+                    {
+                        "name": "idea",
+                        "in": "path",
+                        "description": "id идеи",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Значения типа идеи",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "type": {
+                                        "description": "Тип",
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "date_start": {
+                                        "description": "Дата начала",
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "10.09.2022 14:30"
+                                    },
+                                    "date_end": {
+                                        "description": "Дата окончания",
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "10.09.2022 15:00"
+                                    },
+                                    "note_general": {
+                                        "description": "Общие заметки",
+                                        "type": "string",
+                                        "example": "Текст общих заметок"
+                                    },
+                                    "note_private": {
+                                        "description": "Личные заметки",
+                                        "type": "string",
+                                        "example": "Текст личных заметок"
+                                    },
+                                    "points_for_discussion": {
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Пункт номер 1"
+                                                },
+                                                "private": {
+                                                    "type": "boolean",
+                                                    "example": "false"
+                                                },
+                                                "completed": {
+                                                    "type": "boolean",
+                                                    "example": "false"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "plan_action": {
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Пункт номер 1"
+                                                },
+                                                "private": {
+                                                    "type": "boolean",
+                                                    "example": "false"
+                                                },
+                                                "completed": {
+                                                    "type": "boolean",
+                                                    "example": "false"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Обновление идеи",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "lang": {
+                                                    "type": "string",
+                                                    "example": "ru"
+                                                },
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": ""
+                                                },
+                                                "fields": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Название поля"
+                                                            },
+                                                            "code": {
+                                                                "type": "integer",
+                                                                "example": "Код поля"
+                                                            },
+                                                            "require": {
+                                                                "type": "boolean",
+                                                                "example": "true"
+                                                            },
+                                                            "value": {
+                                                                "type": "string",
+                                                                "example": ""
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Мои идеи"
+                ],
+                "summary": "Удаление идеи",
+                "description": "Удаление идеи",
+                "operationId": "ideaDestroy",
+                "parameters": [
+                    {
+                        "name": "idea",
+                        "in": "path",
+                        "description": "id идеи",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Удаление идеи прошло успешно."
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/idea/change-stage/{idea}": {
+            "put": {
+                "tags": [
+                    "Мои идеи"
+                ],
+                "summary": "Обновление стидии идеи",
+                "description": "Обновление стадии идеи",
+                "operationId": "ideaChangeStage",
+                "parameters": [
+                    {
+                        "name": "idea",
+                        "in": "path",
+                        "description": "id идеи",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Значения типа идеи",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "stage": {
+                                        "description": "новая стадия",
+                                        "type": "integer",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Обновление идеи",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "lang": {
+                                                    "type": "string",
+                                                    "example": "ru"
+                                                },
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": ""
+                                                },
+                                                "fields": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Название поля"
+                                                            },
+                                                            "code": {
+                                                                "type": "integer",
+                                                                "example": "Код поля"
+                                                            },
+                                                            "require": {
+                                                                "type": "boolean",
+                                                                "example": "true"
+                                                            },
+                                                            "value": {
+                                                                "type": "string",
+                                                                "example": ""
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/idea/sort-ideas": {
+            "post": {
+                "tags": [
+                    "Мои идеи"
+                ],
+                "summary": "Сортировка идей в рамках стадий",
+                "description": "Сортировка идей в рамках стадий",
+                "operationId": "sortIdeas",
+                "requestBody": {
+                    "description": "Значения для изменения этапа цикла найма",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "stage": {
+                                        "description": "Идентификатор этапа",
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "sortIdeas": {
+                                        "description": "Массив идентификаторов идей этой стадии",
+                                        "type": "object",
+                                        "example": [
+                                            1,
+                                            2
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Данные для вкладки Цикл",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "lang": {
+                                                    "type": "string",
+                                                    "example": "ru"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/ideas-list": {
+            "get": {
+                "tags": [
+                    "Мои идеи"
+                ],
+                "summary": "Получение списка идей",
+                "description": "Возможные варианты type- all (все), my (мои)",
+                "operationId": "ideasList",
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "description": "таб идей",
+                        "required": true,
+                        "example": "all"
+                    },
+                    {
+                        "name": "view",
+                        "in": "query",
+                        "description": "тип отображения",
+                        "required": true,
+                        "example": "list"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список идей",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "lang": {
+                                                    "type": "string",
+                                                    "example": "ru"
+                                                },
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": ""
+                                                },
+                                                "fields": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Название поля"
+                                                            },
+                                                            "code": {
+                                                                "type": "integer",
+                                                                "example": "Код поля"
+                                                            },
+                                                            "require": {
+                                                                "type": "boolean",
+                                                                "example": "true"
+                                                            },
+                                                            "value": {
+                                                                "type": "string",
+                                                                "example": ""
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/ideas/stage/{stage}": {
+            "get": {
+                "tags": [
+                    "Мои идеи"
+                ],
+                "summary": "Получение списка идей этапа",
+                "description": "Возможные варианты type- all (все), my (мои)",
+                "operationId": "ideasStageList",
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "description": "таб идей",
+                        "required": true,
+                        "example": "all"
+                    },
+                    {
+                        "name": "stage",
+                        "in": "path",
+                        "description": "идентификатор этапа",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список идей",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "lang": {
+                                                    "type": "string",
+                                                    "example": "ru"
+                                                },
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": ""
+                                                },
+                                                "fields": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Название поля"
+                                                            },
+                                                            "code": {
+                                                                "type": "integer",
+                                                                "example": "Код поля"
+                                                            },
+                                                            "require": {
+                                                                "type": "boolean",
+                                                                "example": "true"
+                                                            },
+                                                            "value": {
+                                                                "type": "string",
+                                                                "example": ""
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/ideas-list/export": {
+            "post": {
+                "tags": [
+                    "Мои идеи"
+                ],
+                "summary": "Экспорт списка идей",
+                "description": "Экспортирует список идей с фильтрацией по параметрам и возвращает файл в указанном формате.",
+                "operationId": "ideasListExport",
+                "requestBody": {
+                    "description": "Экспорт идей",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "formatfile": {
+                                        "description": "Формат файла для экспорта (например, csv или xlsx)",
+                                        "type": "string",
+                                        "example": "csv"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Файл успешно экспортирован"
+                    }
+                }
+            }
+        },
+        "/api/idea/{idea}/send-reaction": {
+            "post": {
+                "tags": [
+                    "Мои идеи"
+                ],
+                "summary": "Отправить реакцию на идею (лайк или дизлайк)",
+                "description": "Отправить реакцию на идею (лайк или дизлайк)",
+                "operationId": "ideaStoreLike",
+                "parameters": [
+                    {
+                        "name": "idea",
+                        "in": "path",
+                        "description": "id идеи",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Значения идеи",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "value": {
+                                        "description": "Лайк или дизлайк",
+                                        "type": "string",
+                                        "example": "like"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Реакции",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "myReaction": {
+                                                    "type": "string",
+                                                    "example": "dislike"
+                                                },
+                                                "reactions": {
+                                                    "properties": {
+                                                        "likes": {
+                                                            "type": "integer",
+                                                            "example": "1"
+                                                        },
+                                                        "dislikes": {
+                                                            "type": "integer",
+                                                            "example": "1"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Идея - Комментарии",
+            "description": "Идея - Комментарии"
+        },
+        {
+            "name": "Идея - Комментарии v2",
+            "description": "Идея - Комментарии v2"
+        },
+        {
+            "name": "Мои идеи",
+            "description": "Мои идеи"
+        }
+    ],
+    "components": {
+        "securitySchemes": {
+            "sanctum": {
+                "type": "apiKey",
+                "description": "Введите token в следующем формате: Bearer Ваш Api Token",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    }
+}

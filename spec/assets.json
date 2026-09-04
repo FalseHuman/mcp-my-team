@@ -1,0 +1,1395 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Раздел Имущество",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/assets-with-filter": {
+            "get": {
+                "tags": [
+                    "Имущество"
+                ],
+                "summary": "Список имущества с фильтром",
+                "description": "Список имущества с фильтром",
+                "operationId": "assetListWithFilter",
+                "requestBody": {
+                    "description": "Значения фильтрации",
+                    "required": false,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "q": {
+                                        "description": "Поиск по имени",
+                                        "type": "string",
+                                        "example": "Админ"
+                                    },
+                                    "category": {
+                                        "description": "Категория",
+                                        "type": "object",
+                                        "example": [
+                                            1
+                                        ]
+                                    },
+                                    "department": {
+                                        "description": "Департамент",
+                                        "type": "object",
+                                        "example": [
+                                            1
+                                        ]
+                                    },
+                                    "division": {
+                                        "description": "Подразделение",
+                                        "type": "object",
+                                        "example": [
+                                            1
+                                        ]
+                                    },
+                                    "location": {
+                                        "description": "Локация",
+                                        "type": "object",
+                                        "example": [
+                                            1
+                                        ]
+                                    },
+                                    "user": {
+                                        "description": "Пользователь",
+                                        "type": "object",
+                                        "example": [
+                                            1
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Список имущества",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "lang": {
+                                                    "type": "string",
+                                                    "example": "ru"
+                                                },
+                                                "assets": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "string",
+                                                                "example": "Название поля"
+                                                            },
+                                                            "code": {
+                                                                "type": "integer",
+                                                                "example": "Код поля"
+                                                            },
+                                                            "serialNumber": {
+                                                                "type": "string",
+                                                                "example": "Серийный номер"
+                                                            },
+                                                            "category": {
+                                                                "type": "string",
+                                                                "example": "Категория"
+                                                            },
+                                                            "location": {
+                                                                "type": "string",
+                                                                "example": "Локация"
+                                                            },
+                                                            "division": {
+                                                                "type": "string",
+                                                                "example": "Подразделение"
+                                                            },
+                                                            "date": {
+                                                                "type": "string",
+                                                                "format": "date",
+                                                                "example": "02.02.2025"
+                                                            },
+                                                            "user": {
+                                                                "properties": {
+                                                                    "id": {
+                                                                        "type": "string",
+                                                                        "example": "ru"
+                                                                    },
+                                                                    "name": {
+                                                                        "type": "string",
+                                                                        "example": "Имя пользователя"
+                                                                    },
+                                                                    "avatar": {
+                                                                        "type": "string",
+                                                                        "example": "/picture.jpg"
+                                                                    }
+                                                                },
+                                                                "type": "object"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/assets/create": {
+            "get": {
+                "tags": [
+                    "Имущество"
+                ],
+                "summary": "Форма добавления имущества",
+                "description": "Форма добавления имущества",
+                "operationId": "assetCreate",
+                "responses": {
+                    "200": {
+                        "description": "Данные для создания информации об имуществе",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": "null"
+                                                },
+                                                "lang": {
+                                                    "type": "string",
+                                                    "example": "ru"
+                                                },
+                                                "fields": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Название поля"
+                                                            },
+                                                            "code": {
+                                                                "type": "integer",
+                                                                "example": "Код поля"
+                                                            },
+                                                            "require": {
+                                                                "type": "boolean",
+                                                                "example": "true"
+                                                            },
+                                                            "value": {
+                                                                "type": "integer",
+                                                                "example": "null"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/assets": {
+            "post": {
+                "tags": [
+                    "Имущество"
+                ],
+                "summary": "Добавление имущества",
+                "description": "Добавление имущества",
+                "operationId": "asseStore",
+                "requestBody": {
+                    "description": "Добавление имущества",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "code": {
+                                        "description": "Код",
+                                        "type": "string",
+                                        "example": "HH0007"
+                                    },
+                                    "name": {
+                                        "description": "Название",
+                                        "type": "string",
+                                        "example": "Название"
+                                    },
+                                    "serial_number": {
+                                        "description": "Серийный номер",
+                                        "type": "string",
+                                        "example": "728985"
+                                    },
+                                    "category": {
+                                        "description": "Категория",
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "location": {
+                                        "description": "Локация",
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "department": {
+                                        "description": "Департамент",
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "division": {
+                                        "description": "Подразделение",
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "price": {
+                                        "description": "Цена",
+                                        "type": "integer",
+                                        "example": "500"
+                                    },
+                                    "currency": {
+                                        "description": "Валюта",
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "date": {
+                                        "description": "Гарантия истекает",
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "30.09.2022"
+                                    },
+                                    "description": {
+                                        "description": "Описание",
+                                        "type": "string",
+                                        "example": "Описание"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Список имущества",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "lang": {
+                                                    "type": "string",
+                                                    "example": "ru"
+                                                },
+                                                "assets": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "string",
+                                                                "example": "Название поля"
+                                                            },
+                                                            "code": {
+                                                                "type": "integer",
+                                                                "example": "Код поля"
+                                                            },
+                                                            "serialNumber": {
+                                                                "type": "string",
+                                                                "example": "Серийный номер"
+                                                            },
+                                                            "category": {
+                                                                "type": "string",
+                                                                "example": "Категория"
+                                                            },
+                                                            "location": {
+                                                                "type": "string",
+                                                                "example": "Локация"
+                                                            },
+                                                            "division": {
+                                                                "type": "string",
+                                                                "example": "Подразделение"
+                                                            },
+                                                            "date": {
+                                                                "type": "string",
+                                                                "format": "date",
+                                                                "example": "02.02.2025"
+                                                            },
+                                                            "user": {
+                                                                "properties": {
+                                                                    "id": {
+                                                                        "type": "string",
+                                                                        "example": "ru"
+                                                                    },
+                                                                    "name": {
+                                                                        "type": "string",
+                                                                        "example": "Имя пользователя"
+                                                                    },
+                                                                    "avatar": {
+                                                                        "type": "string",
+                                                                        "example": "/picture.jpg"
+                                                                    }
+                                                                },
+                                                                "type": "object"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/assets/{asset}": {
+            "get": {
+                "tags": [
+                    "Имущество"
+                ],
+                "summary": "Детальная информация об имуществе",
+                "description": "Детальная информация об имуществе",
+                "operationId": "assetDetail",
+                "parameters": [
+                    {
+                        "name": "asset",
+                        "in": "path",
+                        "description": "id имущества",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список созданных оценок",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Имущество"
+                ],
+                "summary": "Обновление информации об имуществе",
+                "description": "Обновление информации об имуществе",
+                "operationId": "assetUpdate",
+                "parameters": [
+                    {
+                        "name": "asset",
+                        "in": "path",
+                        "description": "id имущества",
+                        "required": false,
+                        "example": "1"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Добавление имущества",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "code": {
+                                        "description": "Код",
+                                        "type": "string",
+                                        "example": "HH0007"
+                                    },
+                                    "name": {
+                                        "description": "Название",
+                                        "type": "string",
+                                        "example": "Название"
+                                    },
+                                    "category": {
+                                        "description": "Категория",
+                                        "type": "integer",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Список имущества",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "lang": {
+                                                    "type": "string",
+                                                    "example": "ru"
+                                                },
+                                                "assets": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "string",
+                                                                "example": "Название поля"
+                                                            },
+                                                            "code": {
+                                                                "type": "integer",
+                                                                "example": "Код поля"
+                                                            },
+                                                            "serialNumber": {
+                                                                "type": "string",
+                                                                "example": "Серийный номер"
+                                                            },
+                                                            "category": {
+                                                                "type": "string",
+                                                                "example": "Категория"
+                                                            },
+                                                            "location": {
+                                                                "type": "string",
+                                                                "example": "Локация"
+                                                            },
+                                                            "division": {
+                                                                "type": "string",
+                                                                "example": "Подразделение"
+                                                            },
+                                                            "date": {
+                                                                "type": "string",
+                                                                "format": "date",
+                                                                "example": "02.02.2025"
+                                                            },
+                                                            "user": {
+                                                                "properties": {
+                                                                    "id": {
+                                                                        "type": "string",
+                                                                        "example": "ru"
+                                                                    },
+                                                                    "name": {
+                                                                        "type": "string",
+                                                                        "example": "Имя пользователя"
+                                                                    },
+                                                                    "avatar": {
+                                                                        "type": "string",
+                                                                        "example": "/picture.jpg"
+                                                                    }
+                                                                },
+                                                                "type": "object"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Имущество"
+                ],
+                "summary": "Удаление имущества",
+                "description": "Удаление имущества",
+                "operationId": "assetDelete",
+                "parameters": [
+                    {
+                        "name": "asset",
+                        "in": "path",
+                        "description": "id имущества",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список имущества",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "lang": {
+                                                    "type": "string",
+                                                    "example": "ru"
+                                                },
+                                                "assets": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "string",
+                                                                "example": "Название поля"
+                                                            },
+                                                            "code": {
+                                                                "type": "integer",
+                                                                "example": "Код поля"
+                                                            },
+                                                            "serialNumber": {
+                                                                "type": "string",
+                                                                "example": "Серийный номер"
+                                                            },
+                                                            "category": {
+                                                                "type": "string",
+                                                                "example": "Категория"
+                                                            },
+                                                            "location": {
+                                                                "type": "string",
+                                                                "example": "Локация"
+                                                            },
+                                                            "division": {
+                                                                "type": "string",
+                                                                "example": "Подразделение"
+                                                            },
+                                                            "date": {
+                                                                "type": "string",
+                                                                "format": "date",
+                                                                "example": "02.02.2025"
+                                                            },
+                                                            "user": {
+                                                                "properties": {
+                                                                    "id": {
+                                                                        "type": "string",
+                                                                        "example": "ru"
+                                                                    },
+                                                                    "name": {
+                                                                        "type": "string",
+                                                                        "example": "Имя пользователя"
+                                                                    },
+                                                                    "avatar": {
+                                                                        "type": "string",
+                                                                        "example": "/picture.jpg"
+                                                                    }
+                                                                },
+                                                                "type": "object"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/assets/{asset}/edit": {
+            "get": {
+                "tags": [
+                    "Имущество"
+                ],
+                "summary": "Редактирование информации об имуществе",
+                "description": "Редактирование информации об имуществе",
+                "operationId": "assetEdit",
+                "parameters": [
+                    {
+                        "name": "asset",
+                        "in": "path",
+                        "description": "id имущества",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Данные для создания информации об имуществе",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "lang": {
+                                                    "type": "string",
+                                                    "example": "ru"
+                                                },
+                                                "fields": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Название поля"
+                                                            },
+                                                            "code": {
+                                                                "type": "integer",
+                                                                "example": "Код поля"
+                                                            },
+                                                            "require": {
+                                                                "type": "boolean",
+                                                                "example": "true"
+                                                            },
+                                                            "value": {
+                                                                "type": "string",
+                                                                "example": "Значение поля"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/assets/{asset}/copy": {
+            "get": {
+                "tags": [
+                    "Имущество"
+                ],
+                "summary": "Копирование информации об имуществе",
+                "description": "Копирование информации об имуществе",
+                "operationId": "assetCopy",
+                "parameters": [
+                    {
+                        "name": "asset",
+                        "in": "path",
+                        "description": "id имущества",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Данные для копирования информации об имуществе",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "lang": {
+                                                    "type": "string",
+                                                    "example": "ru"
+                                                },
+                                                "fields": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Название поля"
+                                                            },
+                                                            "code": {
+                                                                "type": "integer",
+                                                                "example": "Код поля"
+                                                            },
+                                                            "require": {
+                                                                "type": "boolean",
+                                                                "example": "true"
+                                                            },
+                                                            "value": {
+                                                                "type": "string",
+                                                                "example": "Значение поля"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/assets/{asset}/assignments/create": {
+            "get": {
+                "tags": [
+                    "Назначения"
+                ],
+                "summary": "Форма добавления назначения",
+                "description": "Форма добавления назначения",
+                "operationId": "assignmentCreate",
+                "parameters": [
+                    {
+                        "name": "asset",
+                        "in": "path",
+                        "description": "id имущества",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Данные для формы создания назначения",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": "null"
+                                                },
+                                                "lang": {
+                                                    "type": "string",
+                                                    "example": "ru"
+                                                },
+                                                "alert": {
+                                                    "properties": {
+                                                        "name": {
+                                                            "type": "string",
+                                                            "example": "Это имущество в настоящее время назначено"
+                                                        },
+                                                        "user": {
+                                                            "properties": {
+                                                                "id": {
+                                                                    "type": "integer",
+                                                                    "example": "1"
+                                                                },
+                                                                "name": {
+                                                                    "type": "string",
+                                                                    "example": "Имя пользователя"
+                                                                },
+                                                                "avatar": {
+                                                                    "type": "string",
+                                                                    "example": "/example.jpg"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "fields": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Название поля"
+                                                            },
+                                                            "code": {
+                                                                "type": "integer",
+                                                                "example": "Код поля"
+                                                            },
+                                                            "require": {
+                                                                "type": "boolean",
+                                                                "example": "true"
+                                                            },
+                                                            "value": {
+                                                                "type": "integer",
+                                                                "example": "null"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/assets/{asset}/assignments": {
+            "post": {
+                "tags": [
+                    "Назначения"
+                ],
+                "summary": "Добавление назначения",
+                "description": "Добавление назначения",
+                "operationId": "assignmentStore",
+                "parameters": [
+                    {
+                        "name": "asset",
+                        "in": "path",
+                        "description": "id имущества",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Значения назначения",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "user": {
+                                        "description": "Пользователь",
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "date_issue": {
+                                        "description": "Выдано",
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "01.09.2022"
+                                    },
+                                    "date_return": {
+                                        "description": "Возвращено",
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "10.09.2022"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Детальная имущества",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": "null"
+                                                },
+                                                "lang": {
+                                                    "type": "string",
+                                                    "example": "ru"
+                                                },
+                                                "canEdit": {
+                                                    "type": "boolean",
+                                                    "example": "true"
+                                                },
+                                                "code": {
+                                                    "type": "boolean",
+                                                    "example": "true"
+                                                },
+                                                "name": {
+                                                    "type": "boolean",
+                                                    "example": "true"
+                                                },
+                                                "category": {
+                                                    "type": "boolean",
+                                                    "example": "true"
+                                                },
+                                                "location": {
+                                                    "type": "boolean",
+                                                    "example": "true"
+                                                },
+                                                "department": {
+                                                    "type": "boolean",
+                                                    "example": "true"
+                                                },
+                                                "division": {
+                                                    "type": "boolean",
+                                                    "example": "true"
+                                                },
+                                                "serialNumber": {
+                                                    "type": "boolean",
+                                                    "example": "true"
+                                                },
+                                                "assignments": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": "1"
+                                                            },
+                                                            "user": {
+                                                                "properties": {
+                                                                    "id": {
+                                                                        "type": "integer",
+                                                                        "example": "1"
+                                                                    },
+                                                                    "name": {
+                                                                        "type": "string",
+                                                                        "example": "Имя пользователя"
+                                                                    },
+                                                                    "avatar": {
+                                                                        "type": "string",
+                                                                        "example": "/picture.jpg"
+                                                                    }
+                                                                },
+                                                                "type": "object"
+                                                            },
+                                                            "dateIssue": {
+                                                                "type": "string",
+                                                                "format": "date",
+                                                                "example": "01.09.2022"
+                                                            },
+                                                            "dateReturn": {
+                                                                "type": "string",
+                                                                "format": "date",
+                                                                "example": "01.09.2022"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/assignments/{assignment}/edit": {
+            "get": {
+                "tags": [
+                    "Назначения"
+                ],
+                "summary": "Добавление назначения",
+                "description": "Добавление назначения",
+                "operationId": "assignmentEdit",
+                "parameters": [
+                    {
+                        "name": "assignment",
+                        "in": "path",
+                        "description": "id назначения",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Данные для создания назначения",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": "null"
+                                                },
+                                                "lang": {
+                                                    "type": "string",
+                                                    "example": "ru"
+                                                },
+                                                "alert": {
+                                                    "properties": {
+                                                        "name": {
+                                                            "type": "string",
+                                                            "example": "Это имущество в настоящее время назначено"
+                                                        },
+                                                        "user": {
+                                                            "properties": {
+                                                                "id": {
+                                                                    "type": "integer",
+                                                                    "example": "1"
+                                                                },
+                                                                "name": {
+                                                                    "type": "string",
+                                                                    "example": "Имя пользователя"
+                                                                },
+                                                                "avatar": {
+                                                                    "type": "string",
+                                                                    "example": "/example.jpg"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "fields": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Название поля"
+                                                            },
+                                                            "code": {
+                                                                "type": "integer",
+                                                                "example": "Код поля"
+                                                            },
+                                                            "require": {
+                                                                "type": "boolean",
+                                                                "example": "true"
+                                                            },
+                                                            "value": {
+                                                                "type": "integer",
+                                                                "example": "null"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/assignments/{assignment}": {
+            "put": {
+                "tags": [
+                    "Назначения"
+                ],
+                "summary": "Обновление назначения",
+                "description": "Обновление назначения",
+                "operationId": "assignmentUpdate",
+                "parameters": [
+                    {
+                        "name": "assignment",
+                        "in": "path",
+                        "description": "id назначения",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Значения назначения",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "user": {
+                                        "description": "Пользователь",
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "date_issue": {
+                                        "description": "Выдано",
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "02.09.2022"
+                                    },
+                                    "date_return": {
+                                        "description": "Возвращено",
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "11.09.2022"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Данные для создания назначения",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": "null"
+                                                },
+                                                "lang": {
+                                                    "type": "string",
+                                                    "example": "ru"
+                                                },
+                                                "alert": {
+                                                    "properties": {
+                                                        "name": {
+                                                            "type": "string",
+                                                            "example": "Это имущество в настоящее время назначено"
+                                                        },
+                                                        "user": {
+                                                            "properties": {
+                                                                "id": {
+                                                                    "type": "integer",
+                                                                    "example": "1"
+                                                                },
+                                                                "name": {
+                                                                    "type": "string",
+                                                                    "example": "Имя пользователя"
+                                                                },
+                                                                "avatar": {
+                                                                    "type": "string",
+                                                                    "example": "/example.jpg"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "fields": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Название поля"
+                                                            },
+                                                            "code": {
+                                                                "type": "integer",
+                                                                "example": "Код поля"
+                                                            },
+                                                            "require": {
+                                                                "type": "boolean",
+                                                                "example": "true"
+                                                            },
+                                                            "value": {
+                                                                "type": "integer",
+                                                                "example": "null"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Назначения"
+                ],
+                "summary": "Удаление назначения",
+                "description": "Удаление назначения",
+                "operationId": "assignmentDestroy",
+                "parameters": [
+                    {
+                        "name": "assignment",
+                        "in": "path",
+                        "description": "id назначения",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Данные для создания назначения",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/assets/import": {
+            "post": {
+                "tags": [
+                    "Импорт"
+                ],
+                "summary": "Импорт имущества из xlsx файла",
+                "description": "Загружает содержимое из файла и наполяет им таблицу имущества",
+                "operationId": "import",
+                "requestBody": {
+                    "description": "Файл с данными для загрузки",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "file": {
+                                        "description": "Файл с данными",
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "format": "binary"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Список имущества",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "updated": {
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "created": {
+                                                    "type": "integer",
+                                                    "example": "2"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Имущество",
+            "description": "Имущество"
+        },
+        {
+            "name": "Назначения",
+            "description": "Назначения"
+        },
+        {
+            "name": "Импорт",
+            "description": "Импорт"
+        }
+    ],
+    "components": {
+        "securitySchemes": {
+            "sanctum": {
+                "type": "apiKey",
+                "description": "Введите token в следующем формате: Bearer Ваш Api Token",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    }
+}
