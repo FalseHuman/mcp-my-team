@@ -1,6 +1,6 @@
 {
   "name": "mcp-my-team",
-  "version": "1.0.4",
+  "version": "1.0.2",
   "description": "MCP-сервер для API HR/таск-платформы «МояКоманда»",
   "type": "module",
   "main": "dist/index.js",
