@@ -5,17 +5,21 @@ Tools генерируются **динамически** из OpenAPI JSON в �
 
 Сейчас регистрируется **2516** tools. Полный список: [`docs/tools.md`](docs/tools.md).
 
-## Установка
+## Установка и запуск
+
+Самый простой способ — через `npx` (Node.js ≥ 18):
 
 ```bash
-npm install
-npm run build
+npx -y mcp-my-team
 ```
 
-Скопируйте переменные окружения:
+Переменные окружения задайте в конфигурации MCP-клиента (см. ниже) или экспортируйте в оболочке.
+
+Глобальная установка:
 
 ```bash
-cp .env.example .env
+npm install -g mcp-my-team
+mcp-my-team
 ```
 
 ## Авторизация
@@ -25,7 +29,7 @@ cp .env.example .env
 ### 1. Готовый API-токен
 
 ```env
-MYTEAM_BASE_URL=https://mozg.ismyteam.ru
+MYTEAM_BASE_URL=https://example.ismyteam.ru
 MYTEAM_API_TOKEN=your_bearer_token_here
 ```
 
@@ -38,7 +42,7 @@ MYTEAM_API_TOKEN=your_bearer_token_here
 3. Дальше все API-запросы идут с `Authorization: Bearer <token>`
 
 ```env
-MYTEAM_BASE_URL=https://mozg.ismyteam.ru
+MYTEAM_BASE_URL=https://example.ismyteam.ru
 MYTEAM_LOGIN=user@example.com
 MYTEAM_PASSWORD=secret
 ```
@@ -52,9 +56,57 @@ MYTEAM_PASSWORD=secret
 - OTP / 2FA (`/api/login-otp`, `/api/login-mobile-otp` и т.п.) и SAML/SSO **не поддерживаются**.
 - Эндпоинты из `spec/auth.json` **не** экспортируются как MCP-tools — только внутренняя авторизация.
 
-## Запуск
+## Подключение к MCP-клиенту
+
+### Cursor
+
+В настройках MCP (`mcp.json`) добавьте:
+
+```json
+{
+  "mcpServers": {
+    "my-team": {
+      "command": "npx",
+      "args": ["-y", "mcp-my-team"],
+      "env": {
+        "MYTEAM_BASE_URL": "https://example.ismyteam.ru",
+        "MYTEAM_API_TOKEN": "your_token"
+      }
+    }
+  }
+}
+```
+
+Либо логин/пароль:
+
+```json
+{
+  "mcpServers": {
+    "my-team": {
+      "command": "npx",
+      "args": ["-y", "mcp-my-team"],
+      "env": {
+        "MYTEAM_BASE_URL": "https://example.ismyteam.ru",
+        "MYTEAM_LOGIN": "user@example.com",
+        "MYTEAM_PASSWORD": "secret"
+      }
+    }
+  }
+}
+```
+
+### Claude Desktop
+
+Аналогичный блок в `claude_desktop_config.json` (ключ `mcpServers`).
+
+## Разработка
+
+Клонируйте репозиторий и установите зависимости:
 
 ```bash
+npm install
+cp .env.example .env
+npm run build
 npm start
 ```
 
@@ -69,49 +121,6 @@ npm run dev
 ```bash
 npm run list-tools
 ```
-
-## Подключение к MCP-клиенту
-
-### Cursor
-
-В настройках MCP (`mcp.json`) добавьте:
-
-```json
-{
-  "mcpServers": {
-    "my-team": {
-      "command": "node",
-      "args": ["/ABSOLUTE/PATH/TO/mcp-my-team/dist/index.js"],
-      "env": {
-        "MYTEAM_BASE_URL": "https://mozg.ismyteam.ru",
-        "MYTEAM_API_TOKEN": "your_token"
-      }
-    }
-  }
-}
-```
-
-Либо логин/пароль:
-
-```json
-{
-  "mcpServers": {
-    "my-team": {
-      "command": "node",
-      "args": ["/ABSOLUTE/PATH/TO/mcp-my-team/dist/index.js"],
-      "env": {
-        "MYTEAM_BASE_URL": "https://mozg.ismyteam.ru",
-        "MYTEAM_LOGIN": "user@example.com",
-        "MYTEAM_PASSWORD": "secret"
-      }
-    }
-  }
-}
-```
-
-### Claude Desktop
-
-Аналогичный блок в `claude_desktop_config.json` (ключ `mcpServers`).
 
 ## Как устроены tools
 
@@ -140,3 +149,37 @@ docs/tools.md         полный список tools
 
 Положите новый OpenAPI JSON в `spec/` и перезапустите сервер — tools подхватятся автоматически.  
 Эндпоинты авторизации оставляйте в `auth.json` (он намеренно не превращается в tools).
+
+## Публикация в npm
+
+Релизы публикуются автоматически из GitHub Actions по git-тегу `v*` через [Trusted Publishing (OIDC)](https://docs.npmjs.com/trusted-publishers/) — долгоживущий `NPM_TOKEN` не нужен.
+
+### Одноразовая настройка на npmjs.com
+
+1. Убедитесь, что пакет `mcp-my-team` уже существует на npm (первый раз можно опубликовать вручную: `npm login && npm publish`).
+2. Откройте [настройки пакета](https://www.npmjs.com/package/mcp-my-team) → **Trusted Publisher** → **GitHub Actions**.
+3. Укажите:
+   - **Organization or user:** `FalseHuman`
+   - **Repository:** `mcp-my-team`
+   - **Workflow filename:** `publish.yml` (только имя файла, не путь)
+   - Environment — оставьте пустым
+4. Разрешите действие `npm publish`.
+
+Workflow: [`.github/workflows/publish.yml`](.github/workflows/publish.yml).
+
+### Как выпустить версию
+
+1. Обновите `version` в `package.json` (например `1.0.1`).
+2. Закоммитьте и запушьте в репозиторий.
+3. Создайте и запушьте тег с тем же номером:
+
+```bash
+git tag v1.0.1
+git push origin v1.0.1
+```
+
+Версия в теге (`v1.0.1`) должна совпадать с `package.json`, иначе workflow завершится с ошибкой.
+
+## Лицензия
+
+MIT

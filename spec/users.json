@@ -13270,6 +13270,15 @@
                 "summary": "Канбан",
                 "description": "Возвращает список стадии канбана",
                 "operationId": "getTeamTaskList",
+                "parameters": [
+                    {
+                        "name": "team",
+                        "in": "path",
+                        "description": "Id команды",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Список стадии канбана",
@@ -28296,6 +28305,11 @@
                                         "type": "string",
                                         "format": "date",
                                         "example": "11.05.2022"
+                                    },
+                                    "team_id": {
+                                        "description": "Id команды (канбан)",
+                                        "type": "integer",
+                                        "example": 7
                                     }
                                 },
                                 "type": "object"

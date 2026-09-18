@@ -1,14 +1,25 @@
 {
   "name": "mcp-my-team",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "MCP-сервер для API HR/таск-платформы «МояКоманда»",
   "type": "module",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "bin": {
     "mcp-my-team": "dist/index.js"
   },
+  "files": [
+    "dist",
+    "spec",
+    "docs",
+    "LICENSE",
+    "README.md",
+    ".env.example"
+  ],
   "scripts": {
+    "clean": "rm -rf dist",
     "build": "tsc",
+    "prepack": "npm run clean && npm run build",
     "start": "node dist/index.js",
     "dev": "tsx src/index.ts",
     "list-tools": "npm run build && node scripts/list-tools.mjs"
@@ -19,9 +30,21 @@
   "keywords": [
     "mcp",
     "myteam",
-    "моякоманда"
+    "моякоманда",
+    "model-context-protocol"
   ],
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FalseHuman/mcp-my-team.git"
+  },
+  "homepage": "https://github.com/FalseHuman/mcp-my-team#readme",
+  "bugs": {
+    "url": "https://github.com/FalseHuman/mcp-my-team/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.12.1",
     "axios": "^1.9.0",

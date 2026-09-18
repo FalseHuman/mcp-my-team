@@ -16,7 +16,7 @@ export interface AppConfig {
 }
 
 export function loadConfig(): AppConfig {
-  const baseUrl = (process.env.MYTEAM_BASE_URL || "https://mozg.ismyteam.ru").replace(
+  const baseUrl = (process.env.MYTEAM_BASE_URL || "https://example.ismyteam.ru").replace(
     /\/+$/,
     "",
   );
