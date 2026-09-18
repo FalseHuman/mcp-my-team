@@ -150,36 +150,6 @@ docs/tools.md         полный список tools
 Положите новый OpenAPI JSON в `spec/` и перезапустите сервер — tools подхватятся автоматически.  
 Эндпоинты авторизации оставляйте в `auth.json` (он намеренно не превращается в tools).
 
-## Публикация в npm
-
-Релизы публикуются автоматически из GitHub Actions по git-тегу `v*` через [Trusted Publishing (OIDC)](https://docs.npmjs.com/trusted-publishers/) — долгоживущий `NPM_TOKEN` не нужен.
-
-### Одноразовая настройка на npmjs.com
-
-1. Убедитесь, что пакет `mcp-my-team` уже существует на npm (первый раз можно опубликовать вручную: `npm login && npm publish`).
-2. Откройте [настройки пакета](https://www.npmjs.com/package/mcp-my-team) → **Trusted Publisher** → **GitHub Actions**.
-3. Укажите:
-   - **Organization or user:** `FalseHuman`
-   - **Repository:** `mcp-my-team`
-   - **Workflow filename:** `publish.yml` (только имя файла, не путь)
-   - Environment — оставьте пустым
-4. Разрешите действие `npm publish`.
-
-Workflow: [`.github/workflows/publish.yml`](.github/workflows/publish.yml).
-
-### Как выпустить версию
-
-1. Обновите `version` в `package.json` (например `1.0.1`).
-2. Закоммитьте и запушьте в репозиторий.
-3. Создайте и запушьте тег с тем же номером:
-
-```bash
-git tag v1.0.1
-git push origin v1.0.1
-```
-
-Версия в теге (`v1.0.1`) должна совпадать с `package.json`, иначе workflow завершится с ошибкой.
-
 ## Лицензия
 
 MIT
